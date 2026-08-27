@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Inicio de sesión de (Off)line Archive" />
+    <title>Login | (Off)line Archive</title>
+    <link rel="stylesheet" href="css/auth.css" />
+    <script src="js/auth.js" defer></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <!-- Panel visual compartido por login y registro -->
+      <section class="auth-visual" aria-label="Identidad de la tienda">
+        <div class="scanline"></div>
+        <div class="visual-content">
+          <p class="eyebrow">SYSTEM_01 / ACCESS</p>
+          <h1 class="title">(Off)line <span>Archive</span></h1>
+          <p class="body-copy">
+            ESTO NO ES EL FUTURO.<br />
+            ES EL <strong>ARCHIVO.</strong>
+          </p>
+
+          <div class="system-readout">
+            <span>ARCHIVE / 2003</span>
+            <span>STATUS: <b>ONLINE</b></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulario de inicio de sesión -->
+      <section class="auth-form-panel">
+        <div class="auth-header">
+          <p class="eyebrow">SYSTEM_01 / LOGIN</p>
+          <h2>WELCOME <span>BACK</span></h2>
+          <p>Inicia sesión para acceder al archivo.</p>
+        </div>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <div class="field">
+            <label for="loginEmail">Correo electrónico</label>
+            <input
+              type="email"
+              id="loginEmail"
+              name="email"
+              autocomplete="email"
+              maxlength="100"
+              placeholder="you@offline.com"
+              aria-describedby="loginEmailHint loginEmailError"
+              required
+            />
+            <small id="loginEmailHint" class="field-hint">
+              Usa @gmail.com, @hotmail.com, @yahoo.com o @outlook.com.
+            </small>
+            <small
+              id="loginEmailError"
+              class="field-error"
+              aria-live="polite"
+            ></small>
+          </div>
+
+          <div class="field">
+            <label for="loginPassword">Contraseña</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                autocomplete="current-password"
+                minlength="4"
+                maxlength="10"
+                placeholder="Ingresa tu contraseña"
+                aria-describedby="loginPasswordHint loginPasswordError"
+                required
+              />
+              <button
+                type="button"
+                class="password-toggle"
+                data-password-toggle="loginPassword"
+                aria-label="Mostrar contraseña"
+              >
+                +
+              </button>
+            </div>
+            <small id="loginPasswordHint" class="field-hint"
+              >Entre 4 y 10 caracteres.</small
+            >
+            <small
+              id="loginPasswordError"
+              class="field-error"
+              aria-live="polite"
+            ></small>
+          </div>
+
+          <div class="form-options">
+            <label class="check-control">
+              <input type="checkbox" id="rememberMe" name="remember" />
+              <span class="custom-check"></span>
+              <span>Recordarme</span>
+            </label>
+
+            <button type="button" class="text-button" id="forgotPassword">
+              ¿Olvidaste tu contraseña?
+            </button>
+          </div>
+
+          <button type="submit" class="primary-button">
+            <span>INICIAR SESIÓN</span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <div
+            id="loginMessage"
+            class="form-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </form>
+
+        <div class="auth-divider"><span>OR</span></div>
+
+        <a class="secondary-button" href="registro.html">
+          <span>CREAR CUENTA</span>
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <a class="guest-link" href="index.html">CONTINUAR COMO INVITADO</a>
+
+        <footer class="auth-footer">
+          <span>(OFF)LINE ARCHIVE</span>
+          <span>VER_2.003 | Grupo 7</span>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

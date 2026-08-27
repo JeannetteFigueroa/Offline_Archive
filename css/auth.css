@@ -1,0 +1,684 @@
+/* =========================================================
+   AUTH.CSS
+
+   Estilos compartidos para Login y Registro
+   ========================================================= */
+
+
+/* =========================================================
+   1. FUENTES PERSONALIZADAS
+   ========================================================= */
+
+@font-face {
+  font-family: "Archive Title";
+  src: url("../assets/fonts/Title.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archive Body";
+  src: url("../assets/fonts/Body.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* =========================================================
+   2. VARIABLES
+   ========================================================= */
+
+:root {
+  /* Colores */
+  --black: #010300;
+  --neon: #c3ff00;
+  --lime: #b5d25c;
+  --olive: #566f20;
+  --dark-olive: #22330c;
+  --forest-black: #0d1608;
+  --gray: #b5b5b5;
+  --muted-gray: #7d8a66;
+
+  /* Tipografías */
+  --font-title: "Archive Title", sans-serif;
+  --font-body: "Archive Body", sans-serif;
+}
+
+
+/* =========================================================
+   3. RESET
+   ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   4. CONFIGURACIÓN GENERAL
+   ========================================================= */
+
+body {
+  min-height: 100vh;
+
+  font-family: var(--font-body);
+  color: var(--gray);
+
+  /* Fondo de la página */
+  background-color: var(--black);
+  background-image: url("../assets/images/fondo-auth-placeholder.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   5. TIPOGRAFÍA DE LA MARCA
+
+   .title corresponde solamente a "(Off)line Archive"
+   ========================================================= */
+
+.title {
+  font-family: var(--font-title);
+  color: var(--gray);
+  font-weight: normal;
+}
+
+
+/* Parte destacada de la marca */
+
+.title span {
+  color: var(--neon);
+}
+
+
+/* =========================================================
+   6. TÍTULOS DE LOGIN Y REGISTRO
+   ========================================================= */
+
+.auth-header h2 {
+  margin: 10px 0;
+
+  font-family: var(--font-title);
+  color: var(--gray);
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+
+/* Parte destacada de los títulos */
+
+.auth-header h2 span {
+  color: var(--neon);
+}
+
+
+/* =========================================================
+   7. TEXTOS DEL SISTEMA
+   ========================================================= */
+
+.eyebrow,
+.system-readout {
+  font-family: var(--font-body);
+}
+
+
+/* =========================================================
+   8. ESTRUCTURA PRINCIPAL
+   ========================================================= */
+
+.auth-page {
+  min-height: 100vh;
+}
+
+
+.auth-shell {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+}
+
+
+/* =========================================================
+   9. PANEL VISUAL
+   ========================================================= */
+
+.auth-visual {
+  position: relative;
+
+  width: 50%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+
+  padding: 50px;
+
+  background-color: rgba(13, 22, 8, 0.85);
+}
+
+
+.auth-form-panel {
+  width: 50%;
+  min-height: 100vh;
+
+  padding: 50px;
+
+  background-color: rgba(1, 3, 0, 0.92);
+}
+
+
+/* =========================================================
+   10. CONTENIDO DEL PANEL VISUAL
+   ========================================================= */
+
+.visual-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   11. TEXTO DEL PANEL VISUAL
+   ========================================================= */
+
+.body-copy {
+  margin-top: 25px;
+
+  font-family: var(--font-body);
+  color: var(--gray);
+  font-size: 1.25rem;
+  line-height: 1.05;
+}
+
+
+.body-copy strong {
+  color: var(--neon);
+}
+
+
+/* =========================================================
+   12. INFORMACIÓN DEL SISTEMA
+   ========================================================= */
+
+.system-readout {
+  display: flex;
+
+  gap: 30px;
+  margin-top: 40px;
+
+  color: var(--muted-gray);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+
+.system-readout b {
+  color: var(--neon);
+}
+
+
+/* =========================================================
+   13. EFECTO SCANLINE
+   ========================================================= */
+
+.scanline {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(195, 255, 0, 0.025) 4px
+  );
+}
+
+
+/* =========================================================
+   14. ENCABEZADO DEL FORMULARIO
+   ========================================================= */
+
+.auth-header {
+  margin-bottom: 35px;
+}
+
+
+.auth-header > p:last-child {
+  color: var(--muted-gray);
+  font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   15. FORMULARIO
+   ========================================================= */
+
+.auth-form {
+  width: 100%;
+}
+
+
+/* =========================================================
+   16. GRID DEL REGISTRO
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+}
+
+
+.field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   17. CAMPOS DEL FORMULARIO
+   ========================================================= */
+
+.field label {
+  color: var(--gray);
+
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid var(--dark-olive);
+  outline: none;
+
+  color: var(--gray);
+  background-color: var(--forest-black);
+
+  font-family: var(--font-body);
+}
+
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--neon);
+}
+
+
+.field textarea {
+  min-height: 100px;
+
+  resize: vertical;
+}
+
+
+/* =========================================================
+   18. TEXTOS DE AYUDA Y ERRORES
+   ========================================================= */
+
+.field-hint {
+  color: var(--muted-gray);
+
+  font-size: 0.7rem;
+}
+
+
+.field-error {
+  color: var(--neon);
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   19. CONTRASEÑA
+   ========================================================= */
+
+.password-wrapper {
+  position: relative;
+}
+
+
+.password-wrapper input {
+  padding-right: 45px;
+}
+
+
+.password-toggle {
+  position: absolute;
+
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  border: none;
+
+  color: var(--neon);
+  background: transparent;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   20. OPCIONES DEL LOGIN
+   ========================================================= */
+
+.form-options {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 20px 0;
+}
+
+
+.check-control {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--gray);
+
+  font-size: 0.8rem;
+
+  cursor: pointer;
+}
+
+
+.check-control input {
+  accent-color: var(--neon);
+}
+
+
+.text-button {
+  border: none;
+
+  color: var(--muted-gray);
+  background: none;
+
+  cursor: pointer;
+
+  font-family: var(--font-body);
+}
+
+
+/* =========================================================
+   21. BOTÓN PRINCIPAL
+   ========================================================= */
+
+.primary-button {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 20px;
+
+  border: 1px solid var(--neon);
+
+  color: var(--black);
+  background-color: var(--neon);
+
+  font-family: var(--font-body);
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.primary-button:hover {
+  color: var(--neon);
+
+  background-color: var(--black);
+}
+
+
+/* =========================================================
+   22. BOTÓN SECUNDARIO
+   ========================================================= */
+
+.secondary-button {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 20px;
+
+  border: 1px solid var(--olive);
+
+  color: var(--neon);
+
+  text-decoration: none;
+
+  font-family: var(--font-body);
+}
+
+
+.secondary-button:hover {
+  border-color: var(--neon);
+}
+
+
+/* =========================================================
+   23. DIVISOR
+   ========================================================= */
+
+.auth-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin: 25px 0;
+
+  color: var(--muted-gray);
+
+  font-size: 0.7rem;
+}
+
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+
+  flex: 1;
+
+  height: 1px;
+
+  background-color: var(--dark-olive);
+}
+
+
+/* =========================================================
+   24. ENLACE INVITADO
+   ========================================================= */
+
+.guest-link {
+  display: block;
+
+  margin-top: 20px;
+
+  color: var(--muted-gray);
+
+  text-align: center;
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   25. FOOTER
+   ========================================================= */
+
+.auth-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 40px;
+
+  color: var(--muted-gray);
+
+  font-size: 0.65rem;
+}
+
+
+/* =========================================================
+   26. REGISTRO
+   ========================================================= */
+
+.register-layout .auth-form-panel {
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   27. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .auth-visual {
+    width: 40%;
+
+    padding: 30px;
+  }
+
+
+  .auth-form-panel {
+    width: 60%;
+
+    padding: 30px;
+  }
+
+}
+
+
+/* =========================================================
+   28. CELULAR
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .auth-shell {
+    display: block;
+  }
+
+
+  .auth-visual {
+    width: 100%;
+
+    min-height: 35vh;
+
+    padding: 25px;
+  }
+
+
+  .auth-form-panel {
+    width: 100%;
+
+    min-height: auto;
+
+    padding: 25px;
+  }
+
+
+  .body-copy {
+    font-size: 1.5rem;
+  }
+
+
+  .system-readout {
+    margin-top: 20px;
+
+    gap: 15px;
+
+    font-size: 0.65rem;
+  }
+
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .field-full {
+    grid-column: auto;
+  }
+
+
+  .form-options {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   29. CELULAR PEQUEÑO
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .auth-visual {
+    min-height: 30vh;
+  }
+
+
+  .auth-form-panel {
+    padding: 20px;
+  }
+
+
+  .auth-header h2 {
+    font-size: 2rem;
+  }
+
+
+  .auth-footer {
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+}

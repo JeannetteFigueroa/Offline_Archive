@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Registro de usuario de (Off)line Archive"
+    />
+    <title>Registro | (Off)line Archive</title>
+    <link rel="stylesheet" href="css/auth.css" />
+    <script src="js/auth.js" defer></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <!-- Panel visual compartido -->
+      <section class="auth-visual" aria-label="Identidad de la tienda">
+        <div class="scanline"></div>
+        <div class="visual-content">
+          <p class="eyebrow">SYSTEM_02 / REGISTER</p>
+          <h1 class="title">JOIN THE <span>ARCHIVE</span></h1>
+          <p class="body-copy">
+            CREA TU PERFIL.<br />
+            DESBLOQUEA EL <strong>ARCHIVO.</strong>
+          </p>
+
+          <div class="system-readout">
+            <span>NEW_USER / 001</span>
+            <span>STATUS: <b>READY</b></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulario de registro -->
+      <section class="auth-form-panel">
+        <div class="auth-header">
+          <p class="eyebrow">SYSTEM_02 / ACCOUNT</p>
+          <h2>JOIN THE <span>ARCHIVE</span></h2>
+          <p>Crea una cuenta para acceder a la tienda.</p>
+        </div>
+
+        <form id="registerForm" class="auth-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="registerRut">RUT</label>
+              <input
+                type="text"
+                id="registerRut"
+                name="rut"
+                autocomplete="off"
+                minlength="7"
+                maxlength="9"
+                placeholder="19011022K"
+                aria-describedby="registerRutHint registerRutError"
+                required
+              />
+              <small id="registerRutHint" class="field-hint"
+                >Sin puntos ni guion. Ej.: 19011022K.</small
+              >
+              <small
+                id="registerRutError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field">
+              <label for="registerName">Nombre</label>
+              <input
+                type="text"
+                id="registerName"
+                name="name"
+                autocomplete="given-name"
+                maxlength="50"
+                placeholder="Tu nombre"
+                required
+              />
+              <small
+                id="registerNameError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field field-full">
+              <label for="registerLastName">Apellidos</label>
+              <input
+                type="text"
+                id="registerLastName"
+                name="lastName"
+                autocomplete="family-name"
+                maxlength="100"
+                placeholder="Tus apellidos"
+                required
+              />
+              <small
+                id="registerLastNameError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field field-full">
+              <label for="registerEmail">Correo electrónico</label>
+              <input
+                type="email"
+                id="registerEmail"
+                name="email"
+                autocomplete="email"
+                maxlength="100"
+                placeholder="you@gmail.com"
+                aria-describedby="registerEmailHint registerEmailError"
+                required
+              />
+              <small id="registerEmailHint" class="field-hint"
+                >Permitidos: Usa @gmail.com, @hotmail.com, @yahoo.com o
+                @outlook.com.</small
+              >
+              <small
+                id="registerEmailError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field">
+              <label for="registerPassword">Contraseña</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="registerPassword"
+                  name="password"
+                  autocomplete="new-password"
+                  minlength="4"
+                  maxlength="10"
+                  placeholder="4 a 10 caracteres"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-password-toggle="registerPassword"
+                  aria-label="Mostrar contraseña"
+                >
+                  +
+                </button>
+              </div>
+              <small
+                id="registerPasswordError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field">
+              <label for="registerPasswordConfirm">Confirmar contraseña</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="registerPasswordConfirm"
+                  name="passwordConfirm"
+                  autocomplete="new-password"
+                  minlength="4"
+                  maxlength="10"
+                  placeholder="Repite la contraseña"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-password-toggle="registerPasswordConfirm"
+                  aria-label="Mostrar contraseña"
+                >
+                  +
+                </button>
+              </div>
+              <small
+                id="registerPasswordConfirmError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field">
+              <label for="birthDate"
+                >Fecha de nacimiento
+                <span class="optional">(opcional)</span></label
+              >
+              <input
+                type="date"
+                id="birthDate"
+                name="birthDate"
+                autocomplete="bday"
+              />
+            </div>
+
+            <div class="field">
+              <label for="region">Región</label>
+              <select id="region" name="region" required>
+                <option value="">Selecciona una región</option>
+              </select>
+              <small
+                id="regionError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field">
+              <label for="commune">Comuna</label>
+              <select id="commune" name="commune" disabled required>
+                <option value="">Primero selecciona una región</option>
+              </select>
+              <small
+                id="communeError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="field field-full">
+              <label for="address">Dirección</label>
+              <textarea
+                id="address"
+                name="address"
+                autocomplete="street-address"
+                maxlength="300"
+                placeholder="Ingresa tu dirección"
+                required
+              ></textarea>
+              <small
+                id="addressError"
+                class="field-error"
+                aria-live="polite"
+              ></small>
+            </div>
+          </div>
+
+          <label class="check-control terms-control">
+            <input type="checkbox" id="terms" name="terms" required />
+            <span class="custom-check"></span>
+            <span>Acepto los términos y condiciones.</span>
+          </label>
+          <small id="termsError" class="field-error" aria-live="polite"></small>
+
+          <button type="submit" class="primary-button">
+            <span>CREAR CUENTA</span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <div
+            id="registerMessage"
+            class="form-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </form>
+
+        <div class="auth-divider"><span>OR</span></div>
+
+        <a class="secondary-button" href="login.html">
+          <span>VOLVER AL LOGIN</span>
+          <span aria-hidden="true">←</span>
+        </a>
+
+        <a class="guest-link" href="index.html">CONTINUAR COMO INVITADO</a>
+
+        <footer class="auth-footer">
+          <span>(OFF)LINE ARCHIVE</span>
+          <span>VER_2.003 | Grupo 7</span>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="1600" height="1000" fill="#010300"/>
+<rect width="1600" height="1000" fill="#0D1608" opacity=".7"/>
+<g opacity=".16" stroke="#C3FF00">
+  <path d="M0 120H1600M0 240H1600M0 360H1600M0 480H1600M0 600H1600M0 720H1600M0 840H1600"/>
+  <path d="M120 0V1000M300 0V1000M480 0V1000M660 0V1000M840 0V1000M1020 0V1000M1200 0V1000M1380 0V1000"/>
+</g>
+<g fill="none" stroke="#566F20" stroke-width="3" opacity=".7">
+  <circle cx="1220" cy="370" r="220"/><circle cx="1220" cy="370" r="170"/><circle cx="1220" cy="370" r="120"/>
+  <path d="M980 370h480M1220 130v480"/>
+</g>
+<text x="80" y="860" fill="#C3FF00" opacity=".55" font-family="monospace" font-size="30">ARCHIVE / SYSTEM_01</text>
+<text x="80" y="905" fill="#7D8A66" opacity=".6" font-family="monospace" font-size="18">OFFLINE // VISUAL BACKGROUND PLACEHOLDER</text>
+</svg>
