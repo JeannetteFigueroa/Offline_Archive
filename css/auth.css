@@ -23,6 +23,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Archive txt";
+  src: url("../assets/fonts/Subway_Haze_1.1.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 /* =========================================================
    2. VARIABLES
@@ -42,6 +49,7 @@
   /* Tipografías */
   --font-title: "Archive Title", sans-serif;
   --font-body: "Archive Body", sans-serif;
+  --font-txt: "Archive txt", sans-serif;
 }
 
 
@@ -314,11 +322,11 @@ body {
 
   border: 1px solid var(--dark-olive);
   outline: none;
-
+  font-size: medium;
   color: var(--gray);
   background-color: var(--forest-black);
 
-  font-family: var(--font-body);
+  font-family: var(--font-txt);
 }
 
 
