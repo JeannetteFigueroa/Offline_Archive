@@ -1,0 +1,463 @@
+<!doctype html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Contacto - (Off)line Archive"
+    >
+
+    <title>Contacto | (Off)line Archive</title>
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/auth.css">
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/contacto.js" defer></script>
+
+</head>
+
+
+<body class="account-page">
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <a
+            href="index.html"
+            class="navbar-logo"
+        >
+            (Off)line Archive
+        </a>
+
+
+        <!-- =================================================
+             MENÚ PRINCIPAL
+             ================================================= -->
+
+        <nav class="navbar-menu">
+
+            <a href="#">
+                Accesorios
+            </a>
+
+            <a href="#">
+                Colección y3k
+            </a>
+
+            <a href="sobre-nosotros.html">
+                Sobre<br>
+                Nosotros
+            </a>
+
+            <a href="contacto.html">
+                Contacto
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             ACCIONES DERECHA
+             ================================================= -->
+
+        <nav class="navbar-actions">
+
+            <a href="#">
+                Buscar
+            </a>
+
+            <a
+                href="login.html"
+                id="accountLink"
+            >
+                Login
+            </a>
+
+            <a
+                href="#"
+                class="navbar-cart"
+            >
+
+                <span>
+                    Carrito
+                </span>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             BOTÓN MENÚ MÓVIL
+             ================================================= -->
+
+        <button
+            class="menu-toggle"
+            type="button"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <!-- =================================================
+             MENÚ LATERAL MÓVIL
+             ================================================= -->
+
+        <aside
+            class="mobile-menu"
+            id="mobileMenu"
+            hidden
+        >
+
+            <div class="mobile-menu-header">
+
+                <span>
+                    MENU_01
+                </span>
+
+                <button
+                    class="menu-close"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <nav class="mobile-menu-links">
+
+                <a href="#">
+                    <span>01</span>
+                    Accesorios
+                </a>
+
+                <a href="#">
+                    <span>02</span>
+                    Colección y3k
+                </a>
+
+                <a href="sobre-nosotros.html">
+                    <span>03</span>
+                    Sobre Nosotros
+                </a>
+
+                <a href="contacto.html">
+                    <span>04</span>
+                    Contacto
+                </a>
+
+
+                <div class="mobile-divider"></div>
+
+
+                <a href="#">
+                    <span>05</span>
+                    Buscar
+                </a>
+
+                <a
+                    href="login.html"
+                    id="mobileAccountLink"
+                >
+                    <span>06</span>
+                    Login
+                </a>
+
+                <a
+                    href="#"
+                    class="mobile-cart"
+                >
+
+                    <span>
+                        07
+                    </span>
+
+                    Carrito
+
+                    <b>
+                        0
+                    </b>
+
+                </a>
+
+            </nav>
+
+
+            <div class="mobile-menu-footer">
+
+                SYSTEM_01
+
+                <span>
+                    ONLINE
+                </span>
+
+            </div>
+
+        </aside>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENIDO DE CONTACTO
+         ===================================================== -->
+
+    <main class="account-content">
+
+        <div class="account-shell">
+
+
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+
+            <header class="account-header">
+
+                <div>
+
+                    <p class="account-eyebrow">
+                        SYSTEM_04 / CONTACT
+                    </p>
+
+                    <h1>
+                        CON<span>TACT</span>
+                    </h1>
+
+                    <p>
+                        Ponte en contacto con
+                        <strong>
+                            (Off)line Archive
+                        </strong>.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =================================================
+                 FORMULARIO
+                 ================================================= -->
+
+            <section class="account-card">
+
+                <div class="account-card-header">
+
+                    <span>
+                        CONTACT_FORM / 001
+                    </span>
+
+                    <span class="status">
+
+                        STATUS:
+
+                        <b>
+                            ONLINE
+                        </b>
+
+                    </span>
+
+                </div>
+
+
+
+                <form
+                    id="contactForm"
+                    class="auth-form"
+                    novalidate
+                >
+
+                    <div class="contact-list">
+
+
+                        <!-- =========================================
+                             NOMBRE
+                             ========================================= -->
+
+                        <div class="field">
+
+                            <label for="contactName">
+                                NOMBRE
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contactName"
+                                name="name"
+                                placeholder="Tu nombre"
+                            >
+
+                            <small
+                                id="nameError"
+                                class="field-error"
+                            ></small>
+
+                        </div>
+
+
+
+                        <!-- =========================================
+                             CORREO
+                             ========================================= -->
+
+                        <div class="field">
+
+                            <label for="contactEmail">
+                                CORREO
+                            </label>
+
+                            <input
+                                type="email"
+                                id="contactEmail"
+                                name="email"
+                                placeholder="tu@email.com"
+                            >
+
+                            <small
+                                id="emailError"
+                                class="field-error"
+                            ></small>
+
+                        </div>
+
+
+
+                        <!-- =========================================
+                             ASUNTO
+                             ========================================= -->
+
+                        <div class="field">
+
+                            <label for="contactSubject">
+                                ASUNTO
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contactSubject"
+                                name="subject"
+                                placeholder="Motivo del contacto"
+                            >
+
+                            <small
+                                id="subjectError"
+                                class="field-error"
+                            ></small>
+
+                        </div>
+
+
+
+                        <!-- =========================================
+                             MENSAJE
+                             ========================================= -->
+
+                        <div class="field">
+
+                            <label for="contactMessage">
+                                MENSAJE
+                            </label>
+
+                            <textarea
+                                id="contactMessage"
+                                name="message"
+                                rows="5"
+                                placeholder="Escribe tu mensaje..."
+                            ></textarea>
+
+                            <small
+                                id="messageError"
+                                class="field-error"
+                            ></small>
+
+                        </div>
+
+
+
+                        <!-- =========================================
+                             BOTÓN
+                             ========================================= -->
+
+                        <div class="field field-full">
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+
+                                ENVIAR MENSAJE
+
+                                <span>
+                                    →
+                                </span>
+
+                            </button>
+
+
+                            <p
+                                id="formMessage"
+                                class="form-message"
+                            ></p>
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer class="account-footer">
+
+                <span>
+                    (OFF)LINE ARCHIVE
+                </span>
+
+                <span>
+                    VER_2.003 | Grupo 7
+                </span>
+
+            </footer>
+
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>

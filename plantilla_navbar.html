@@ -13,112 +13,176 @@
 
 <body>
 
+    
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
     <header class="navbar">
 
-    <!-- Logo -->
-    <a href="#" class="navbar-logo">
-        (Off)line Archive
-    </a>
-
-
-    <!-- Conjunto de acciones izquierda -->
-    <nav class="navbar-menu">
-
-        <a href="#">Accesorios</a>
-        <a href="#">Colección y3k</a>
-        <a href="#">Sobre<br>Nosotros</a>
-        <a href="#">Contacto</a>
-
-    </nav>
-
-
-    <!-- Conjunto de acciones derecha -->
-    <nav class="navbar-actions">
-
-        <a href="#">Buscar</a>
-        <a href="#">Login</a>
-
-        <a href="#" class="navbar-cart">
-            <span>Carrito</span>
-            <span class="cart-count">3</span>
+        <a href="index.html" class="navbar-logo">
+            (Off)line Archive
         </a>
 
-    </nav>
 
+        <!-- =================================================
+             MENÚ PRINCIPAL
+             ================================================= -->
 
-    <!-- Botón telefono -->
-    <button class="menu-toggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+        <nav class="navbar-menu">
 
+            <a href="#">Accesorios</a>
 
-    <!-- Menú lateral telefono -->
-    <aside class="mobile-menu">
+            <a href="collections.html">Colección y3k</a>
 
-        <div class="mobile-menu-header">
-            <span>MENU_01</span>
-
-            <button class="menu-close" aria-label="Cerrar menú">
-                ×
-            </button>
-        </div>
-
-
-        <nav class="mobile-menu-links">
-
-            <a href="#">
-                <span>01</span>
-                Accesorios
+            <a href="about_us.html">
+                Sobre<br>
+                Nosotros
             </a>
 
-            <a href="#">
-                <span>02</span>
-                Colección y3k
-            </a>
+            <a href="#">Contacto</a>
 
-            <a href="#">
-                <span>03</span>
-                Sobre Nosotros
-            </a>
-
-            <a href="#">
-                <span>04</span>
-                Contacto
-            </a>
+        </nav>
 
 
-            <div class="mobile-divider"></div>
+        <!-- =================================================
+             ACCIONES DERECHA
+             ================================================= -->
 
+        <nav class="navbar-actions">
 
-            <a href="#">
-                <span>05</span>
-                Buscar
-            </a>
+            <a href="#">Buscar</a>
 
-            <a href="#">
-                <span>06</span>
+            <a href="login.html" id="accountLink">
                 Login
             </a>
 
-            <a href="#" class="mobile-cart">
-                <span>07</span>
-                Carrito
-                <b>3</b>
+            <a href="#" class="navbar-cart">
+
+                <span>Carrito</span>
+
+                <span class="cart-count">
+                    0
+                </span>
+
             </a>
 
         </nav>
 
 
-        <div class="mobile-menu-footer">
-            SYSTEM_01
-            <span>ONLINE</span>
-        </div>
+        <!-- =================================================
+             BOTÓN MENÚ MÓVIL
+             ================================================= -->
 
-    </aside>
+        <button
+            class="menu-toggle"
+            type="button"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-</header>
+
+        <!-- =================================================
+             MENÚ LATERAL MÓVIL
+             ================================================= -->
+
+        <aside
+            class="mobile-menu"
+            id="mobileMenu"
+            hidden
+        >
+
+            <!-- HEADER -->
+
+            <div class="mobile-menu-header">
+
+                <span>
+                    MENU_01
+                </span>
+
+                <button
+                    class="menu-close"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- LINKS -->
+
+            <nav class="mobile-menu-links">
+
+                <a href="#">
+                    <span>01</span>
+                    Accesorios
+                </a>
+
+                <a href="#">
+                    <span>02</span>
+                    Colección y3k
+                </a>
+
+                <a href="#">
+                    <span>03</span>
+                    Sobre Nosotros
+                </a>
+
+                <a href="#">
+                    <span>04</span>
+                    Contacto
+                </a>
+
+
+                <!-- DIVISOR -->
+
+                <div class="mobile-divider"></div>
+
+
+                <a href="#">
+                    <span>05</span>
+                    Buscar
+                </a>
+
+                <a
+                    href="login.html"
+                    id="mobileAccountLink"
+                >
+                    <span>06</span>
+                    Login
+                </a>
+
+                <a
+                    href="#"
+                    class="mobile-cart"
+                >
+                    <span>07</span>
+                    Carrito
+                    <b>0</b>
+                </a>
+
+            </nav>
+
+
+            <!-- FOOTER -->
+
+            <div class="mobile-menu-footer">
+
+                SYSTEM_01
+
+                <span>
+                    ONLINE
+                </span>
+
+            </div>
+
+        </aside>
+
+    </header>
+
 <script src="js/navbar.js"></script>
 </body>
 </html>
