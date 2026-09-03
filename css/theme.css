@@ -1,0 +1,87 @@
+/* =========================================================
+   THEME.CSS
+
+   Recursos visuales compartidos por todo el proyecto.
+   Aquí se centralizan fuentes, colores y reset general.
+   ========================================================= */
+
+/* =========================================================
+   1. FUENTES PERSONALIZADAS
+   ========================================================= */
+
+@font-face {
+  font-family: "Archive Title";
+  src: url("../assets/fonts/Title.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archive Body";
+  src: url("../assets/fonts/Body.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archive txt";
+  src: url("../assets/fonts/Subway_Haze_1.1.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archive Bttn";
+  src: url("../assets/fonts/KottaOne-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* =========================================================
+   2. PALETA DE COLORES Y TIPOGRAFÍAS
+   ========================================================= */
+
+:root {
+  --black: #010300;
+  --neon: #c3ff00;
+  --lime: #b5d25c;
+  --olive: #566f20;
+  --dark-olive: #22330c;
+  --forest-black: #0d1608;
+  --gray: #b5b5b5;
+  --muted-gray: #7d8a66;
+
+  --font-title: "Archive Title", sans-serif;
+  --font-body: "Archive Body", sans-serif;
+  --font-txt: "Archive txt", sans-serif;
+  --font-bttn: "Archive Bttn", sans-serif;
+}
+
+/* =========================================================
+   3. RESET GENERAL
+   ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--gray);
+  background-color: var(--black);
+  font-family: var(--font-body);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}

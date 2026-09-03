@@ -11,14 +11,18 @@
     <link rel="stylesheet" href="css/auth.css" />
     <script src="js/auth.js" defer></script>
   </head>
-  <body class="auth-page">
+
+  <body class="auth-page register-page">
     <main class="auth-shell">
       <!-- Panel visual compartido -->
       <section class="auth-visual" aria-label="Identidad de la tienda">
         <div class="scanline"></div>
+
         <div class="visual-content">
           <p class="eyebrow">SYSTEM_02 / REGISTER</p>
-          <h1 class="title">JOIN THE <span>ARCHIVE</span></h1>
+
+          <h1 class="title">(Off)line <span>Archive</span></h1>
+
           <p class="body-copy">
             CREA TU PERFIL.<br />
             DESBLOQUEA EL <strong>ARCHIVO.</strong>
@@ -31,7 +35,7 @@
         </div>
       </section>
 
-      <!-- Formulario de registro -->
+      <!-- Panel del formulario -->
       <section class="auth-form-panel">
         <div class="auth-header">
           <p class="eyebrow">SYSTEM_02 / ACCOUNT</p>
@@ -39,8 +43,10 @@
           <p>Crea una cuenta para acceder a la tienda.</p>
         </div>
 
-      
-            <div class="field">
+        <!-- IMPORTANTE: el formulario contiene todos los campos -->
+        <form id="registerForm" class="auth-form" novalidate>
+          <div class="form-grid">
+<div class="field">
               <label for="registerName">Nombre</label>
               <input
                 type="text"
@@ -58,7 +64,7 @@
               ></small>
             </div>
 
-            <div class="field field-full">
+            <div class="field">
               <label for="registerLastName">Apellidos</label>
               <input
                 type="text"
@@ -88,10 +94,9 @@
                 aria-describedby="registerEmailHint registerEmailError"
                 required
               />
-              <small id="registerEmailHint" class="field-hint"
-                >Permitidos: Usa @gmail.com, @hotmail.com, @yahoo.com o
-                @outlook.com.</small
-              >
+              <small id="registerEmailHint" class="field-hint">
+                Permitidos: @gmail.com, @hotmail.com, @yahoo.com y @outlook.com.
+              </small>
               <small
                 id="registerEmailError"
                 class="field-error"
@@ -158,10 +163,10 @@
             </div>
 
             <div class="field">
-              <label for="birthDate"
-                >Fecha de nacimiento
-                <span class="optional">(opcional)</span></label
-              >
+              <label for="birthDate">
+                Fecha de nacimiento
+                <span class="optional">(opcional)</span>
+              </label>
               <input
                 type="date"
                 id="birthDate"

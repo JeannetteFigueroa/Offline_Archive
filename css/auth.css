@@ -1,87 +1,4 @@
-/* =========================================================
-   AUTH.CSS
-
-   Estilos compartidos para Login y Registro
-   ========================================================= */
-
-
-/* =========================================================
-   1. FUENTES PERSONALIZADAS
-   ========================================================= */
-
-@font-face {
-  font-family: "Archive Title";
-  src: url("../assets/fonts/Title.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Archive Body";
-  src: url("../assets/fonts/Body.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Archive txt";
-  src: url("../assets/fonts/Subway_Haze_1.1.ttf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-/* =========================================================
-   2. VARIABLES
-   ========================================================= */
-
-:root {
-  /* Colores */
-  --black: #010300;
-  --neon: #c3ff00;
-  --lime: #b5d25c;
-  --olive: #566f20;
-  --dark-olive: #22330c;
-  --forest-black: #0d1608;
-  --gray: #b5b5b5;
-  --muted-gray: #7d8a66;
-
-  /* Tipografías */
-  --font-title: "Archive Title", sans-serif;
-  --font-body: "Archive Body", sans-serif;
-  --font-txt: "Archive txt", sans-serif;
-}
-
-
-/* =========================================================
-   3. RESET
-   ========================================================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
-/* =========================================================
-   4. CONFIGURACIÓN GENERAL
-   ========================================================= */
-
-body {
-  min-height: 100vh;
-
-  font-family: var(--font-body);
-  color: var(--gray);
-
-  /* Fondo de la página */
-  background-color: var(--black);
-  background-image: url("../assets/images/fondo-auth-placeholder.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
+@import url("theme.css");
 
 /* =========================================================
    5. TIPOGRAFÍA DE LA MARCA
@@ -89,7 +6,7 @@ body {
    .title corresponde solamente a "(Off)line Archive"
    ========================================================= */
 
-.title {
+.auth-visual .title {
   font-family: var(--font-title);
   color: var(--gray);
   font-weight: normal;
@@ -98,7 +15,7 @@ body {
 
 /* Parte destacada de la marca */
 
-.title span {
+.auth-visual .title span {
   color: var(--neon);
 }
 
@@ -689,4 +606,30 @@ body {
     gap: 8px;
   }
 
+}
+
+/* =========================================================
+   MENSAJES DEL FORMULARIO
+   ========================================================= */
+
+.form-message {
+  min-height: 20px;
+  margin-top: 15px;
+  font-size: 0.75rem;
+}
+
+.form-message.success {
+  color: var(--neon);
+}
+
+.form-message.error {
+  color: var(--lime);
+}
+
+.optional {
+  color: var(--muted-gray);
+}
+
+.terms-control {
+  margin-top: 20px;
 }

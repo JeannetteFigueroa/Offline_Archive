@@ -1,103 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-
-    <!-- Permite que el diseño se adapte correctamente a celulares -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="(Off)line Archive - ropa seleccionada del archivo.">
     <title>(Off)line Archive</title>
 
-    <!-- CSS exclusivo de la página principal -->
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 
 <body>
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+    <header class="navbar">
+        <a href="index.html" class="navbar-logo">(Off)line Archive</a>
+
+        <nav class="navbar-menu" aria-label="Navegación principal">
+            <a href="#">Accesorios</a>
+            <a href="#">Colección y3k</a>
+            <a href="#">Sobre<br>Nosotros</a>
+            <a href="#">Contacto</a>
+        </nav>
+
+        <nav class="navbar-actions" aria-label="Acciones de usuario">
+            <a href="#">Buscar</a>
+            <a href="login.html" id="accountLink">Login</a>
+            <a href="#" class="navbar-cart">
+                <span>Carrito</span>
+                <span class="cart-count">0</span>
+            </a>
+        </nav>
+
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <div class="mobile-menu-header">
+                <span>MENU_01</span>
+                <button class="menu-close" type="button" aria-label="Cerrar menú">×</button>
+            </div>
+
+            <nav class="mobile-menu-links" aria-label="Navegación móvil">
+                <a href="#"><span>01</span>Accesorios</a>
+                <a href="#"><span>02</span>Colección y3k</a>
+                <a href="#"><span>03</span>Sobre Nosotros</a>
+                <a href="#"><span>04</span>Contacto</a>
+
+                <div class="mobile-divider"></div>
+
+                <a href="#"><span>05</span>Buscar</a>
+                <a href="login.html" id="mobileAccountLink"><span>06</span>Login</a>
+                <a href="#" class="mobile-cart">
+                    <span>07</span>Carrito <b>0</b>
+                </a>
+            </nav>
+
+            <div class="mobile-menu-footer">
+                SYSTEM_01
+                <span>ONLINE</span>
+            </div>
+        </aside>
+    </header>
 
     <!-- =====================================================
-         CONTENIDO PRINCIPAL
+         HOME / HERO
          ===================================================== -->
-
     <main class="home">
-
-        <!-- =================================================
-             HERO / PORTADA PRINCIPAL
-             ================================================= -->
-
         <section class="hero">
-
-            <!-- Contenido textual del hero -->
             <div class="hero-content">
-
-                <!-- Nombre de la tienda -->
                 <p class="hero-brand">(Off)line Archive</p>
 
-                <!-- Título principal -->
                 <h1 class="hero-title">
                     <span>ESTO NO ES</span>
                     <span>EL FUTURO.</span>
-                    <span class="neon-text">
-                        ES EL ARCHIVO.
-                    </span>
+                    <span class="neon-text">ES EL ARCHIVO.</span>
                 </h1>
 
-                <!-- Texto complementario -->
                 <p class="hero-description">
                     Ropa seleccionada del archivo.
                     Estética underground.
                     Piezas que no siguen tendencias.
                 </p>
 
-                <!-- Botón hacia la colección -->
                 <a href="login.html" class="hero-button">
                     <span>VER COLECCIÓN</span>
                     <span>→</span>
                 </a>
-
             </div>
 
-
-            <!-- =================================================
-                 INFORMACIÓN VISUAL DEL ARCHIVO
-                 ================================================= -->
-
             <div class="archive-interface">
-
-                <!-- Decoración superior -->
-                <div class="archive-plus">
-                    +
-                </div>
-
-                <!-- Información de imagen -->
+                <div class="archive-plus">+</div>
                 <div class="archive-item active">
                     <span>IMG_0047</span>
                     <span>+</span>
                 </div>
-
-                <!-- Información del archivo -->
                 <div class="archive-item">
                     <span>ARCHIVE / 2003</span>
                 </div>
-
-                <!-- Sistema -->
                 <div class="archive-item">
                     <span>SYSTEM_01</span>
                     <span>+</span>
                 </div>
-
-                <!-- Drop -->
                 <div class="archive-item">
                     <span>DROP 07</span>
                     <span>+</span>
                 </div>
-
             </div>
-
         </section>
-
     </main>
 
+    <script src="js/navbar.js"></script>
 </body>
-
 </html>
