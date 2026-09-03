@@ -68,13 +68,34 @@
    ========================================================= */
 
 .account-page {
-  min-height: 100vh;
-  padding: 40px 24px;
-  background:
-    linear-gradient(rgba(1, 3, 0, 0.88), rgba(1, 3, 0, 0.96)),
-    url("../assets/images/fondo-auth-placeholder.svg");
-  background-size: cover;
-  background-position: center;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    background:
+
+        linear-gradient(
+            rgba(1, 3, 0, 0.88),
+            rgba(1, 3, 0, 0.96)
+        ),
+
+        url("../assets/images/fondo-auth-placeholder.svg");
+
+    background-size: cover;
+
+    background-position: center;
+
+}
+
+.account-content {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 40px 24px;
+
 }
 
 .account-shell {
@@ -101,6 +122,7 @@
 
 .account-header h1 {
   margin: 10px 0;
+  margin-left: 5%;
   color: var(--gray);
   font-family: var(--font-title);
   font-size: clamp(2.4rem, 7vw, 5rem);
@@ -252,4 +274,23 @@
   .account-footer {
     flex-direction: column;
   }
+}
+
+
+/* =========================================================
+   CONTACTO - LISTA VERTICAL
+   ========================================================= */
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-list .field {
+    width: 100%;
+}
+
+.contact-list .field-full {
+    width: 100%;
 }
