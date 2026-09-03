@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/auth.css">
 
     <script src="js/navbar.js" defer></script>
-    <script src="js/contacto.js" defer></script>
+    <script src="js/contact.js" defer></script>
 
 </head>
 
@@ -310,14 +310,18 @@
                                 type="text"
                                 id="contactName"
                                 name="name"
+                                autocomplete="name"
+                                maxlength="100"
                                 placeholder="Tu nombre"
+                                aria-describedby="nameError"
+                                required
                             >
 
                             <small
                                 id="nameError"
                                 class="field-error"
+                                aria-live="polite"
                             ></small>
-
                         </div>
 
 
@@ -336,16 +340,28 @@
                                 type="email"
                                 id="contactEmail"
                                 name="email"
+                                autocomplete="email"
+                                maxlength="100"
                                 placeholder="tu@email.com"
+                                aria-describedby="contactEmailHint emailError"
+                                required
                             >
+
+                            <small
+                                id="contactEmailHint"
+                                class="field-hint"
+                            >
+                                Permitidos: @duoc.cl, @profesor.duoc.cl y @gmail.com
+                            </small>
 
                             <small
                                 id="emailError"
                                 class="field-error"
+                                aria-live="polite"
+                                
                             ></small>
-
                         </div>
-
+                        <!-- aria-live="polite": Anuncia errores dinámicos a lectores de pantalla sin interrumpir la lectura actual -->
 
 
                         <!-- =========================================
@@ -362,12 +378,16 @@
                                 type="text"
                                 id="contactSubject"
                                 name="subject"
+                                maxlength="100"
                                 placeholder="Motivo del contacto"
+                                aria-describedby="subjectError"
+                                required
                             >
 
                             <small
                                 id="subjectError"
                                 class="field-error"
+                                aria-live="polite"
                             ></small>
 
                         </div>
@@ -379,7 +399,7 @@
                              ========================================= -->
 
                         <div class="field">
-
+                            
                             <label for="contactMessage">
                                 MENSAJE
                             </label>
@@ -388,12 +408,23 @@
                                 id="contactMessage"
                                 name="message"
                                 rows="5"
+                                maxlength="500"
                                 placeholder="Escribe tu mensaje..."
+                                aria-describedby="contactMessageHint messageError"
+                                required
                             ></textarea>
+
+                            <small
+                                id="contactMessageHint"
+                                class="field-hint"
+                            >
+                                Máximo 500 caracteres.
+                            </small>
 
                             <small
                                 id="messageError"
                                 class="field-error"
+                                aria-live="polite"
                             ></small>
 
                         </div>
@@ -423,15 +454,13 @@
                             <p
                                 id="formMessage"
                                 class="form-message"
+                                role="status"
+                                aria-live="polite"
                             ></p>
-
                         </div>
 
-
                     </div>
-
                 </form>
-
             </section>
 
 
