@@ -1,0 +1,255 @@
+@import url("theme.css");
+
+
+/* =========================================================
+   NAVBAR DE LA CUENTA
+   ========================================================= */
+
+.account-navbar {
+  position: relative;
+  z-index: 10;
+}
+
+/* =========================================================
+   MENSAJE DE BIENVENIDA
+   ========================================================= */
+
+.account-header p strong {
+  color: var(--neon);
+  font-weight: normal;
+}
+
+/* =========================================================
+   HISTORIAL DE COMPRAS
+   ========================================================= */
+
+.purchase-card {
+  margin-top: 25px;
+}
+
+.purchase-history {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 45px 25px;
+  text-align: center;
+}
+
+.empty-history {
+  max-width: 520px;
+}
+
+.empty-history-code {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--muted-gray);
+  font-family: var(--font-bttn);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.empty-history h2 {
+  margin-bottom: 12px;
+  color: var(--gray);
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: normal;
+}
+
+.empty-history p {
+  color: var(--muted-gray);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   ACCOUNT.CSS
+   Página de cuenta del usuario.
+   ========================================================= */
+
+.account-page {
+  min-height: 100vh;
+  padding: 40px 24px;
+  background:
+    linear-gradient(rgba(1, 3, 0, 0.88), rgba(1, 3, 0, 0.96)),
+    url("../assets/images/fondo-auth-placeholder.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+.account-shell {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.account-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--dark-olive);
+}
+
+.account-eyebrow {
+  color: var(--muted-gray);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.account-header h1 {
+  margin: 10px 0;
+  color: var(--gray);
+  font-family: var(--font-title);
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: normal;
+}
+
+.account-header h1 span {
+  color: var(--neon);
+}
+
+.account-header p:last-child {
+  color: var(--muted-gray);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  min-width: 190px;
+  padding: 15px 18px;
+  border: 1px solid var(--olive);
+  color: var(--neon);
+  background: transparent;
+  font-family: var(--font-bttn);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logout-button:hover {
+  border-color: var(--neon);
+  background: var(--forest-black);
+}
+
+.account-card {
+  border: 1px solid var(--dark-olive);
+  background-color: rgba(13, 22, 8, 0.88);
+}
+
+.account-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 22px;
+  border-bottom: 1px dashed var(--dark-olive);
+  color: var(--muted-gray);
+  font-family: var(--font-bttn);
+  font-size: 0.75rem;
+}
+
+.status b {
+  color: var(--neon);
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.account-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 100px;
+  padding: 22px;
+  border-right: 1px solid var(--dark-olive);
+  border-bottom: 1px solid var(--dark-olive);
+}
+
+.account-field:nth-child(even) {
+  border-right: none;
+}
+
+.account-field span {
+  color: var(--muted-gray);
+  font-family: var(--font-bttn);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.account-field strong {
+  color: var(--gray);
+  font-family: var(--font-body);
+  font-weight: normal;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.account-field-full {
+  grid-column: 1 / -1;
+  border-right: none;
+}
+
+.back-home {
+  display: inline-block;
+  margin-top: 25px;
+  color: var(--muted-gray);
+  font-family: var(--font-bttn);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.back-home:hover {
+  color: var(--neon);
+}
+
+.account-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 50px;
+  color: var(--muted-gray);
+  font-size: 0.65rem;
+}
+
+@media (max-width: 700px) {
+  .account-page {
+    padding: 25px 18px;
+  }
+
+  .account-navbar {
+    margin: -25px -18px 25px;
+    width: calc(100% + 36px);
+  }
+
+  .account-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-field,
+  .account-field:nth-child(even) {
+    border-right: none;
+  }
+
+  .account-field-full {
+    grid-column: auto;
+  }
+
+  .account-card-header,
+  .account-footer {
+    flex-direction: column;
+  }
+}

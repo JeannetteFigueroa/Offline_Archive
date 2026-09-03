@@ -1,0 +1,444 @@
+@import url("theme.css");
+
+/* =========================================================
+   NAVBAR (O barra de navegación)
+   ========================================================= */
+
+.navbar {
+
+    width: 100%;
+    height: 92px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 60px;
+
+    background-color: var(--black);
+
+    border-bottom: 1px solid var(--neon);
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.navbar-logo {
+
+    color: var(--neon);
+
+    font-family: var(--font-title);
+
+    font-size: 42px;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   MENÚ PRINCIPAL
+   ========================================================= */
+
+.navbar-menu {
+
+    display: flex;
+    align-items: center;
+
+    gap: 42px;
+
+    margin-left: 65px;
+}
+
+
+.navbar-menu a {
+
+    position: relative;
+
+    color: var(--gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 16px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+/* Hover */
+
+.navbar-menu a:hover {
+
+    color: var(--neon);
+}
+
+
+/* =========================================================
+   ACCIONES DERECHA
+   ========================================================= */
+
+.navbar-actions {
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 55px;
+
+    margin-left: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.navbar-actions a {
+
+    color: var(--gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 16px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.navbar-actions a:hover {
+
+    color: var(--neon);
+}
+
+
+/* =========================================================
+   CARRITO
+   ========================================================= */
+
+.navbar-cart {
+
+    height: 100%;
+
+    min-width: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border-left: 1px dashed var(--dark-olive);
+    border-right: 1px dashed var(--dark-olive);
+}
+
+
+/* Número del carrito */
+
+.cart-count {
+
+    color: var(--neon);
+
+    font-family: var(--font-bttn);
+
+    font-size: 14px;
+}
+
+
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.menu-toggle {
+    display: none;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 10px;
+
+    border: 1px solid var(--dark-olive);
+
+    background: var(--black);
+
+    cursor: pointer;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.menu-toggle span {
+    display: block;
+
+    width: 22px;
+    height: 1px;
+
+    background-color: var(--neon);
+
+    transition: 0.2s ease;
+}
+
+
+/* =========================================================
+   MENÚ LATERAL
+   ========================================================= */
+
+.mobile-menu {
+
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: min(85vw, 360px);
+    height: 100vh;
+
+    z-index: 1000;
+
+    background-color: var(--black);
+
+    border-left: 1px solid var(--neon);
+
+    padding: 25px;
+
+    transform: translateX(100%);
+
+    transition: transform 0.35s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   HEADER DEL MENÚ
+   ========================================================= */
+
+.mobile-menu-header {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px dashed var(--dark-olive);
+
+    color: var(--muted-gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 15px;
+
+    letter-spacing: 0.08em;
+}
+
+
+.menu-close {
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid var(--dark-olive);
+
+    background: transparent;
+
+    color: var(--neon);
+
+    font-family: var(--font-bttn);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.menu-close:hover {
+
+    border-color: var(--neon);
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.mobile-menu-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-top: 25px;
+}
+
+
+.mobile-menu-links a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 17px 5px;
+
+    border-bottom: 1px solid rgba(34, 51, 12, 0.5);
+
+    color: var(--gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 17px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+
+.mobile-menu-links a span {
+
+    width: 25px;
+
+    color: var(--muted-gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 10px;
+}
+
+
+.mobile-menu-links a:hover {
+
+    padding-left: 12px;
+
+    color: var(--neon);
+}
+
+
+/* =========================================================
+   DIVISOR
+   ========================================================= */
+
+.mobile-divider {
+
+    height: 20px;
+
+    border-bottom: 1px dashed var(--dark-olive);
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   CARRITO
+   ========================================================= */
+
+.mobile-cart b {
+
+    margin-left: auto;
+
+    color: var(--neon);
+
+    font-family: var(--font-bttn);
+
+    font-weight: normal;
+}
+
+
+/* =========================================================
+   FOOTER (del menú lateral)
+   ========================================================= */
+
+.mobile-menu-footer {
+
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top: 1px dashed var(--dark-olive);
+
+    color: var(--muted-gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 9px;
+
+    letter-spacing: 0.1em;
+}
+
+
+/* =========================================
+   PANTALLAS MEDIANAS
+   ========================================= */
+
+@media (max-width: 1200px) {
+
+    .navbar {
+        padding-left: 35px;
+    }
+
+    .navbar-menu {
+        gap: 25px;
+        margin-left: 40px;
+    }
+
+    .navbar-actions {
+        gap: 30px;
+    }
+
+}
+
+
+/* =========================================
+   TABLET / PANTALLA PEQUEÑA
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .navbar-menu,
+    .navbar-actions {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .navbar {
+        height: 75px;
+        padding: 0 20px;
+    }
+
+    .navbar-logo {
+        font-size: 30px;
+    }
+
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
