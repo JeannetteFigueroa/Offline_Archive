@@ -68,12 +68,15 @@
 }
 
 html {
+  width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
-  min-width: 320px;
+  width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
   color: var(--gray);
   background-color: var(--black);
   font-family: var(--font-body);
