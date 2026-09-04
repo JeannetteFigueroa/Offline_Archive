@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="(Off)line Archive - ropa seleccionada del archivo.">
+
+    <meta
+        name="description"
+        content="(Off)line Archive - ropa seleccionada del archivo."
+    >
+
     <title>(Off)line Archive</title>
 
     <link rel="stylesheet" href="css/home.css">
@@ -11,81 +17,208 @@
 </head>
 
 <body>
+
     <!-- =====================================================
          NAVBAR
          ===================================================== -->
+
     <header class="navbar">
-        <a href="index.html" class="navbar-logo">(Off)line Archive</a>
 
-        <nav class="navbar-menu" aria-label="Navegación principal">
+        <a href="index.html" class="navbar-logo">
+            (Off)line Archive
+        </a>
+
+
+        <!-- =================================================
+             MENÚ PRINCIPAL
+             ================================================= -->
+
+        <nav class="navbar-menu">
+
             <a href="#">Accesorios</a>
-            <a href="#">Colección y3k</a>
-            <a href="#">Sobre<br>Nosotros</a>
-            <a href="#">Contacto</a>
+
+            <a href="collections.html">Colección Y2K</a>
+
+            <a href="about_us.html">
+                Sobre<br>
+                Nosotros
+            </a>
+
+            <a href="contact.html">Contacto</a>
+
         </nav>
 
-        <nav class="navbar-actions" aria-label="Acciones de usuario">
+
+        <!-- =================================================
+             ACCIONES DERECHA
+             ================================================= -->
+
+        <nav class="navbar-actions">
+
             <a href="#">Buscar</a>
-            <a href="login.html" id="accountLink">Login</a>
-            <a href="#" class="navbar-cart">
-                <span>Carrito</span>
-                <span class="cart-count">0</span>
+
+            <a href="login.html" id="accountLink">
+                Login
             </a>
+
+            <a href="#" class="navbar-cart">
+
+                <span>Carrito</span>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
         </nav>
+
+
+        <!-- =================================================
+             BOTÓN MENÚ MÓVIL
+             ================================================= -->
 
         <button
             class="menu-toggle"
             type="button"
-            aria-label="Abrir menú"
-            aria-expanded="false"
-            aria-controls="mobileMenu"
         >
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-        <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+
+        <!-- =================================================
+             MENÚ LATERAL MÓVIL
+             ================================================= -->
+
+        <aside
+            class="mobile-menu"
+            id="mobileMenu"
+            hidden
+        >
+
+            <!-- HEADER -->
+
             <div class="mobile-menu-header">
-                <span>MENU_01</span>
-                <button class="menu-close" type="button" aria-label="Cerrar menú">×</button>
+
+                <span>
+                    MENU_01
+                </span>
+
+                <button
+                    class="menu-close"
+                    type="button"
+                >
+                    ×
+                </button>
+
             </div>
 
-            <nav class="mobile-menu-links" aria-label="Navegación móvil">
-                <a href="#"><span>01</span>Accesorios</a>
-                <a href="#"><span>02</span>Colección y3k</a>
-                <a href="#"><span>03</span>Sobre Nosotros</a>
-                <a href="#"><span>04</span>Contacto</a>
+
+            <!-- LINKS -->
+
+            <nav class="mobile-menu-links">
+
+                <a href="#">
+                    <span>01</span>
+                    Accesorios
+                </a>
+
+                <a href="collections.html">
+                    <span>02</span>
+                    Colección Y2K
+                </a>
+
+                <a href="about_us.html">
+                    <span>03</span>
+                    Sobre Nosotros
+                </a>
+
+                <a href="contact.html">
+                    <span>04</span>
+                    Contacto
+                </a>
+
+
+                <!-- DIVISOR -->
 
                 <div class="mobile-divider"></div>
 
-                <a href="#"><span>05</span>Buscar</a>
-                <a href="login.html" id="mobileAccountLink"><span>06</span>Login</a>
-                <a href="#" class="mobile-cart">
-                    <span>07</span>Carrito <b>0</b>
+
+                <a href="#">
+                    <span>05</span>
+                    Buscar
                 </a>
+
+                <a
+                    href="login.html"
+                    id="mobileAccountLink"
+                >
+                    <span>06</span>
+                    Login
+                </a>
+
+                <a
+                    href="#"
+                    class="mobile-cart"
+                >
+                    <span>07</span>
+                    Carrito
+                    <b>0</b>
+                </a>
+
             </nav>
 
+
+            <!-- FOOTER -->
+
             <div class="mobile-menu-footer">
+
                 SYSTEM_01
-                <span>ONLINE</span>
+
+                <span>
+                    ONLINE
+                </span>
+
             </div>
+
         </aside>
+
     </header>
+
 
     <!-- =====================================================
          HOME / HERO
          ===================================================== -->
+
     <main class="home">
+
         <section class="hero">
+
             <div class="hero-content">
-                <p class="hero-brand">(Off)line Archive</p>
+
+                <p class="hero-brand">
+                    (Off)line Archive
+                </p>
+
 
                 <h1 class="hero-title">
-                    <span>ESTO NO ES</span>
-                    <span>EL FUTURO.</span>
-                    <span class="neon-text">ES EL ARCHIVO.</span>
+
+                    <span>
+                        ESTO NO ES
+                    </span>
+
+                    <span>
+                        EL FUTURO.
+                    </span>
+
+                    <span class="neon-text">
+                        ES EL ARCHIVO.
+                    </span>
+
                 </h1>
+
 
                 <p class="hero-description">
                     Ropa seleccionada del archivo.
@@ -93,33 +226,37 @@
                     Piezas que no siguen tendencias.
                 </p>
 
-                <a href="login.html" class="hero-button">
-                    <span>VER COLECCIÓN</span>
-                    <span>→</span>
+
+                <a
+                    href="collections.html"
+                    class="hero-button"
+                >
+                    <span>
+                        VER COLECCIÓN
+                    </span>
+
+                    <span>
+                        →
+                    </span>
                 </a>
+
             </div>
 
-            <div class="archive-interface">
-                <div class="archive-plus">+</div>
-                <div class="archive-item active">
-                    <span>IMG_0047</span>
-                    <span>+</span>
-                </div>
-                <div class="archive-item">
-                    <span>ARCHIVE / 2003</span>
-                </div>
-                <div class="archive-item">
-                    <span>SYSTEM_01</span>
-                    <span>+</span>
-                </div>
-                <div class="archive-item">
-                    <span>DROP 07</span>
-                    <span>+</span>
-                </div>
-            </div>
+
+            
+
+
         </section>
+
     </main>
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
     <script src="js/navbar.js"></script>
+
 </body>
+
 </html>

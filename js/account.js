@@ -1,4 +1,4 @@
-/* =========================================================
+/* =========================================================contactForm
    ACCOUNT.JS
 
    Carga los datos de la cuenta simulada, muestra el nombre
@@ -6,11 +6,11 @@
    ========================================================= */
 
 const ACCOUNT_KEY = "offlineArchiveAccount";
-const SESSION_KEY = "offlineArchiveSession";
+const ACCOUNT_SESSION_KEY = "offlineArchiveSession";
 
 function getStoredSession() {
-  const localSession = localStorage.getItem(SESSION_KEY);
-  const temporarySession = sessionStorage.getItem(SESSION_KEY);
+  const localSession = localStorage.getItem(ACCOUNT_SESSION_KEY);
+  const temporarySession = sessionStorage.getItem(ACCOUNT_SESSION_KEY);
 
   try {
     return JSON.parse(localSession || temporarySession || "null");
@@ -81,8 +81,8 @@ const logoutButton = document.getElementById("logoutButton");
 
 if (logoutButton) {
   logoutButton.addEventListener("click", () => {
-    localStorage.removeItem(SESSION_KEY);
-    sessionStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(ACCOUNT_SESSION_KEY);
+    sessionStorage.removeItem(ACCOUNT_SESSION_KEY);
     window.location.href = "index.html";
   });
 }

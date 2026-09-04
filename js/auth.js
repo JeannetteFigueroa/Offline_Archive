@@ -10,10 +10,9 @@
    ========================================================= */
 
 const ALLOWED_EMAIL_DOMAINS = [
+  "@duoc.cl",
+  "@profesor.duoc.cl",
   "@gmail.com",
-  "@hotmail.com",
-  "@yahoo.com",
-  "@outlook.com",
 ];
 
 const REGION_DATA = {
@@ -117,7 +116,7 @@ function validateEmailField(fieldId, errorId) {
       fieldId,
       errorId,
       false,
-      "Solo se permiten correos @gmail.com, @hotmail.com, @yahoo.com y @outlook.com.",
+      "Solo se permiten correos @duoc.cl, @profesor.duoc.cl y @gmail.com",
     );
   }
 

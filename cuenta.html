@@ -1,147 +1,462 @@
 <!doctype html>
+
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cuenta de usuario de (Off)line Archive" />
-  <title>Mi cuenta | (Off)line Archive</title>
-  <link rel="stylesheet" href="css/navbar.css" />
-  <link rel="stylesheet" href="css/account.css" />
-  <script src="js/navbar.js" defer></script>
-  <script src="js/account.js" defer></script>
+
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Cuenta de usuario de (Off)line Archive"
+>
+
+<title>Mi cuenta | (Off)line Archive</title>
+
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/account.css">
+
+<script src="js/navbar.js" defer></script>
+<script src="js/account.js" defer></script>
+
+
 </head>
 
 <body class="account-page">
 
-  <header class="navbar account-navbar">
-    <a href="index.html" class="navbar-logo">(Off)line Archive</a>
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
 
-    <nav class="navbar-menu" aria-label="Navegación principal">
-      <a href="#">Accesorios</a>
-      <a href="#">Colección y3k</a>
-      <a href="#">Sobre<br>Nosotros</a>
-      <a href="#">Contacto</a>
+<header class="navbar">
+
+    <a
+        href="index.html"
+        class="navbar-logo"
+    >
+        (Off)line Archive
+    </a>
+
+
+    <!-- =================================================
+         MENÚ PRINCIPAL
+         ================================================= -->
+
+    <nav class="navbar-menu">
+
+        <a href="#">
+            Accesorios
+        </a>
+
+        <a href="collections.html">
+            Colección Y2K
+        </a>
+
+        <a href="about_us.html">
+            Sobre<br>
+            Nosotros
+        </a>
+
+        <a href="contact.html">
+            Contacto
+        </a>
+
     </nav>
 
-    <nav class="navbar-actions" aria-label="Acciones de usuario">
-      <a href="#">Buscar</a>
-      <a href="cuenta.html" id="accountLink">Mi cuenta</a>
-      <a href="#" class="navbar-cart">
-        <span>Carrito</span>
-        <span class="cart-count">0</span>
-      </a>
+
+    <!-- =================================================
+         ACCIONES DERECHA
+         ================================================= -->
+
+    <nav class="navbar-actions">
+
+        <a href="#">
+            Buscar
+        </a>
+
+        <a
+            href="cuenta.html"
+            id="accountLink"
+        >
+            Mi cuenta
+        </a>
+
+        <a
+            href="#"
+            class="navbar-cart"
+        >
+            <span>
+                Carrito
+            </span>
+
+            <span class="cart-count">
+                0
+            </span>
+        </a>
+
     </nav>
+
+
+    <!-- =================================================
+         BOTÓN MENÚ MÓVIL
+         ================================================= -->
 
     <button
-      class="menu-toggle"
-      type="button"
-      aria-label="Abrir menú"
-      aria-expanded="false"
-      aria-controls="mobileMenu"
+        class="menu-toggle"
+        type="button"
     >
-      <span></span>
-      <span></span>
-      <span></span>
+
+        <span></span>
+        <span></span>
+        <span></span>
+
     </button>
 
-    <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <div class="mobile-menu-header">
-        <span>MENU_01</span>
-        <button class="menu-close" type="button" aria-label="Cerrar menú">×</button>
-      </div>
 
-      <nav class="mobile-menu-links" aria-label="Navegación móvil">
-        <a href="#"><span>01</span>Accesorios</a>
-        <a href="#"><span>02</span>Colección y3k</a>
-        <a href="#"><span>03</span>Sobre Nosotros</a>
-        <a href="#"><span>04</span>Contacto</a>
+    <!-- =================================================
+         MENÚ LATERAL MÓVIL
+         ================================================= -->
 
-        <div class="mobile-divider"></div>
+    <aside
+        class="mobile-menu"
+        id="mobileMenu"
+        hidden
+    >
 
-        <a href="#"><span>05</span>Buscar</a>
-        <a href="cuenta.html" id="mobileAccountLink"><span>06</span>Mi cuenta</a>
-        <a href="#" class="mobile-cart">
-          <span>07</span>Carrito <b>0</b>
-        </a>
-      </nav>
 
-      <div class="mobile-menu-footer">
-        SYSTEM_01
-        <span>ONLINE</span>
-      </div>
+        <!-- HEADER -->
+
+        <div class="mobile-menu-header">
+
+            <span>
+                MENU_01
+            </span>
+
+            <button
+                class="menu-close"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- LINKS -->
+
+        <nav class="mobile-menu-links">
+
+            <a href="#">
+                <span>01</span>
+                Accesorios
+            </a>
+
+            <a href="collections.html">
+                <span>02</span>
+                Colección Y2K
+            </a>
+
+            <a href="about_us.html">
+                <span>03</span>
+                Sobre Nosotros
+            </a>
+
+            <a href="contact.html">
+                <span>04</span>
+                Contacto
+            </a>
+
+
+            <!-- DIVISOR -->
+
+            <div class="mobile-divider"></div>
+
+
+            <a href="#">
+                <span>05</span>
+                Buscar
+            </a>
+
+            <a
+                href="cuenta.html"
+                id="mobileAccountLink"
+            >
+                <span>06</span>
+                Mi cuenta
+            </a>
+
+            <a
+                href="#"
+                class="mobile-cart"
+            >
+
+                <span>
+                    07
+                </span>
+
+                Carrito
+
+                <b>
+                    0
+                </b>
+
+            </a>
+
+        </nav>
+
+
+        <!-- FOOTER -->
+
+        <div class="mobile-menu-footer">
+
+            SYSTEM_01
+
+            <span>
+                ONLINE
+            </span>
+
+        </div>
+
     </aside>
-  </header>
 
-  <main class="account-shell">
+</header>
+
+
+
+<!-- =====================================================
+     ACCOUNT
+     ===================================================== -->
+
+<main class="account-shell">
+
+
+    <!-- =================================================
+         HEADER DE CUENTA
+         ================================================= -->
+
     <header class="account-header">
-      <div>
-        <p class="account-eyebrow">SYSTEM_03 / ACCOUNT</p>
-        <h1>MY <span>ARCHIVE</span></h1>
-        <p>Bienvenido/a, <strong id="welcomeName">—</strong>.</p>
-      </div>
 
-      <button id="logoutButton" class="logout-button" type="button">
-        CERRAR SESIÓN <span>→</span>
-      </button>
+        <div>
+
+            <p class="account-eyebrow">
+                SYSTEM_03 / ACCOUNT
+            </p>
+
+            <h1>
+                MY
+                <span>
+                    ARCHIVE
+                </span>
+            </h1>
+
+            <p>
+                Bienvenido/a,
+                <strong id="welcomeName">
+                    —
+                </strong>.
+            </p>
+
+        </div>
+
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+            type="button"
+        >
+            CERRAR SESIÓN
+            <span>
+                →
+            </span>
+        </button>
+
     </header>
 
-    <section class="account-card" aria-labelledby="accountTitle">
-      <div class="account-card-header">
-        <span id="accountTitle">USER_DATA / 001</span>
-        <span class="status">STATUS: <b>ACTIVE</b></span>
-      </div>
 
-      <div class="account-grid">
-        <div class="account-field">
-          <span>CORREO</span>
-          <strong id="accountEmail">—</strong>
+
+    <!-- =================================================
+         DATOS DEL USUARIO
+         ================================================= -->
+
+    <section class="account-card">
+
+        <div class="account-card-header">
+
+            <span>
+                USER_DATA / 001
+            </span>
+
+            <span class="status">
+                STATUS:
+                <b>
+                    ACTIVE
+                </b>
+            </span>
+
         </div>
 
-        <div class="account-field">
-          <span>FECHA DE NACIMIENTO</span>
-          <strong id="accountBirthDate">No registrada</strong>
+
+        <div class="account-grid">
+
+
+            <!-- CORREO -->
+
+            <div class="account-field">
+
+                <span>
+                    CORREO
+                </span>
+
+                <strong id="accountEmail">
+                    —
+                </strong>
+
+            </div>
+
+
+            <!-- FECHA DE NACIMIENTO -->
+
+            <div class="account-field">
+
+                <span>
+                    FECHA DE NACIMIENTO
+                </span>
+
+                <strong id="accountBirthDate">
+                    No registrada
+                </strong>
+
+            </div>
+
+
+            <!-- REGIÓN -->
+
+            <div class="account-field">
+
+                <span>
+                    REGIÓN
+                </span>
+
+                <strong id="accountRegion">
+                    —
+                </strong>
+
+            </div>
+
+
+            <!-- COMUNA -->
+
+            <div class="account-field">
+
+                <span>
+                    COMUNA
+                </span>
+
+                <strong id="accountCommune">
+                    —
+                </strong>
+
+            </div>
+
+
+            <!-- DIRECCIÓN -->
+
+            <div class="account-field account-field-full">
+
+                <span>
+                    DIRECCIÓN
+                </span>
+
+                <strong id="accountAddress">
+                    —
+                </strong>
+
+            </div>
+
         </div>
 
-        <div class="account-field">
-          <span>REGIÓN</span>
-          <strong id="accountRegion">—</strong>
-        </div>
-
-        <div class="account-field">
-          <span>COMUNA</span>
-          <strong id="accountCommune">—</strong>
-        </div>
-
-        <div class="account-field account-field-full">
-          <span>DIRECCIÓN</span>
-          <strong id="accountAddress">—</strong>
-        </div>
-      </div>
     </section>
 
-    <section class="account-card purchase-card" aria-labelledby="purchaseTitle">
-      <div class="account-card-header">
-        <span id="purchaseTitle">PURCHASE_HISTORY / 001</span>
-        <span>ORDERS: <b id="purchaseCount">0</b></span>
-      </div>
 
-      <div id="purchaseHistory" class="purchase-history">
-        <div class="empty-history">
-          <span class="empty-history-code">NO_ORDERS_FOUND</span>
-          <h2>HISTORIAL VACÍO</h2>
-          <p>
-            Cuando realices una compra, tus pedidos aparecerán
-            aquí para poder consultar su estado y detalle.
-          </p>
+
+    <!-- =================================================
+         HISTORIAL DE COMPRAS
+         ================================================= -->
+
+    <section class="account-card purchase-card">
+
+        <div class="account-card-header">
+
+            <span>
+                PURCHASE_HISTORY / 001
+            </span>
+
+            <span>
+                ORDERS:
+                <b id="purchaseCount">
+                    0
+                </b>
+            </span>
+
         </div>
-      </div>
+
+
+        <div
+            id="purchaseHistory"
+            class="purchase-history"
+        >
+
+            <div class="empty-history">
+
+                <span class="empty-history-code">
+                    NO_ORDERS_FOUND
+                </span>
+
+                <h2>
+                    HISTORIAL VACÍO
+                </h2>
+
+                <p>
+                    Cuando realices una compra,
+                    tus pedidos aparecerán aquí
+                    para poder consultar su estado
+                    y detalle.
+                </p>
+
+            </div>
+
+        </div>
+
     </section>
 
+
+
+    <!-- =================================================
+         FOOTER
+         ================================================= -->
 
     <footer class="account-footer">
-      <span>(OFF)LINE ARCHIVE</span>
-      <span>VER_2.003 | Grupo 7</span>
+
+        <span>
+            (OFF)LINE ARCHIVE
+        </span>
+
+        <span>
+            VER_2.003 | Grupo 7
+        </span>
+
     </footer>
-  </main>
+
+
+</main>
+
+
 </body>
+
 </html>
