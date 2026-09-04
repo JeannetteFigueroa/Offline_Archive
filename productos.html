@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Catálogo de productos de (Off)line Archive."
+    >
+
+    <title>Productos | (Off)line Archive</title>
+
+
+    <!-- =====================================================
+         ESTILOS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/navbar.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/productos.css"
+    >
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="js/navbar.js"
+        defer
+    ></script>
+
+    <script
+        src="js/productos.js"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <a
+            href="index.html"
+            class="navbar-logo"
+        >
+            (Off)line Archive
+        </a>
+
+
+        <!-- MENÚ DE ESCRITORIO -->
+
+        <nav
+            class="navbar-menu"
+            aria-label="Navegación principal"
+        >
+
+            <a
+                href="productos.html"
+                aria-current="page"
+            >
+                Productos
+            </a>
+
+            <a href="collections.html">
+                Colección Y2K
+            </a>
+
+            <a href="about_us.html">
+                Sobre<br>
+                Nosotros
+            </a>
+
+            <a href="contact.html">
+                Contacto
+            </a>
+
+        </nav>
+
+
+        <!-- ACCIONES -->
+
+        <nav
+            class="navbar-actions"
+            aria-label="Acciones de usuario"
+        >
+
+            <a href="#catalogControls">
+                Buscar
+            </a>
+
+            <a
+                href="login.html"
+                id="accountLink"
+            >
+                Login
+            </a>
+
+            <a
+                href="carrito.html"
+                class="navbar-cart"
+            >
+
+                <span>
+                    Carrito
+                </span>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- BOTÓN DEL MENÚ MÓVIL -->
+
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <!-- MENÚ MÓVIL -->
+
+        <aside
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-hidden="true"
+        >
+
+            <div class="mobile-menu-header">
+
+                <span>
+                    MENU_01
+                </span>
+
+                <button
+                    class="menu-close"
+                    type="button"
+                    aria-label="Cerrar menú"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <nav
+                class="mobile-menu-links"
+                aria-label="Navegación móvil"
+            >
+
+                <a href="productos.html">
+                    <span>01</span>
+                    Productos
+                </a>
+
+                <a href="collections.html">
+                    <span>02</span>
+                    Colección Y2K
+                </a>
+
+                <a href="about_us.html">
+                    <span>03</span>
+                    Sobre Nosotros
+                </a>
+
+                <a href="contact.html">
+                    <span>04</span>
+                    Contacto
+                </a>
+
+
+                <div class="mobile-divider"></div>
+
+
+                <a href="#catalogControls">
+                    <span>05</span>
+                    Buscar
+                </a>
+
+                <a
+                    href="login.html"
+                    id="mobileAccountLink"
+                >
+                    <span>06</span>
+                    Login
+                </a>
+
+                <a
+                    href="carrito.html"
+                    class="mobile-cart"
+                >
+                    <span>07</span>
+                    Carrito
+                    <b>0</b>
+                </a>
+
+            </nav>
+
+
+            <div class="mobile-menu-footer">
+
+                SYSTEM_01
+
+                <span>
+                    ONLINE
+                </span>
+
+            </div>
+
+        </aside>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
+    <main class="products-page">
+
+
+        <!-- =================================================
+             ENCABEZADO
+             ================================================= -->
+
+        <section
+            class="products-header"
+            aria-labelledby="productsTitle"
+        >
+
+            <div class="products-heading">
+
+                <p class="products-code products-kicker">
+                    ARCHIVE / PRODUCT_SYSTEM
+                </p>
+
+                <h1
+                    class="products-title"
+                    id="productsTitle"
+                >
+                    PRODUCTOS.
+                </h1>
+
+                <p class="products-description">
+                    Selección de prendas y accesorios recuperados
+                    del archivo Offline.
+                </p>
+
+            </div>
+
+
+            <p class="products-count">
+
+                <span id="productCount">
+                    0
+                </span>
+
+                PIEZAS DISPONIBLES
+
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             BUSCADOR Y FILTROS
+             ================================================= -->
+
+        <section
+            class="catalog-controls"
+            id="catalogControls"
+            aria-label="Controles del catálogo"
+        >
+
+
+            <!-- BUSCADOR -->
+
+            <div class="search-control search-field">
+
+                <label
+                    class="search-label"
+                    for="productSearch"
+                >
+                    BUSCAR EN EL ARCHIVO
+                </label>
+
+                <input
+                    type="search"
+                    id="productSearch"
+                    class="product-search"
+                    placeholder="Nombre o categoría..."
+                    maxlength="100"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- FILTROS -->
+
+            <div
+                class="category-filters filter-list"
+                aria-label="Filtrar por categoría"
+            >
+
+                <button
+                    class="filter-button active"
+                    type="button"
+                    data-category="todos"
+                >
+                    TODOS
+                </button>
+
+                <button
+                    class="filter-button"
+                    type="button"
+                    data-category="tops"
+                >
+                    TOPS
+                </button>
+
+                <button
+                    class="filter-button"
+                    type="button"
+                    data-category="bottoms"
+                >
+                    BOTTOMS
+                </button>
+
+                <button
+                    class="filter-button"
+                    type="button"
+                    data-category="accesorios"
+                >
+                    ACCESORIOS
+                </button>
+
+                <button
+                    class="filter-button"
+                    type="button"
+                    data-category="outerwear"
+                >
+                    OUTERWEAR
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CATÁLOGO
+             ================================================= -->
+
+        <section
+            class="products-catalog"
+            aria-label="Catálogo de productos"
+        >
+
+            <!-- Los productos se insertan desde productos.js -->
+
+            <div
+                class="products-grid"
+                id="productsGrid"
+            ></div>
+
+
+            <!-- MENSAJE SIN RESULTADOS -->
+
+            <p
+                class="empty-products"
+                id="emptyProducts"
+                hidden
+            >
+                NO SE ENCONTRARON PRODUCTOS EN EL ARCHIVO.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MENSAJE DEL CARRITO
+         ===================================================== -->
+
+    <p
+        class="catalog-message"
+        id="catalogMessage"
+        role="status"
+        aria-live="polite"
+    ></p>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="products-footer">
+
+        <span>
+            (OFF)LINE ARCHIVE
+        </span>
+
+        <span>
+            VER_2003 | GRUPO 07
+        </span>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,880 @@
+/* =========================================================
+   PRODUCTOS.CSS
+
+   Estilos para el catálogo de productos.
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.products-page {
+
+    width: min(92%, 1400px);
+
+    margin: 0 auto;
+
+    padding: 45px 0 70px;
+
+}
+
+
+/* =========================================================
+   2. ENCABEZADO
+   ========================================================= */
+
+.products-header {
+
+    margin-bottom: 35px;
+
+}
+
+
+.products-code {
+
+    margin-bottom: 12px;
+
+    color: var(--muted-gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 0.8rem;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.products-heading {
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding-bottom: 28px;
+
+    border-bottom:
+        1px solid var(--dark-olive);
+
+}
+
+
+.products-heading h1 {
+
+    margin: 0;
+
+    color: var(--neon);
+
+    font-family: var(--font-body);
+
+    font-size: clamp(4rem, 9vw, 7rem);
+
+    font-weight: normal;
+
+    line-height: 0.9;
+
+}
+
+
+.products-summary {
+
+    min-width: 260px;
+
+    color: var(--muted-gray);
+
+    font-family: var(--font-txt);
+
+    font-size: 0.85rem;
+
+    line-height: 1.7;
+
+    text-align: right;
+
+}
+
+
+.products-summary span {
+
+    color: var(--neon);
+
+}
+
+
+/* =========================================================
+   3. CONTROLES
+   ========================================================= */
+
+.catalog-controls {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, 380px)
+        1fr;
+
+    align-items: end;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    padding: 24px;
+
+    border:
+        1px solid var(--dark-olive);
+
+    background-color:
+        rgba(13, 22, 8, 0.72);
+
+    scroll-margin-top: 20px;
+
+}
+
+
+/* =========================================================
+   4. BUSCADOR
+   ========================================================= */
+
+.product-search {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.product-search label {
+
+    color: var(--muted-gray);
+
+    font-family: var(--font-bttn);
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.06em;
+
+}
+
+
+.product-search input {
+
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border:
+        1px solid var(--olive);
+
+    outline: none;
+
+    color: var(--gray);
+
+    background-color:
+        var(--black);
+
+    font-family: var(--font-bttn);
+
+    font-size: 1rem;
+
+}
+
+
+.product-search input:focus {
+
+    border-color:
+        var(--neon);
+
+}
+
+
+.product-search input::placeholder {
+
+    color:
+        var(--muted-gray);
+
+}
+
+
+/* =========================================================
+   5. FILTROS
+   ========================================================= */
+
+.product-filters {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.filter-button {
+
+    min-height: 44px;
+
+    padding: 10px 15px;
+
+    border:
+        1px solid var(--dark-olive);
+
+    color:
+        var(--muted-gray);
+
+    background-color:
+        transparent;
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.8rem;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+
+}
+
+
+.filter-button:hover,
+.filter-button:focus-visible {
+
+    border-color:
+        var(--neon);
+
+    color:
+        var(--neon);
+
+}
+
+
+.filter-button.active {
+
+    border-color:
+        var(--neon);
+
+    color:
+        var(--black);
+
+    background-color:
+        var(--neon);
+
+}
+
+
+/* =========================================================
+   6. GRID DE PRODUCTOS
+   ========================================================= */
+
+.products-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 24px;
+
+}
+
+
+/* =========================================================
+   7. TARJETA
+   ========================================================= */
+
+.product-card {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--dark-olive);
+
+    background-color:
+        rgba(13, 22, 8, 0.72);
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.product-card:hover {
+
+    border-color:
+        var(--olive);
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+/* =========================================================
+   8. IMAGEN
+   ========================================================= */
+
+.product-image {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    overflow: hidden;
+
+    border-bottom:
+        1px solid var(--dark-olive);
+
+    background-color:
+        var(--black);
+
+}
+
+
+.product-image img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+
+}
+
+
+.product-card:hover
+.product-image img {
+
+    transform:
+        scale(1.025);
+
+    filter:
+        brightness(1.08);
+
+}
+
+
+.product-code {
+
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    padding: 6px 8px;
+
+    border:
+        1px solid var(--olive);
+
+    color:
+        var(--neon);
+
+    background-color:
+        rgba(1, 3, 0, 0.85);
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.75rem;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+/* =========================================================
+   9. INFORMACIÓN DEL PRODUCTO
+   ========================================================= */
+
+.product-content {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 18px;
+
+}
+
+
+.product-category {
+
+    margin-bottom: 8px;
+
+    color:
+        var(--neon);
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.8rem;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+}
+
+
+.product-name {
+
+    margin: 0 0 12px;
+
+    color:
+        var(--gray);
+
+    font-family:
+        var(--font-title);
+
+    font-size: 2rem;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+}
+
+
+.product-description {
+
+    margin-bottom: 20px;
+
+    color:
+        var(--muted-gray);
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.95rem;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   10. PRECIO Y BOTÓN
+   ========================================================= */
+
+.product-information {
+
+    margin-top: auto;
+
+    padding-top: 16px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-top:
+        1px dashed var(--dark-olive);
+
+}
+
+
+.product-information > div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.product-price {
+
+    color:
+        var(--gray);
+
+    font-family:
+        var(--font-body);
+
+    font-size: 1.35rem;
+
+    font-weight: normal;
+
+}
+
+
+.product-stock {
+
+    color:
+        var(--muted-gray);
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.75rem;
+
+}
+
+
+.add-product {
+
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    padding: 11px 14px;
+
+    border:
+        1px solid var(--neon);
+
+    color:
+        var(--neon);
+
+    background-color:
+        transparent;
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.8rem;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+
+}
+
+
+.add-product:hover,
+.add-product:focus-visible {
+
+    color:
+        var(--black);
+
+    background-color:
+        var(--neon);
+
+}
+
+
+/* =========================================================
+   11. MENSAJES
+   ========================================================= */
+
+.empty-products {
+
+    padding: 60px 20px;
+
+    border:
+        1px solid var(--dark-olive);
+
+    color:
+        var(--muted-gray);
+
+    font-family:
+        var(--font-bttn);
+
+    text-align: center;
+
+}
+
+
+.catalog-message {
+
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 100;
+
+    max-width: 420px;
+
+    padding: 16px 20px;
+
+    border:
+        1px solid var(--neon);
+
+    color:
+        var(--black);
+
+    background-color:
+        var(--neon);
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.85rem;
+
+    line-height: 1.4;
+
+}
+
+
+.catalog-message:empty {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   12. FOOTER
+   ========================================================= */
+
+.products-footer {
+
+    width: min(92%, 1400px);
+
+    margin: 0 auto;
+
+    padding: 28px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top:
+        1px solid var(--dark-olive);
+
+    color:
+        var(--muted-gray);
+
+    font-family:
+        var(--font-bttn);
+
+    font-size: 0.75rem;
+
+}
+
+
+/* =========================================================
+   13. ELEMENTO ACCESIBLE
+   ========================================================= */
+
+.visually-hidden {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+
+/* =========================================================
+   14. PANTALLAS MEDIANAS
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .products-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* =========================================================
+   15. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .products-page {
+
+        padding-top: 35px;
+
+    }
+
+
+    .products-heading {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+
+    }
+
+
+    .products-summary {
+
+        min-width: 0;
+
+        text-align: left;
+
+    }
+
+
+    .catalog-controls {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .product-filters {
+
+        justify-content: flex-start;
+
+    }
+
+
+    .products-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* =========================================================
+   16. CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .products-page {
+
+        width:
+            calc(100% - 30px);
+
+        padding:
+            28px 0 50px;
+
+    }
+
+
+    .products-heading h1 {
+
+        font-size:
+            clamp(3rem, 17vw, 4.5rem);
+
+    }
+
+
+    .catalog-controls {
+
+        padding: 16px;
+
+    }
+
+
+    .product-filters {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .filter-button {
+
+        width: 100%;
+
+    }
+
+
+    .products-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+    }
+
+
+    .product-information {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+
+    .add-product {
+
+        width: 100%;
+
+    }
+
+
+    .catalog-message {
+
+        right: 15px;
+        bottom: 15px;
+        left: 15px;
+
+        max-width: none;
+
+    }
+
+
+    .products-footer {
+
+        width:
+            calc(100% - 30px);
+
+        flex-direction: column;
+
+        font-size: 0.8rem;
+
+    }
+
+}
