@@ -294,3 +294,59 @@
 .contact-list .field-full {
     width: 100%;
 }
+
+/* =========================================================
+   BOTÓN DE INSTAGRAM
+   ========================================================= */
+
+.instagram-section {
+    margin-top: 30px;
+}
+
+.instagram-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 18px 20px;
+
+    border: 1px solid var(--neon);
+    background-color: transparent;
+
+    color: var(--neon);
+    font-family: var(--font-bttn);
+    font-size: 0.8rem;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.instagram-button span:last-child {
+    color: var(--muted-gray);
+}
+
+.instagram-button:hover {
+    color: var(--black);
+    background-color: var(--neon);
+}
+
+.instagram-button:hover span:last-child {
+    color: var(--black);
+}
+
+
+/* Adaptación para celulares */
+
+@media (max-width: 700px) {
+
+    .instagram-button {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+}
