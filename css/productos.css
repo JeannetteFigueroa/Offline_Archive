@@ -878,3 +878,60 @@
     }
 
 }
+
+/* =========================================================
+   ACCIONES DE LA TARJETA
+
+   Contiene los botones Ver detalle y Agregar.
+   ========================================================= */
+
+.product-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* Enlace hacia el detalle */
+
+.view-product {
+    padding: 11px 14px;
+
+    color: var(--gray);
+
+    background-color: transparent;
+
+    border: 1px solid var(--olive);
+
+    font-size: 13px;
+
+    text-align: center;
+    text-decoration: none;
+}
+
+
+.view-product:hover {
+    color: var(--neon);
+
+    border-color: var(--neon);
+}
+
+
+/* Ambos controles utilizan el mismo ancho */
+
+.product-actions .add-product {
+    width: 100%;
+}
+
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 600px) {
+
+    .product-actions {
+        width: 100%;
+    }
+
+}

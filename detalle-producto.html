@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+<!-- Define que el contenido de la página está en español -->
+<html lang="es">
+
+
+<head>
+
+    <!-- Permite utilizar tildes, ñ y caracteres especiales -->
+    <meta charset="UTF-8">
+
+
+    <!-- Hace que la página se adapte a celulares y tablets -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+
+    <!-- Descripción utilizada por buscadores -->
+    <meta
+        name="description"
+        content="Detalle de producto de (Off)line Archive."
+    >
+
+
+    <!-- Texto que aparece en la pestaña del navegador -->
+    <title>Detalle de producto | (Off)line Archive</title>
+
+
+    <!-- =====================================================
+         ARCHIVOS CSS
+
+         theme.css:
+         Contiene las fuentes, colores y estilos generales.
+
+         navbar.css:
+         Contiene los estilos del menú de navegación.
+
+         detalle-producto.css:
+         Contendrá los estilos propios de esta página.
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/navbar.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/detalle-producto.css"
+    >
+
+
+    <!-- =====================================================
+         ARCHIVOS JAVASCRIPT
+
+         defer hace que JavaScript espere hasta que el HTML
+         esté cargado antes de comenzar a ejecutarse.
+
+         navbar.js:
+         Controla el menú móvil y los datos de sesión.
+
+         detalle-producto.js:
+         Mostrará los datos del producto seleccionado.
+         ===================================================== -->
+
+    <script
+        src="js/navbar.js"
+        defer
+    ></script>
+
+    <script
+        src="js/detalle-producto.js"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+
+         Menú principal que se muestra en la parte superior.
+         Conserva la misma estructura de las otras páginas.
+         ===================================================== -->
+
+    <header class="navbar">
+
+
+        <!-- Logo que permite regresar al inicio -->
+
+        <a
+            href="index.html"
+            class="navbar-logo"
+        >
+            (Off)line Archive
+        </a>
+
+
+        <!-- =================================================
+             MENÚ DE ESCRITORIO
+             ================================================= -->
+
+        <nav
+            class="navbar-menu"
+            aria-label="Navegación principal"
+        >
+
+            <!-- Enlace al catálogo completo -->
+
+            <a href="productos.html">
+                Productos
+            </a>
+
+
+            <!-- Enlace a las colecciones -->
+
+            <a href="collections.html">
+                Colección Y2K
+            </a>
+
+
+            <!-- Enlace a la información del proyecto -->
+
+            <a href="about_us.html">
+                Sobre<br>
+                Nosotros
+            </a>
+
+
+            <!-- Enlace al formulario de contacto -->
+
+            <a href="contact.html">
+                Contacto
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             ACCIONES DEL USUARIO EN ESCRITORIO
+             ================================================= -->
+
+        <nav
+            class="navbar-actions"
+            aria-label="Acciones de usuario"
+        >
+
+            <!-- Lleva directamente al buscador del catálogo -->
+
+            <a href="productos.html#catalogControls">
+                Buscar
+            </a>
+
+
+            <!--
+                navbar.js puede cambiar este enlace por
+                "Mi cuenta" cuando existe una sesión.
+            -->
+
+            <a
+                href="login.html"
+                id="accountLink"
+            >
+                Login
+            </a>
+
+
+            <!-- Enlace al carrito y contador de productos -->
+
+            <a
+                href="carrito.html"
+                class="navbar-cart"
+            >
+
+                <span>
+                    Carrito
+                </span>
+
+                <!--
+                    JavaScript actualizará este número
+                    según los productos agregados.
+                -->
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             BOTÓN DEL MENÚ MÓVIL
+
+             Este botón aparece en pantallas pequeñas.
+             navbar.js se encarga de abrir el menú.
+             ================================================= -->
+
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+        >
+
+            <!-- Las tres líneas forman el icono del menú -->
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <!-- =================================================
+             MENÚ MÓVIL
+
+             aria-hidden indica inicialmente que el menú
+             está cerrado para los lectores de pantalla.
+             ================================================= -->
+
+        <aside
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-hidden="true"
+        >
+
+
+            <!-- Cabecera del menú móvil -->
+
+            <div class="mobile-menu-header">
+
+                <span>
+                    MENU_01
+                </span>
+
+                <!-- Botón para cerrar el menú -->
+
+                <button
+                    class="menu-close"
+                    type="button"
+                    aria-label="Cerrar menú"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- Enlaces del menú móvil -->
+
+            <nav
+                class="mobile-menu-links"
+                aria-label="Navegación móvil"
+            >
+
+                <a href="productos.html">
+                    <span>01</span>
+                    Productos
+                </a>
+
+                <a href="collections.html">
+                    <span>02</span>
+                    Colección Y2K
+                </a>
+
+                <a href="about_us.html">
+                    <span>03</span>
+                    Sobre Nosotros
+                </a>
+
+                <a href="contact.html">
+                    <span>04</span>
+                    Contacto
+                </a>
+
+
+                <!-- Línea que separa las secciones del menú -->
+
+                <div class="mobile-divider"></div>
+
+
+                <a href="productos.html#catalogControls">
+                    <span>05</span>
+                    Buscar
+                </a>
+
+
+                <!-- Acceso móvil a Login o Mi cuenta -->
+
+                <a
+                    href="login.html"
+                    id="mobileAccountLink"
+                >
+                    <span>06</span>
+                    Login
+                </a>
+
+
+                <!-- Acceso móvil al carrito -->
+
+                <a
+                    href="carrito.html"
+                    class="mobile-cart"
+                >
+                    <span>07</span>
+
+                    Carrito
+
+                    <!-- Contador móvil del carrito -->
+
+                    <b>
+                        0
+                    </b>
+                </a>
+
+            </nav>
+
+
+            <!-- Pie del menú móvil -->
+
+            <div class="mobile-menu-footer">
+
+                SYSTEM_01
+
+                <span>
+                    ONLINE
+                </span>
+
+            </div>
+
+        </aside>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
+    <main class="detail-page">
+
+
+        <!-- Permite regresar al catálogo -->
+
+        <a
+            href="productos.html"
+            class="back-products"
+        >
+            ← VOLVER A PRODUCTOS
+        </a>
+
+
+        <!-- =================================================
+             DETALLE DEL PRODUCTO
+
+             Esta sección comienza oculta con "hidden".
+
+             detalle-producto.js quitará hidden cuando encuentre
+             correctamente el producto seleccionado.
+             ================================================= -->
+
+        <section
+            class="product-detail"
+            id="productDetail"
+            hidden
+        >
+
+
+            <!-- =============================================
+                 IMAGEN DEL PRODUCTO
+                 ============================================= -->
+
+            <div class="detail-image-container">
+
+
+                <!--
+                    JavaScript agregará dinámicamente:
+
+                    src = ruta de la imagen.
+                    alt = nombre del producto.
+                -->
+
+                <img
+                    src=""
+                    alt=""
+                    id="detailImage"
+                >
+
+
+                <!-- Código del producto, por ejemplo ITEM_001 -->
+
+                <span id="detailCode">
+                    ITEM_000
+                </span>
+
+            </div>
+
+
+            <!-- =============================================
+                 INFORMACIÓN DEL PRODUCTO
+                 ============================================= -->
+
+            <div class="detail-information">
+
+
+                <!-- Categoría: Tops, Bottoms, Accesorios, etc. -->
+
+                <p
+                    class="detail-category"
+                    id="detailCategory"
+                ></p>
+
+
+                <!-- Nombre principal del producto -->
+
+                <h1
+                    class="detail-name"
+                    id="detailName"
+                ></h1>
+
+
+                <!-- Descripción del producto -->
+
+                <p
+                    class="detail-description"
+                    id="detailDescription"
+                ></p>
+
+
+                <!-- Precio y stock -->
+
+                <div class="detail-data">
+
+
+                    <!-- PRECIO -->
+
+                    <div>
+
+                        <span>
+                            PRECIO
+                        </span>
+
+                        <!-- JavaScript reemplazará el valor $0 -->
+
+                        <strong id="detailPrice">
+                            $0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- STOCK -->
+
+                    <div>
+
+                        <span>
+                            DISPONIBILIDAD
+                        </span>
+
+                        <!-- JavaScript reemplazará el stock inicial -->
+
+                        <strong id="detailStock">
+                            STOCK: 0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!--
+                    Botón que agregará el producto seleccionado
+                    al mismo carrito utilizado en productos.html.
+                -->
+
+                <button
+                    type="button"
+                    class="detail-add-button"
+                    id="detailAddButton"
+                >
+
+                    AGREGAR AL CARRITO
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+
+                <!--
+                    Aquí aparecerán mensajes como:
+                    "Producto agregado al carrito".
+                -->
+
+                <p
+                    class="detail-message"
+                    id="detailMessage"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRODUCTO NO ENCONTRADO
+
+             Esta sección aparecerá si el usuario entra
+             directamente a detalle-producto.html sin haber
+             seleccionado previamente un producto.
+             ================================================= -->
+
+        <section
+            class="product-not-found"
+            id="productNotFound"
+            hidden
+        >
+
+            <p>
+                ERROR_404 / PRODUCT_NOT_FOUND
+            </p>
+
+            <h1>
+                PRODUCTO NO ENCONTRADO.
+            </h1>
+
+            <a href="productos.html">
+                VOLVER AL CATÁLOGO →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="detail-footer">
+
+        <span>
+            (OFF)LINE ARCHIVE
+        </span>
+
+        <span>
+            PRODUCT_SYSTEM / 2003
+        </span>
+
+    </footer>
+
+</body>
+
+</html>

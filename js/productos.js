@@ -132,6 +132,10 @@ const PRODUCTS = [
 
 const CART_KEY = "offlineArchiveCart";
 
+// Clave utilizada para guardar el producto que se quiere visualizar
+const SELECTED_PRODUCT_KEY =
+    "offlineArchiveSelectedProduct";
+
 let selectedCategory = "todos";
 let messageTimer;
 
@@ -244,14 +248,37 @@ function createProductCard(product) {
                     </div>
 
 
-                    <button
-                        type="button"
-                        class="add-product"
-                        data-product-id="${product.id}"
-                    >
-                        AGREGAR
-                        <span>+</span>
-                    </button>
+                    <div class="product-actions">
+
+                        <!--
+                            Este enlace guarda el producto seleccionado
+                            y abre la página de detalle.
+                        -->
+
+                        <a
+                            href="detalle-producto.html"
+                            class="view-product"
+                            data-product-id="${product.id}"
+                        >
+                            VER DETALLE
+                        </a>
+
+
+                        <!--
+                            Este botón agrega directamente el producto
+                            al carrito sin abrir el detalle.
+                        -->
+
+                        <button
+                            type="button"
+                            class="add-product"
+                            data-product-id="${product.id}"
+                        >
+                            AGREGAR
+                            <span>+</span>
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -581,7 +608,12 @@ function addProductToCart(productId) {
 
 
 /* =========================================================
-   16. EVENTO DE LAS TARJETAS
+   16. EVENTOS DE LAS TARJETAS
+
+   Este evento controla dos acciones:
+
+   1. Abrir el detalle del producto.
+   2. Agregar el producto directamente al carrito.
    ========================================================= */
 
 if (productsGrid) {
@@ -589,7 +621,68 @@ if (productsGrid) {
     productsGrid.addEventListener(
         "click",
         (event) => {
-            // Verificamos si el clic fue en un botón de agregar producto
+
+
+            /* =============================================
+               ABRIR DETALLE
+               ============================================= */
+
+            const detailLink =
+                event.target.closest(
+                    ".view-product"
+                );
+
+
+            if (detailLink) {
+
+                // Evita que el enlace cambie de página inmediatamente
+                event.preventDefault();
+
+
+                // Obtiene el ID guardado en data-product-id
+                const productId =
+                    Number(
+                        detailLink.dataset.productId
+                    );
+
+
+                // Busca el producto dentro del arreglo PRODUCTS
+                const selectedProduct =
+                    PRODUCTS.find(
+                        (product) =>
+                            product.id === productId
+                    );
+
+
+                if (selectedProduct) {
+
+                    /*
+                     * Guarda el producto completo en localStorage.
+                     * detalle-producto.js podrá leer esta información.
+                     */
+
+                    localStorage.setItem(
+                        SELECTED_PRODUCT_KEY,
+                        JSON.stringify(selectedProduct)
+                    );
+
+
+                    // Abre la página del detalle
+                    window.location.href =
+                        "detalle-producto.html";
+
+                }
+
+
+                return;
+
+            }
+
+
+            /* =============================================
+               AGREGAR AL CARRITO
+               ============================================= */
+
             const addButton =
                 event.target.closest(
                     ".add-product"
@@ -601,19 +694,20 @@ if (productsGrid) {
             }
 
 
+            // Obtiene el ID del producto seleccionado
             const productId =
                 Number(
                     addButton.dataset.productId
                 );
 
-            // Agregamos el producto al carrito
+
+            // Utiliza la función que ya existía
             addProductToCart(productId);
 
         }
     );
 
 }
-
 
 /* =========================================================
    17. INICIALIZACIÓN
