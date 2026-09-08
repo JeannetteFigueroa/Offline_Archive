@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Carrito de compras de (Off)line Archive."
+    >
+
+    <title>Carrito | (Off)line Archive</title>
+
+
+    <!-- =====================================================
+         ESTILOS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/navbar.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/carrito.css"
+    >
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="js/navbar.js"
+        defer
+    ></script>
+
+    <script
+        src="js/carrito.js"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <a
+            href="index.html"
+            class="navbar-logo"
+        >
+            (Off)line Archive
+        </a>
+
+
+        <!-- MENÚ DE ESCRITORIO -->
+
+        <nav
+            class="navbar-menu"
+            aria-label="Navegación principal"
+        >
+
+            <a href="productos.html">
+                Productos
+            </a>
+
+            <a href="collections.html">
+                Colección Y2K
+            </a>
+
+            <a href="about_us.html">
+                Sobre<br>
+                Nosotros
+            </a>
+
+            <a href="contact.html">
+                Contacto
+            </a>
+
+        </nav>
+
+
+        <!-- ACCIONES -->
+
+        <nav
+            class="navbar-actions"
+            aria-label="Acciones de usuario"
+        >
+
+            <a href="productos.html#catalogControls">
+                Buscar
+            </a>
+
+            <a
+                href="login.html"
+                id="accountLink"
+            >
+                Login
+            </a>
+
+            <a
+                href="carrito.html"
+                class="navbar-cart"
+                aria-current="page"
+            >
+
+                <span>
+                    Carrito
+                </span>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- BOTÓN DEL MENÚ MÓVIL -->
+
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <!-- MENÚ MÓVIL -->
+
+        <aside
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-hidden="true"
+        >
+
+            <div class="mobile-menu-header">
+
+                <span>
+                    MENU_01
+                </span>
+
+                <button
+                    class="menu-close"
+                    type="button"
+                    aria-label="Cerrar menú"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <nav
+                class="mobile-menu-links"
+                aria-label="Navegación móvil"
+            >
+
+                <a href="productos.html">
+                    <span>01</span>
+                    Productos
+                </a>
+
+                <a href="collections.html">
+                    <span>02</span>
+                    Colección Y2K
+                </a>
+
+                <a href="about_us.html">
+                    <span>03</span>
+                    Sobre Nosotros
+                </a>
+
+                <a href="contact.html">
+                    <span>04</span>
+                    Contacto
+                </a>
+
+
+                <div class="mobile-divider"></div>
+
+
+                <a href="productos.html#catalogControls">
+                    <span>05</span>
+                    Buscar
+                </a>
+
+                <a
+                    href="login.html"
+                    id="mobileAccountLink"
+                >
+                    <span>06</span>
+                    Login
+                </a>
+
+                <a
+                    href="carrito.html"
+                    class="mobile-cart"
+                >
+                    <span>07</span>
+                    Carrito
+                    <b>0</b>
+                </a>
+
+            </nav>
+
+
+            <div class="mobile-menu-footer">
+
+                SYSTEM_01
+
+                <span>
+                    ONLINE
+                </span>
+
+            </div>
+
+        </aside>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
+    <main class="cart-page">
+
+
+        <!-- =================================================
+             ENCABEZADO
+             ================================================= -->
+
+        <section
+            class="cart-header"
+            aria-labelledby="cartTitle"
+        >
+
+            <div>
+
+                <p class="cart-code">
+                    ORDER_SYSTEM / 001
+                </p>
+
+                <h1
+                    class="cart-title"
+                    id="cartTitle"
+                >
+                    CARRITO.
+                </h1>
+
+                <p class="cart-description">
+                    Revisa las piezas seleccionadas antes de continuar.
+                </p>
+
+            </div>
+
+
+            <p class="cart-quantity">
+
+                <span id="cartProductCount">
+                    0
+                </span>
+
+                PRODUCTOS
+
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             CARRITO Y RESUMEN
+             ================================================= -->
+
+        <section class="cart-layout">
+
+
+            <!-- LISTA DE PRODUCTOS -->
+
+            <div class="cart-products">
+
+                <div class="cart-section-header">
+
+                    <span>
+                        PRODUCTOS_SELECCIONADOS
+                    </span>
+
+                    <span>
+                        STATUS: ACTIVE
+                    </span>
+
+                </div>
+
+
+                <!-- Los productos se insertan con carrito.js -->
+
+                <div
+                    class="cart-items"
+                    id="cartItems"
+                ></div>
+
+
+                <!-- CARRITO VACÍO -->
+
+                <div
+                    class="empty-cart"
+                    id="emptyCart"
+                    hidden
+                >
+
+                    <p class="empty-cart-code">
+                        ERROR_404 / EMPTY_CART
+                    </p>
+
+                    <h2>
+                        TU CARRITO ESTÁ VACÍO.
+                    </h2>
+
+                    <p>
+                        Todavía no has seleccionado productos del archivo.
+                    </p>
+
+                    <a href="productos.html">
+                        VER PRODUCTOS →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESUMEN DE COMPRA -->
+
+            <aside class="cart-summary">
+
+                <p class="summary-code">
+                    ORDER_SUMMARY / 001
+                </p>
+
+                <h2>
+                    RESUMEN
+                </h2>
+
+
+                <div class="summary-information">
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="cartSubtotal">
+                            $0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Envío
+                        </span>
+
+                        <strong>
+                            Por calcular
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row summary-total">
+
+                        <span>
+                            TOTAL
+                        </span>
+
+                        <strong id="cartTotal">
+                            $0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="checkout-button"
+                    id="checkoutButton"
+                    disabled
+                >
+                    CONTINUAR COMPRA
+                    <span>→</span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="empty-cart-button"
+                    id="emptyCartButton"
+                    disabled
+                >
+                    VACIAR CARRITO
+                </button>
+
+
+                <p
+                    class="cart-message"
+                    id="cartMessage"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="cart-footer">
+
+        <span>
+            (OFF)LINE ARCHIVE
+        </span>
+
+        <span>
+            SECURE_ORDER_SYSTEM / 2003
+        </span>
+
+    </footer>
+
+</body>
+
+</html>
