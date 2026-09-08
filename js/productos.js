@@ -162,6 +162,61 @@ const emptyProducts =
 const catalogMessage =
     document.getElementById("catalogMessage");
 
+/* =========================================================
+   LEER CATEGORÍA DESDE COLECCIONES
+
+   Obtiene la categoría enviada en la dirección de la página.
+   Ejemplo: productos.html?categoria=tops
+   ========================================================= */
+
+function loadCategoryFromUrl() {
+
+    const urlParameters =
+        new URLSearchParams(window.location.search);
+
+    const urlCategory =
+        urlParameters.get("categoria");
+
+    const allowedCategories = [
+        "tops",
+        "bottoms",
+        "accesorios",
+        "outerwear"
+    ];
+
+
+    // Si la categoría no existe o no es válida,
+    // se mostrarán todos los productos.
+
+    if (!allowedCategories.includes(urlCategory)) {
+        return;
+    }
+
+
+    selectedCategory = urlCategory;
+
+
+    // Marca visualmente el botón de la categoría seleccionada.
+
+    filterButtons.forEach((button) => {
+
+        const isActive =
+            button.dataset.category === selectedCategory;
+
+        button.classList.toggle(
+            "active",
+            isActive
+        );
+
+        button.setAttribute(
+            "aria-pressed",
+            String(isActive)
+        );
+
+    });
+
+}
+
 
 /* =========================================================
    4. FORMATO DE PRECIO
@@ -712,8 +767,11 @@ if (productsGrid) {
 /* =========================================================
    17. INICIALIZACIÓN
    ========================================================= */
-// Renderizamos todos los productos al cargar la página
-renderProducts(PRODUCTS);
+// Revisa si el usuario llegó desde una colección.
+loadCategoryFromUrl();
 
-// Actualizamos el contador del carrito al cargar la página
+// Muestra los productos aplicando la categoría seleccionada.
+filterProducts();
+
+// Actualiza el contador del carrito.
 updateCartCount();
