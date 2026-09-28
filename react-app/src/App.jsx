@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
-import CartItem from "./components/CartItem";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import ProductCard from "./components/ProductCard";
 import productos from "./data/productos";
+
+import Home from "./pages/Home";
+import Productos from "./pages/Productos";
+import Carrito from "./pages/Carrito";
 
 function App() {
   const [carrito, setCarrito] = useState(() => {
@@ -44,6 +51,7 @@ function App() {
       ]);
     }
   };
+
   const eliminarDelCarrito = (id) => {
     const nuevoCarrito = carrito.filter(
       (producto) => producto.id !== id
@@ -74,55 +82,52 @@ function App() {
     setCarrito(carritoActualizado);
   };
 
-  const totalCarrito = carrito.reduce((total, producto) => {
-    return total + producto.precio * producto.cantidad;
-  }, 0);
-
   const cantidadTotal = carrito.reduce((total, producto) => {
     return total + producto.cantidad;
   }, 0);
 
+  const totalCarrito = carrito.reduce((total, producto) => {
+    return total + producto.precio * producto.cantidad;
+  }, 0);
+
   return (
-    <div>
+    <BrowserRouter>
       <Navbar
         nombreTienda="0ffline"
         cantidadCarrito={cantidadTotal}
       />
 
-      <h1>Productos destacados</h1>
-
-      {productos.map((producto) => (
-        <ProductCard
-          key={producto.id}
-          producto={producto}
-          agregarAlCarrito={agregarAlCarrito}
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
         />
-      ))}
 
-      <h2>Carrito temporal</h2>
+        <Route
+          path="/productos"
+          element={
+            <Productos
+              productos={productos}
+              agregarAlCarrito={agregarAlCarrito}
+            />
+          }
+        />
 
-      {carrito.length === 0 ? (
-        <p>Tu carrito está vacío</p>
-      ) : (
-        <div>
-          <p>Productos agregados: {cantidadTotal}</p>
-
-          {carrito.map((producto) => (
-            <CartItem
-              key={producto.id}
-              producto={producto}
+        <Route
+          path="/carrito"
+          element={
+            <Carrito
+              carrito={carrito}
               eliminarDelCarrito={eliminarDelCarrito}
               aumentarCantidad={aumentarCantidad}
               disminuirCantidad={disminuirCantidad}
+              cantidadTotal={cantidadTotal}
+              totalCarrito={totalCarrito}
             />
-          ))}
-
-          <h3>
-            Total: ${totalCarrito.toLocaleString("es-CL")}
-          </h3>
-        </div>
-      )}
-    </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

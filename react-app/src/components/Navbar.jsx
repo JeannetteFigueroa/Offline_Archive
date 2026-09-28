@@ -1,14 +1,28 @@
+import { Link } from "react-router-dom";
+
 function Navbar({ nombreTienda, cantidadCarrito }) {
   return (
     <nav>
       <h2>{nombreTienda}</h2>
 
       <ul>
-        <li>Inicio</li>
-        <li>Productos</li>
-        <li>Colecciones</li>
-        <li>Contacto</li>
-        <li>Carrito ({cantidadCarrito})</li>
+        <li>
+          <Link to="/">
+            Inicio
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/productos">
+            Productos
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/carrito">
+            Carrito ({cantidadCarrito})
+          </Link>
+        </li>
       </ul>
     </nav>
   );
