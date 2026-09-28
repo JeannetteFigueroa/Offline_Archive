@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import DetalleProducto from "./pages/DetalleProducto";
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
+
+import Colecciones from "./pages/Colecciones";
 
 import Navbar from "./components/Navbar";
 import productos from "./data/productos";
@@ -34,14 +37,28 @@ function App() {
     );
 
     if (productoExiste) {
+
+      if (productoExiste.cantidad >= producto.stock) {
+        return;
+      }
+
       const carritoActualizado = carrito.map((item) =>
         item.id === producto.id
-          ? { ...item, cantidad: item.cantidad + 1 }
+          ? {
+              ...item,
+              cantidad: item.cantidad + 1
+            }
           : item
       );
 
       setCarrito(carritoActualizado);
+
     } else {
+
+      if (producto.stock <= 0) {
+        return;
+      }
+
       setCarrito([
         ...carrito,
         {
@@ -62,8 +79,12 @@ function App() {
 
   const aumentarCantidad = (id) => {
     const carritoActualizado = carrito.map((producto) =>
-      producto.id === id
-        ? { ...producto, cantidad: producto.cantidad + 1 }
+      producto.id === id &&
+      producto.cantidad < producto.stock
+        ? {
+            ...producto,
+            cantidad: producto.cantidad + 1
+          }
         : producto
     );
 
@@ -71,15 +92,21 @@ function App() {
   };
 
   const disminuirCantidad = (id) => {
-    const carritoActualizado = carrito
-      .map((producto) =>
-        producto.id === id
-          ? { ...producto, cantidad: producto.cantidad - 1 }
-          : producto
-      )
-      .filter((producto) => producto.cantidad > 0);
+    const carritoActualizado = carrito.map((producto) =>
+      producto.id === id &&
+      producto.cantidad > 1
+        ? {
+            ...producto,
+            cantidad: producto.cantidad - 1
+          }
+        : producto
+    );
 
     setCarrito(carritoActualizado);
+  };
+
+  const vaciarCarrito = () => {
+    setCarrito([]);
   };
 
   const cantidadTotal = carrito.reduce((total, producto) => {
@@ -93,7 +120,6 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar
-        nombreTienda="0ffline"
         cantidadCarrito={cantidadTotal}
       />
 
@@ -101,6 +127,24 @@ function App() {
         <Route
           path="/"
           element={<Home />}
+
+        
+        />
+
+        <Route
+          path="/productos/:id"
+          element={
+            <DetalleProducto
+              productos={productos}
+              carrito={carrito}
+              agregarAlCarrito={agregarAlCarrito}
+            />
+          }
+        />
+
+        <Route
+          path="/colecciones"
+          element={<Colecciones />}
         />
 
         <Route
@@ -121,6 +165,7 @@ function App() {
               eliminarDelCarrito={eliminarDelCarrito}
               aumentarCantidad={aumentarCantidad}
               disminuirCantidad={disminuirCantidad}
+              vaciarCarrito={vaciarCarrito}
               cantidadTotal={cantidadTotal}
               totalCarrito={totalCarrito}
             />

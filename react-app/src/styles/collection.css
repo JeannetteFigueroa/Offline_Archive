@@ -1,0 +1,375 @@
+/* =========================================================
+   COLLECTIONS.CSS
+
+   Estilos específicos para la sección de colecciones.
+   Las fuentes, colores y reset general vienen de theme.css.
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.collections {
+    width: 100%;
+
+    padding: 15px 0 50px;
+
+    background-color: var(--black);
+}
+
+
+/* =========================================================
+   2. TÍTULO
+   ========================================================= */
+
+.collections-title {
+    margin: 0 0 14px;
+
+    color: var(--neon);
+
+    font-family: var(--font-body);
+
+    font-size: 6rem;
+    font-weight: normal;
+
+    line-height: 1;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   3. GRID DE COLECCIONES
+   ========================================================= */
+
+.collections-grid {
+    width: min(92%, 1400px);
+
+    margin: 0 auto;
+
+    display: grid;
+
+    /*
+     * DOS COLUMNAS
+     *
+     * Esto hace que las tarjetas queden:
+     *
+     * 01 | 02
+     * 03 | 04
+     *
+     */
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 30px;
+
+    row-gap: 28px;
+}
+
+
+/* =========================================================
+   4. TARJETA
+   ========================================================= */
+
+.collection-card {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 2.45 / 1;
+
+    overflow: hidden;
+
+    border: 1px solid var(--olive);
+
+    background-color: var(--forest-black);
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease;
+}
+
+
+/* =========================================================
+   5. IMAGEN
+   ========================================================= */
+
+.collection-card img {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    /*
+     * La imagen ocupa toda la tarjeta.
+     */
+
+    object-fit: cover;
+
+    /*
+     * Ajustes para acercarnos al aspecto
+     * oscuro/contrastado de la referencia.
+     */
+
+    filter:
+        saturate(0.85)
+        contrast(1.15)
+        brightness(0.85);
+
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+
+/* =========================================================
+   6. OVERLAY
+   ========================================================= */
+
+.collection-overlay {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    /*
+     * Oscurece principalmente el lado izquierdo
+     * para que los textos sean fáciles de leer.
+     */
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(1, 3, 0, 0.68) 0%,
+            rgba(1, 3, 0, 0.35) 45%,
+            rgba(1, 3, 0, 0.08) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   7. NÚMERO
+   ========================================================= */
+
+.collection-number {
+    position: absolute;
+
+    top: 7px;
+    left: 16px;
+
+    color: var(--neon);
+
+    font-family: var(--font-txt);
+
+    font-size: 17px;
+
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   8. NOMBRE DE LA COLECCIÓN
+   ========================================================= */
+
+.collection-name {
+    position: absolute;
+
+    top: 27px;
+    left: 16px;
+
+    margin: 0;
+
+    color: var(--gray);
+
+    font-family: var(--font-title);
+
+    font-size: 2.15rem;
+    font-weight: normal;
+
+    line-height: 0.95;
+
+    /*
+     * Evita que un nombre largo
+     * rompa la tarjeta.
+     */
+
+    max-width: 90%;
+}
+
+
+/* =========================================================
+   9. FLECHA
+   ========================================================= */
+
+.collection-arrow {
+    position: absolute;
+
+    left: 17px;
+    bottom: 9px;
+
+    color: var(--neon);
+
+    font-family: var(--font-body);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+/* =========================================================
+   10. HOVER
+   ========================================================= */
+
+.collection-card:hover {
+    border-color: var(--neon);
+}
+
+
+.collection-card:hover img {
+    transform: scale(1.05);
+
+    filter:
+        saturate(1)
+        contrast(1.2)
+        brightness(0.9);
+}
+
+
+.collection-card:hover .collection-arrow {
+    transform: translate(4px, -4px);
+}
+
+
+/* =========================================================
+   11. FOCUS
+   ========================================================= */
+
+/*
+ * Para navegación mediante teclado.
+ */
+
+.collection-card:focus-visible {
+    outline: 1px solid var(--neon);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   13. MÓVIL
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .collections {
+        padding: 25px 0 40px;
+    }
+
+
+    .collections-title {
+        font-size: 2.8rem;
+
+        margin-bottom: 20px;
+    }
+
+
+    .collections-grid {
+
+        /*
+         * SOLO AQUÍ PASAMOS A UNA COLUMNA.
+         */
+
+        width: calc(100% - 40px);
+
+        grid-template-columns: 1fr;
+
+        column-gap: 0;
+
+        row-gap: 18px;
+    }
+
+
+    .collection-card {
+        aspect-ratio: 2.2 / 1;
+    }
+
+
+    .collection-name {
+        font-size: 2rem;
+    }
+}
+
+
+/* =========================================================
+   14. TELÉFONOS PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .collections {
+        padding-top: 20px;
+    }
+
+
+    .collections-title {
+        font-size: 2.4rem;
+
+        margin-bottom: 18px;
+    }
+
+
+    .collections-grid {
+        width: calc(100% - 30px);
+    }
+
+
+    .collection-card {
+        aspect-ratio: 2.05 / 1;
+    }
+
+
+    .collection-name {
+        font-size: 1.7rem;
+
+        top: 25px;
+        left: 13px;
+    }
+
+
+    .collection-number {
+        top: 6px;
+        left: 13px;
+
+        font-size: 15px;
+    }
+
+
+    .collection-arrow {
+        left: 13px;
+        bottom: 8px;
+
+        font-size: 22px;
+    }
+}

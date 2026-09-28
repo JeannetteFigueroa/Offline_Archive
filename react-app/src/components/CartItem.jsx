@@ -4,37 +4,87 @@ function CartItem({
   aumentarCantidad,
   disminuirCantidad
 }) {
+  const subtotal =
+    producto.precio * producto.cantidad;
+
   return (
-    <div>
-      <h4>{producto.nombre}</h4>
+    <article className="cart-item">
 
-      <p>
-        Precio: ${producto.precio.toLocaleString("es-CL")}
-      </p>
-
-      <div>
-        <button onClick={() => disminuirCantidad(producto.id)}>
-          -
-        </button>
-
-        <span>
-          {producto.cantidad}
-        </span>
-
-        <button onClick={() => aumentarCantidad(producto.id)}>
-          +
-        </button>
+      <div className="cart-item-image">
+        <img
+          src={producto.imagen}
+          alt={producto.nombre}
+        />
       </div>
 
-      <p>
-        Subtotal: $
-        {(producto.precio * producto.cantidad).toLocaleString("es-CL")}
-      </p>
+      <div className="cart-item-information">
 
-      <button onClick={() => eliminarDelCarrito(producto.id)}>
-        Eliminar
-      </button>
-    </div>
+        <p className="cart-item-code">
+          {producto.codigo}
+        </p>
+
+        <h2 className="cart-item-name">
+          {producto.nombre}
+        </h2>
+
+        <p className="cart-item-price">
+          Precio unitario: $
+          {producto.precio.toLocaleString("es-CL")}
+        </p>
+
+        <div className="quantity-controls">
+
+          <button
+            type="button"
+            onClick={() =>
+              disminuirCantidad(producto)
+            }
+            aria-label="Disminuir cantidad"
+          >
+            −
+          </button>
+
+          <span>
+            {producto.cantidad}
+          </span>
+
+          <button
+            type="button"
+            onClick={() =>
+              aumentarCantidad(producto)
+            }
+            aria-label="Aumentar cantidad"
+          >
+            +
+          </button>
+
+        </div>
+
+        <button
+          type="button"
+          className="remove-product"
+          onClick={() =>
+            eliminarDelCarrito(producto.id)
+          }
+        >
+          ELIMINAR
+        </button>
+
+      </div>
+
+      <div className="cart-item-subtotal">
+
+        <span>
+          SUBTOTAL
+        </span>
+
+        <strong>
+          ${subtotal.toLocaleString("es-CL")}
+        </strong>
+
+      </div>
+
+    </article>
   );
 }
 
