@@ -14,6 +14,7 @@ import productos from "./data/productos";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
+import SobreNosotros from "./pages/SobreNosotros";
 
 function App() {
   const [carrito, setCarrito] = useState(() => {
@@ -170,6 +171,10 @@ function App() {
               totalCarrito={totalCarrito}
             />
           }
+        />
+        <Route
+          path="/SobreNosotros"
+          element={<SobreNosotros />}
         />
       </Routes>
     </BrowserRouter>

@@ -38,15 +38,11 @@ function Navbar({ cantidadCarrito }) {
 
       <nav className="navbar-menu">
 
-        <a href="#">
-          Accesorios
-        </a>
-
         <Link to="/colecciones">
           Colección Y2K
         </Link>
 
-        <Link to="/nosotros">
+        <Link to="/SobreNosotros">
           Sobre
           <br />
           Nosotros
@@ -124,14 +120,6 @@ function Navbar({ cantidadCarrito }) {
 
         <nav className="mobile-menu-links">
 
-          <a
-            href="#"
-            onClick={cerrarMenu}
-          >
-            <span>01</span>
-            Accesorios
-          </a>
-
           <Link
             to="/colecciones"
             onClick={cerrarMenu}
@@ -141,7 +129,7 @@ function Navbar({ cantidadCarrito }) {
           </Link>
 
           <Link
-            to="/nosotros"
+            to="/SobreNosotros"
             onClick={cerrarMenu}
           >
             <span>03</span>
