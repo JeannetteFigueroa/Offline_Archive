@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import CollectionCard from "../components/CollectionCard";
 import "../styles/collection.css";
 
 function Colecciones() {
@@ -44,36 +44,11 @@ function Colecciones() {
 
         <div className="collections-grid">
           {colecciones.map((coleccion, index) => (
-            <Link
+            <CollectionCard
               key={coleccion.id}
-              to={`/productos?categoria=${coleccion.categoria}`}
-              className="collection-card"
-            >
-              <img
-                src={coleccion.imagen}
-                alt={`Colección ${coleccion.nombre}`}
-              />
-
-              <div
-                className="collection-overlay"
-                aria-hidden="true"
-              ></div>
-
-              <span className="collection-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-
-              <h2 className="collection-name">
-                {coleccion.nombre}
-              </h2>
-
-              <span
-                className="collection-arrow"
-                aria-hidden="true"
-              >
-                ↗
-              </span>
-            </Link>
+              coleccion={coleccion}
+              index={index}
+            />
           ))}
         </div>
       </section>
