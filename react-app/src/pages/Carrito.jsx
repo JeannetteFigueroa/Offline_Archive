@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 import CartItem from "../components/CartItem";
 import "../styles/carrito.css";
@@ -14,6 +17,7 @@ function Carrito({
   totalCarrito
 }) {
   const [mensaje, setMensaje] = useState("");
+  const navigate = useNavigate();
 
   const manejarAumentar = (producto) => {
     if (producto.cantidad >= producto.stock) {
@@ -211,6 +215,7 @@ function Carrito({
               type="button"
               className="checkout-button"
               disabled={carrito.length === 0}
+              onClick={() => navigate("/checkout")}
             >
               CONTINUAR COMPRA
               <span>→</span>
