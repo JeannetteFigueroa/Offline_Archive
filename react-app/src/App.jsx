@@ -14,6 +14,9 @@ import productos from "./data/productos";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
+import Checkout from "./pages/Checkout";
+import CompraExitosa from "./pages/CompraExitosa";
+import PagoRechazado from "./pages/PagoRechazado";
 import SobreNosotros from "./pages/SobreNosotros";
 import Contacto from "./pages/Contacto";
 import Login from "./pages/Login";
@@ -176,6 +179,28 @@ function App() {
             />
           }
         />
+
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              carrito={carrito}
+              totalCarrito={totalCarrito}
+              vaciarCarrito={vaciarCarrito}
+            />
+          }
+        />
+
+        <Route
+          path="/compra-exitosa"
+          element={<CompraExitosa />}
+        />
+
+        <Route
+          path="/pago-rechazado"
+          element={<PagoRechazado />}
+        />
+
         <Route
           path="/SobreNosotros"
           element={<SobreNosotros />}
