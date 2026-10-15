@@ -15,6 +15,10 @@ import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
 import SobreNosotros from "./pages/SobreNosotros";
+import Contacto from "./pages/Contacto";
+import Login from "./pages/Login";
+import Registro from "./pages/Registro";
+import Cuenta from "./pages/Cuenta";
 
 function App() {
   const [carrito, setCarrito] = useState(() => {
@@ -175,6 +179,22 @@ function App() {
         <Route
           path="/SobreNosotros"
           element={<SobreNosotros />}
+        />
+        <Route
+          path="/contacto"
+          element={<Contacto />}
+        />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route
+          path="/registro"
+          element={<Registro />}
+        />
+        <Route
+          path="/cuenta"
+          element={<Cuenta />}
         />
       </Routes>
     </BrowserRouter>

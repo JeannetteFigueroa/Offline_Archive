@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "../styles/navbar.css";
 
 const SESSION_KEY = "offlineArchiveSession";
 
 function Navbar({ cantidadCarrito }) {
+  useLocation();
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const tieneSesionActiva = () => {
