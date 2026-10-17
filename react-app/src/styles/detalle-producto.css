@@ -1,0 +1,488 @@
+/* =========================================================
+   DETALLE-PRODUCTO.CSS
+
+   Estilos utilizados solamente en detalle-producto.html.
+
+   Los colores y tipografías vienen desde theme.css.
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.detail-page {
+    width: min(92%, 1250px);
+
+    margin: 0 auto;
+
+    padding: 45px 0 80px;
+}
+
+
+/* =========================================================
+   2. ENLACE PARA VOLVER
+
+   Permite regresar desde el detalle al catálogo.
+   ========================================================= */
+
+.back-products {
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    color: var(--lime);
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.back-products:hover {
+    color: var(--neon);
+}
+
+
+/* =========================================================
+   3. ESTRUCTURA DEL DETALLE
+
+   En escritorio se utilizan dos columnas:
+
+   IZQUIERDA: imagen.
+   DERECHA: información.
+   ========================================================= */
+
+.product-detail {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    border: 1px solid var(--olive);
+
+    background-color: var(--forest-black);
+}
+
+
+/* =========================================================
+   4. CONTENEDOR DE LA IMAGEN
+   ========================================================= */
+
+.detail-image-container {
+    position: relative;
+
+    min-width: 0;
+
+    aspect-ratio: 4 / 5;
+
+    overflow: hidden;
+
+    background-color: var(--black);
+
+    border-right: 1px solid var(--olive);
+}
+
+
+/* La imagen ocupa completamente su contenedor */
+
+.detail-image-container img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* Código que aparece encima de la imagen */
+
+.detail-image-container span {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    padding: 7px 10px;
+
+    color: var(--neon);
+
+    background-color: rgba(1, 3, 0, 0.85);
+
+    border: 1px solid var(--olive);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   5. INFORMACIÓN DEL PRODUCTO
+   ========================================================= */
+
+.detail-information {
+    padding: clamp(30px, 6vw, 70px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* Categoría del producto */
+
+.detail-category {
+    margin-bottom: 15px;
+
+    color: var(--lime);
+
+    font-size: 15px;
+
+    text-transform: uppercase;
+}
+
+
+/* Nombre principal */
+
+.detail-name {
+    margin-bottom: 25px;
+
+    color: var(--gray);
+
+    font-family: var(--font-title);
+
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: normal;
+
+    line-height: 0.95;
+}
+
+
+/* Descripción */
+
+.detail-description {
+    max-width: 600px;
+
+    margin-bottom: 35px;
+
+    color: var(--muted-gray);
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   6. PRECIO Y STOCK
+
+   Se muestran en dos columnas.
+   ========================================================= */
+
+.detail-data {
+    margin-bottom: 30px;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    border-top: 1px solid var(--dark-olive);
+    border-bottom: 1px solid var(--dark-olive);
+}
+
+
+.detail-data div {
+    padding: 20px 0;
+}
+
+
+/* Separa visualmente precio y stock */
+
+.detail-data div:first-child {
+    padding-right: 20px;
+
+    border-right: 1px solid var(--dark-olive);
+}
+
+
+.detail-data div:last-child {
+    padding-left: 20px;
+}
+
+
+/* Etiquetas PRECIO y DISPONIBILIDAD */
+
+.detail-data span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--muted-gray);
+
+    font-size: 13px;
+}
+
+
+/* Valores correspondientes */
+
+.detail-data strong {
+    display: block;
+
+    color: var(--neon);
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   7. BOTÓN AGREGAR AL CARRITO
+   ========================================================= */
+
+.detail-add-button {
+    width: 100%;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--black);
+
+    background-color: var(--neon);
+
+    border: 1px solid var(--neon);
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Cambio de color al pasar el mouse */
+
+.detail-add-button:hover:not(:disabled) {
+    background-color: var(--lime);
+}
+
+
+/* Apariencia del botón cuando no existe stock */
+
+.detail-add-button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   8. MENSAJE DEL PRODUCTO
+
+   Aquí aparece la confirmación al agregar al carrito.
+   ========================================================= */
+
+.detail-message {
+    min-height: 20px;
+
+    margin-top: 18px;
+
+    color: var(--neon);
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   9. PRODUCTO NO ENCONTRADO
+   ========================================================= */
+
+.product-not-found {
+    padding: 80px 30px;
+
+    text-align: center;
+
+    border: 1px solid var(--olive);
+
+    background-color: var(--forest-black);
+}
+
+
+.product-not-found p {
+    margin-bottom: 15px;
+
+    color: var(--lime);
+
+    font-size: 14px;
+}
+
+
+.product-not-found h1 {
+    margin-bottom: 30px;
+
+    color: var(--gray);
+
+    font-family: var(--font-title);
+
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: normal;
+}
+
+
+.product-not-found a {
+    display: inline-block;
+
+    padding: 15px 22px;
+
+    color: var(--black);
+
+    background-color: var(--neon);
+
+    text-decoration: none;
+}
+
+
+.product-not-found a:hover {
+    background-color: var(--lime);
+}
+
+
+/* =========================================================
+   10. FOOTER
+   ========================================================= */
+
+.detail-footer {
+    width: min(92%, 1250px);
+
+    margin: 0 auto;
+
+    padding: 25px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: var(--lime);
+
+    border-top: 1px solid var(--dark-olive);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   11. ELEMENTOS OCULTOS
+
+   Evita que otras reglas CSS anulen el atributo hidden.
+   ========================================================= */
+
+.product-detail[hidden],
+.product-not-found[hidden] {
+    display: none;
+}
+
+
+/* =========================================================
+   12. TABLET Y CELULAR
+
+   Bajo 800px el detalle cambia de dos columnas
+   a una sola columna.
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .detail-page {
+        padding-top: 30px;
+    }
+
+
+    .product-detail {
+        grid-template-columns: 1fr;
+    }
+
+
+    .detail-image-container {
+        border-right: none;
+        border-bottom: 1px solid var(--olive);
+    }
+
+
+    .detail-information {
+        padding: 30px;
+    }
+
+
+    .detail-name {
+        font-size: 3.5rem;
+    }
+
+}
+
+
+/* =========================================================
+   13. CELULARES PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .detail-page {
+        width: calc(100% - 30px);
+
+        padding-bottom: 55px;
+    }
+
+
+    .detail-information {
+        padding: 25px 20px;
+    }
+
+
+    .detail-name {
+        font-size: 3rem;
+    }
+
+
+    .detail-description {
+        font-size: 16px;
+    }
+
+
+    /* Precio y stock pasan a una sola columna */
+
+    .detail-data {
+        grid-template-columns: 1fr;
+    }
+
+
+    .detail-data div:first-child {
+        padding-right: 0;
+
+        border-right: none;
+        border-bottom: 1px solid var(--dark-olive);
+    }
+
+
+    .detail-data div:last-child {
+        padding-left: 0;
+    }
+
+
+    .detail-footer {
+        width: calc(100% - 30px);
+
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

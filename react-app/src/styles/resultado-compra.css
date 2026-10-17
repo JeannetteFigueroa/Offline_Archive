@@ -1,0 +1,223 @@
+/* RESULTADO DE COMPRA
+
+   Estilos compartidos por las páginas de pago exitoso
+   y pago rechazado */
+
+.result-page {
+    width: min(92%, 900px);
+
+    min-height: calc(100vh - 90px);
+
+    margin: 0 auto;
+
+    padding: 70px 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.result-card {
+    width: 100%;
+
+    padding: 50px;
+
+    border: 1px solid var(--olive);
+
+    background-color: var(--forest-black);
+}
+
+
+.result-code {
+    margin-bottom: 20px;
+
+    color: var(--lime);
+
+    font-size: 14px;
+}
+
+
+.result-icon {
+    width: 70px;
+    height: 70px;
+
+    margin-bottom: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--black);
+
+    background-color: var(--neon);
+
+    font-size: 35px;
+}
+
+
+.result-title {
+    margin-bottom: 20px;
+
+    color: var(--neon);
+
+    font-family: var(--font-body);
+
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: normal;
+
+    line-height: 0.95;
+}
+
+
+.result-message {
+    max-width: 600px;
+
+    margin-bottom: 35px;
+
+    color: var(--muted-gray);
+
+    line-height: 1.6;
+}
+
+
+.result-order {
+    margin-bottom: 30px;
+
+    border-top: 1px solid var(--dark-olive);
+}
+
+
+.result-row {
+    padding: 15px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    color: var(--muted-gray);
+
+    border-bottom: 1px solid var(--dark-olive);
+}
+
+
+.result-row strong {
+    color: var(--gray);
+
+    text-align: right;
+}
+
+
+.result-total {
+    color: var(--neon);
+
+    font-size: 18px;
+}
+
+
+.result-total strong {
+    color: var(--neon);
+
+    font-size: 22px;
+}
+
+
+.result-actions {
+    display: flex;
+
+    gap: 15px;
+}
+
+
+.result-actions a {
+    padding: 15px 20px;
+
+    color: var(--neon);
+
+    border: 1px solid var(--olive);
+
+    text-decoration: none;
+}
+
+
+.result-actions a:last-child {
+    color: var(--black);
+
+    background-color: var(--neon);
+
+    border-color: var(--neon);
+}
+
+
+.result-actions a:hover {
+    border-color: var(--neon);
+}
+
+
+.result-actions a:last-child:hover {
+    background-color: var(--lime);
+}
+
+/* PAGO RECHAZADO */
+
+.result-error .result-icon {
+    color: var(--neon);
+
+    background-color: var(--black);
+
+    border: 1px solid var(--neon);
+}
+
+
+.result-error .result-title {
+    color: var(--gray);
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    .result-page {
+        width: calc(100% - 30px);
+
+        padding: 40px 0;
+    }
+
+
+    .result-card {
+        padding: 25px;
+    }
+
+
+    .result-title {
+        font-size: 3rem;
+    }
+
+
+    .result-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+
+    .result-row strong {
+        text-align: left;
+    }
+
+
+    .result-actions {
+        flex-direction: column;
+    }
+
+
+    .result-actions a {
+        text-align: center;
+    }
+
+}

@@ -1,262 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta
-        name="description"
-        content="(Off)line Archive - ropa seleccionada del archivo."
-    >
+      name="description"
+      content="(Off)line Archive - ropa seleccionada del archivo."
+    />
 
     <title>(Off)line Archive</title>
 
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/navbar.css">
-</head>
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+  </head>
 
-<body>
-
+  <body>
     <!-- =====================================================
          NAVBAR
          ===================================================== -->
 
     <header class="navbar">
+      <a href="index.html" class="navbar-logo"> (Off)line Archive </a>
 
-        <a href="index.html" class="navbar-logo">
-            (Off)line Archive
-        </a>
-
-
-        <!-- =================================================
+      <!-- =================================================
              MENÚ PRINCIPAL
              ================================================= -->
 
-        <nav class="navbar-menu">
+      <nav class="navbar-menu">
+        <a href="#">Accesorios</a>
 
-            <a href="#">Accesorios</a>
+        <a href="collections.html">Colección Y2K</a>
 
-            <a href="collections.html">Colección Y2K</a>
+        <a href="about_us.html">
+          Sobre<br />
+          Nosotros
+        </a>
 
-            <a href="about_us.html">
-                Sobre<br>
-                Nosotros
-            </a>
+        <a href="contact.html">Contacto</a>
+      </nav>
 
-            <a href="contact.html">Contacto</a>
-
-        </nav>
-
-
-        <!-- =================================================
+      <!-- =================================================
              ACCIONES DERECHA
              ================================================= -->
 
-        <nav class="navbar-actions">
+      <nav class="navbar-actions">
+        <a href="#">Buscar</a>
 
-            <a href="#">Buscar</a>
+        <a href="login.html" id="accountLink"> Login </a>
 
-            <a href="login.html" id="accountLink">
-                Login
-            </a>
+        <a href="carrito.html" class="navbar-cart">
+          <span>Carrito</span>
 
-            <a href="carrito.html" class="navbar-cart">
+          <span class="cart-count"> 0 </span>
+        </a>
+      </nav>
 
-                <span>Carrito</span>
-
-                <span class="cart-count">
-                    0
-                </span>
-
-            </a>
-
-        </nav>
-
-
-        <!-- =================================================
+      <!-- =================================================
              BOTÓN MENÚ MÓVIL
              ================================================= -->
 
-        <button
-            class="menu-toggle"
-            type="button"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+      <button class="menu-toggle" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-
-        <!-- =================================================
+      <!-- =================================================
              MENÚ LATERAL MÓVIL
              ================================================= -->
 
-        <aside
-            class="mobile-menu"
-            id="mobileMenu"
-            hidden
-        >
+      <aside class="mobile-menu" id="mobileMenu" hidden>
+        <!-- HEADER -->
 
-            <!-- HEADER -->
+        <div class="mobile-menu-header">
+          <span> MENU_01 </span>
 
-            <div class="mobile-menu-header">
+          <button class="menu-close" type="button">×</button>
+        </div>
 
-                <span>
-                    MENU_01
-                </span>
+        <!-- LINKS -->
 
-                <button
-                    class="menu-close"
-                    type="button"
-                >
-                    ×
-                </button>
+        <nav class="mobile-menu-links">
+          <a href="#">
+            <span>01</span>
+            Accesorios
+          </a>
 
-            </div>
+          <a href="collections.html">
+            <span>02</span>
+            Colección Y2K
+          </a>
 
+          <a href="about_us.html">
+            <span>03</span>
+            Sobre Nosotros
+          </a>
 
-            <!-- LINKS -->
+          <a href="contact.html">
+            <span>04</span>
+            Contacto
+          </a>
 
-            <nav class="mobile-menu-links">
+          <!-- DIVISOR -->
 
-                <a href="#">
-                    <span>01</span>
-                    Accesorios
-                </a>
+          <div class="mobile-divider"></div>
 
-                <a href="collections.html">
-                    <span>02</span>
-                    Colección Y2K
-                </a>
+          <a href="#">
+            <span>05</span>
+            Buscar
+          </a>
 
-                <a href="about_us.html">
-                    <span>03</span>
-                    Sobre Nosotros
-                </a>
+          <a href="login.html" id="mobileAccountLink">
+            <span>06</span>
+            Login
+          </a>
 
-                <a href="contact.html">
-                    <span>04</span>
-                    Contacto
-                </a>
+          <a href="carrito.html" class="mobile-cart">
+            <span>07</span>
+            Carrito
+            <b>0</b>
+          </a>
+        </nav>
 
+        <!-- FOOTER -->
 
-                <!-- DIVISOR -->
+        <div class="mobile-menu-footer">
+          SYSTEM_01
 
-                <div class="mobile-divider"></div>
-
-
-                <a href="#">
-                    <span>05</span>
-                    Buscar
-                </a>
-
-                <a
-                    href="login.html"
-                    id="mobileAccountLink"
-                >
-                    <span>06</span>
-                    Login
-                </a>
-
-                <a
-                    href="carrito.html"
-                    class="mobile-cart"
-                >
-                    <span>07</span>
-                    Carrito
-                    <b>0</b>
-                </a>
-
-            </nav>
-
-
-            <!-- FOOTER -->
-
-            <div class="mobile-menu-footer">
-
-                SYSTEM_01
-
-                <span>
-                    ONLINE
-                </span>
-
-            </div>
-
-        </aside>
-
+          <span> ONLINE </span>
+        </div>
+      </aside>
     </header>
-
 
     <!-- =====================================================
          HOME / HERO
          ===================================================== -->
 
     <main class="home">
+      <section class="hero">
+        <div class="hero-content">
+          <p class="hero-brand">(Off)line Archive</p>
 
-        <section class="hero">
+          <h1 class="hero-title">
+            <span> ESTO NO ES </span>
 
-            <div class="hero-content">
+            <span> EL FUTURO. </span>
 
-                <p class="hero-brand">
-                    (Off)line Archive
-                </p>
+            <span class="neon-text"> ES EL ARCHIVO. </span>
+          </h1>
 
+          <p class="hero-description">
+            Ropa seleccionada del archivo. Estética underground. Piezas que no
+            siguen tendencias.
+          </p>
 
-                <h1 class="hero-title">
+          <a href="collections.html" class="hero-button">
+            <span> VER COLECCIÓN </span>
 
-                    <span>
-                        ESTO NO ES
-                    </span>
-
-                    <span>
-                        EL FUTURO.
-                    </span>
-
-                    <span class="neon-text">
-                        ES EL ARCHIVO.
-                    </span>
-
-                </h1>
-
-
-                <p class="hero-description">
-                    Ropa seleccionada del archivo.
-                    Estética underground.
-                    Piezas que no siguen tendencias.
-                </p>
-
-
-                <a
-                    href="collections.html"
-                    class="hero-button"
-                >
-                    <span>
-                        VER COLECCIÓN
-                    </span>
-
-                    <span>
-                        →
-                    </span>
-                </a>
-
-            </div>
-
-
-            
-
-
-        </section>
-
+            <span> → </span>
+          </a>
+        </div>
+      </section>
     </main>
-
 
     <!-- =====================================================
          JAVASCRIPT
          ===================================================== -->
 
     <script src="js/navbar.js"></script>
-
-</body>
-
+  </body>
 </html>

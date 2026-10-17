@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+.admin-page { min-height: 75vh; color: #171717; background: #f7f7f5; font-family: "Space Grotesk", sans-serif; }
+.admin-eyebrow { font: 500 .75rem "DM Mono", monospace; letter-spacing: .16em; color: #777; }
+.admin-title { font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -.06em; }
+.admin-nav { border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+.admin-nav .nav-link { color: #333; border: 1px solid #ddd; background: #fff; }
+.admin-nav .nav-link.active { color: #fff; background: #171717; border-color: #171717; }
+.admin-stat, .admin-panel { border: 1px solid #e1e1df; border-radius: 14px; background: #fff; padding: 1.25rem; }
+.admin-stat { display: flex; flex-direction: column; gap: .8rem; }
+.admin-stat span { color: #666; font-size: .9rem; }
+.admin-stat strong { font-size: clamp(1.6rem, 3vw, 2.3rem); overflow-wrap: anywhere; }
+.admin-panel h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+.admin-panel .form-label { font-size: .82rem; font-weight: 600; }
+.chart-row { margin: 1.1rem 0; font-size: .9rem; }
+.chart-row .progress { height: 9px; background: #eee; }
+.chart-row .progress-bar { background: #171717; }
+.admin-shortcuts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .8rem; }
+.admin-shortcuts a { display: block; padding: 1.1rem; color: #171717; background: #fff; border: 1px solid #ddd; border-radius: 12px; text-decoration: none; font-weight: 600; }
+.admin-shortcuts a:hover { background: #171717; color: #fff; }
+.purchase-order { padding: 1rem 0; border-bottom: 1px solid #e5e5e5; }
+@media (max-width: 576px) { .admin-panel { padding: 1rem; } .admin-page .table { font-size: .84rem; } }
