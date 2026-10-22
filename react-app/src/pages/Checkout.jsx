@@ -6,15 +6,19 @@ import {
 
 import {
   isAllowedEmail,
-  REGION_DATA
+  REGION_DATA,
+  getAccount,
+  getStoredSession
 } from "../utils/auth";
 
 import "../styles/checkout.css";
+import { obtenerPrecioFinal } from "../utils/precios";
 
 function Checkout({
   carrito,
   totalCarrito,
-  vaciarCarrito
+  vaciarCarrito,
+  descontarStockCompra
 }) {
   const navigate = useNavigate();
 
@@ -23,14 +27,19 @@ function Checkout({
   const totalCompra = totalCarrito + costoEnvio;
 
   // Datos ingresados por el cliente.
-  const [formulario, setFormulario] = useState({
-    nombre: "",
-    correo: "",
-    telefono: "",
-    region: "",
-    comuna: "",
-    direccion: "",
-    metodoPago: ""
+  const [formulario, setFormulario] = useState(() => {
+    const account = getAccount();
+    const session = getStoredSession();
+    const usuarioActivo = account && session && account.email === session.email ? account : null;
+    return {
+      nombre: usuarioActivo ? `${usuarioActivo.name || ""} ${usuarioActivo.lastName || ""}`.trim() : "",
+      correo: usuarioActivo?.email || "",
+      telefono: usuarioActivo?.phone || "",
+      region: usuarioActivo?.region || "",
+      comuna: usuarioActivo?.commune || "",
+      direccion: usuarioActivo?.address || "",
+      metodoPago: ""
+    };
   });
 
   // Aquí se guardan los errores de cada campo.
@@ -133,6 +142,7 @@ function Checkout({
     const nuevaOrden = {
       id: `OFF-${Date.now()}`,
       fecha: new Date().toISOString(),
+      cuentaEmail: getStoredSession()?.email || null,
       cliente: {
         nombre: formulario.nombre.trim(),
         correo: formulario.correo
@@ -174,7 +184,12 @@ function Checkout({
       JSON.stringify(nuevaOrden)
     );
 
-    // Despues de comprar se vacia el carrito
+    // Actualiza el inventario con las unidades vendidas.
+    if (descontarStockCompra) {
+      descontarStockCompra(carrito);
+    }
+
+    // Después de comprar se vacía el carrito.
     vaciarCarrito();
 
     navigate("/compra-exitosa");
@@ -453,10 +468,7 @@ function Checkout({
 
                 <strong>
                   $
-                  {(
-                    producto.precio *
-                    producto.cantidad
-                  ).toLocaleString("es-CL")}
+                  {(obtenerPrecioFinal(producto) * producto.cantidad).toLocaleString("es-CL")}
                 </strong>
               </div>
             ))}

@@ -1,3 +1,5 @@
+import { obtenerPrecioFinal, tieneOferta } from "../utils/precios";
+
 function CartItem({
   producto,
   eliminarDelCarrito,
@@ -5,7 +7,7 @@ function CartItem({
   disminuirCantidad
 }) {
   const subtotal =
-    producto.precio * producto.cantidad;
+    obtenerPrecioFinal(producto) * producto.cantidad;
 
   return (
     <article className="cart-item">
@@ -28,8 +30,8 @@ function CartItem({
         </h2>
 
         <p className="cart-item-price">
-          Precio unitario: $
-          {producto.precio.toLocaleString("es-CL")}
+          Precio unitario: {tieneOferta(producto) && <del className="text-secondary me-2">${producto.precio.toLocaleString("es-CL")}</del>}
+          <strong>${obtenerPrecioFinal(producto).toLocaleString("es-CL")}</strong>
         </p>
 
         <div className="quantity-controls">

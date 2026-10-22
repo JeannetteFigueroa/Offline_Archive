@@ -17,7 +17,8 @@ function Productos({ productos, agregarAlCarrito }) {
     "tops",
     "bottoms",
     "accesorios",
-    "outerwear"
+    "outerwear",
+    "ofertas"
   ];
 
   const categoriaActual =
@@ -61,7 +62,7 @@ function Productos({ productos, agregarAlCarrito }) {
 
   return (
     <>
-      <main className="products-page">
+      <main className="products-page container-fluid px-3 px-md-5">
 
         <section className="products-header">
 
@@ -117,7 +118,8 @@ function Productos({ productos, agregarAlCarrito }) {
               ["tops", "TOPS"],
               ["bottoms", "BOTTOMS"],
               ["accesorios", "ACCESORIOS"],
-              ["outerwear", "OUTERWEAR"]
+              ["outerwear", "OUTERWEAR"],
+              ["ofertas", "OFERTAS"]
             ].map(([valor, texto]) => (
               <button
                 key={valor}
@@ -146,14 +148,15 @@ function Productos({ productos, agregarAlCarrito }) {
               NO SE ENCONTRARON PRODUCTOS EN EL ARCHIVO.
             </p>
           ) : (
-            <div className="products-grid">
+            <div className="products-grid row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
 
               {productosFiltrados.map((producto) => (
-                <ProductCard
-                  key={producto.id}
-                  producto={producto}
-                  agregarAlCarrito={agregarAlCarrito}
-                />
+                <div className="col" key={producto.id}>
+                  <ProductCard
+                    producto={producto}
+                    agregarAlCarrito={agregarAlCarrito}
+                  />
+                </div>
               ))}
 
             </div>

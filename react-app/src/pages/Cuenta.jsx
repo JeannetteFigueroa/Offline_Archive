@@ -7,12 +7,16 @@ import {
   formatBirthDate
 } from "../utils/auth";
 import AccountFooter from "../components/AccountFooter";
+import { leerOrdenes } from "../data/tienda";
 import "../styles/account.css";
 
 function Cuenta() {
   const navigate = useNavigate();
   const session = getStoredSession();
   const account = getAccount();
+  const ordenesUsuario = leerOrdenes().filter((orden) =>
+    (orden.cuentaEmail || orden.cliente?.correo)?.toLowerCase() === account?.email?.toLowerCase()
+  );
 
   const isAuthorized = Boolean(
     session && account && session.email === account.email
@@ -154,7 +158,7 @@ function Cuenta() {
             <span>
               ORDERS:
               <b id="purchaseCount">
-                0
+                {ordenesUsuario.length}
               </b>
             </span>
           </div>
@@ -163,20 +167,23 @@ function Cuenta() {
             id="purchaseHistory"
             className="purchase-history"
           >
-            <div className="empty-history">
-              <span className="empty-history-code">
-                NO_ORDERS_FOUND
-              </span>
-
-              <h2>
-                HISTORIAL VACÍO
-              </h2>
-
-              <p>
-                Cuando realices una compra, tus pedidos aparecerán aquí para poder
-                consultar su estado y detalle.
-              </p>
-            </div>
+            {ordenesUsuario.length === 0 ? (
+              <div className="empty-history">
+                <span className="empty-history-code">NO_ORDERS_FOUND</span>
+                <h2>HISTORIAL VACÍO</h2>
+                <p>Cuando realices una compra con este correo, tus pedidos aparecerán aquí.</p>
+              </div>
+            ) : ordenesUsuario.slice().reverse().map((orden) => (
+              <article className="purchase-order" key={orden.id}>
+                <div className="d-flex flex-wrap justify-content-between gap-2">
+                  <strong>{orden.id}</strong>
+                  <span className="badge text-bg-secondary">{orden.estado}</span>
+                </div>
+                <p className="mb-1">Fecha: {new Date(orden.fecha).toLocaleDateString("es-CL")}</p>
+                <p className="mb-1">Productos: {orden.productos.reduce((total, producto) => total + producto.cantidad, 0)}</p>
+                <strong>Total: ${Number(orden.total).toLocaleString("es-CL")}</strong>
+              </article>
+            ))}
           </div>
         </section>
 

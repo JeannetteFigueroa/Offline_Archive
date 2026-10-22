@@ -935,3 +935,10 @@
     }
 
 }
+
+/* Bootstrap grid: las columnas cambian según el ancho del dispositivo. */
+.products-grid.row {
+    display: flex;
+    grid-template-columns: unset;
+    gap: unset;
+}

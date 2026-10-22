@@ -9,7 +9,10 @@ import {
 import Colecciones from "./pages/Colecciones";
 
 import Navbar from "./components/Navbar";
-import productos from "./data/productos";
+import { leerProductos, guardarProductos } from "./data/tienda";
+import Admin from "./pages/Admin";
+import AdminRoute from "./components/AdminRoute";
+import { obtenerPrecioFinal } from "./utils/precios";
 
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
@@ -24,6 +27,8 @@ import Registro from "./pages/Registro";
 import Cuenta from "./pages/Cuenta";
 
 function App() {
+  const [productosTienda, setProductosTienda] = useState(() => leerProductos());
+  useEffect(() => { guardarProductos(productosTienda); }, [productosTienda]);
   const [carrito, setCarrito] = useState(() => {
     const carritoGuardado = localStorage.getItem("carrito");
 
@@ -117,12 +122,21 @@ function App() {
     setCarrito([]);
   };
 
+  const descontarStockCompra = (productosComprados) => {
+    setProductosTienda((actuales) => actuales.map((producto) => {
+      const comprado = productosComprados.find((item) => item.id === producto.id);
+      return comprado
+        ? { ...producto, stock: Math.max(0, producto.stock - comprado.cantidad) }
+        : producto;
+    }));
+  };
+
   const cantidadTotal = carrito.reduce((total, producto) => {
     return total + producto.cantidad;
   }, 0);
 
   const totalCarrito = carrito.reduce((total, producto) => {
-    return total + producto.precio * producto.cantidad;
+    return total + obtenerPrecioFinal(producto) * producto.cantidad;
   }, 0);
 
   return (
@@ -143,7 +157,7 @@ function App() {
           path="/productos/:id"
           element={
             <DetalleProducto
-              productos={productos}
+              productos={productosTienda}
               carrito={carrito}
               agregarAlCarrito={agregarAlCarrito}
             />
@@ -159,7 +173,7 @@ function App() {
           path="/productos"
           element={
             <Productos
-              productos={productos}
+              productos={productosTienda}
               agregarAlCarrito={agregarAlCarrito}
             />
           }
@@ -187,6 +201,7 @@ function App() {
               carrito={carrito}
               totalCarrito={totalCarrito}
               vaciarCarrito={vaciarCarrito}
+              descontarStockCompra={descontarStockCompra}
             />
           }
         />
@@ -220,6 +235,10 @@ function App() {
         <Route
           path="/cuenta"
           element={<Cuenta />}
+        />
+        <Route
+          path="/admin/*"
+          element={<AdminRoute><Admin productos={productosTienda} setProductos={setProductosTienda} /></AdminRoute>}
         />
       </Routes>
     </BrowserRouter>
