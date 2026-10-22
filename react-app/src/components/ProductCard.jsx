@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { obtenerPrecioFinal, tieneOferta, calcularDescuento } from "../utils/precios";
 
 function ProductCard({ producto, agregarAlCarrito }) {
   return (
@@ -14,6 +15,7 @@ function ProductCard({ producto, agregarAlCarrito }) {
         <span className="product-code">
           {producto.codigo}
         </span>
+        {tieneOferta(producto) && <span className="badge text-bg-danger position-absolute top-0 end-0 m-2">-{calcularDescuento(producto)}% OFERTA</span>}
       </div>
 
       <div className="product-content">
@@ -33,9 +35,12 @@ function ProductCard({ producto, agregarAlCarrito }) {
         <div className="product-information">
 
           <div>
-            <strong className="product-price">
-              ${producto.precio.toLocaleString("es-CL")}
-            </strong>
+            <div className="d-flex flex-column align-items-start gap-1">
+              {tieneOferta(producto) && <del className="text-secondary small">${producto.precio.toLocaleString("es-CL")}</del>}
+              <strong className="product-price" style={tieneOferta(producto) ? { color: "#c62828" } : undefined}>
+                ${obtenerPrecioFinal(producto).toLocaleString("es-CL")}
+              </strong>
+            </div>
 
             <span className="product-stock">
               STOCK: {producto.stock}

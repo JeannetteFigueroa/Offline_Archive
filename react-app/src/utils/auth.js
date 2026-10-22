@@ -6,6 +6,31 @@ export const ALLOWED_EMAIL_DOMAINS = [
 
 export const ACCOUNT_KEY = "offlineArchiveAccount";
 export const SESSION_KEY = "offlineArchiveSession";
+export const ADMIN_ACCOUNT_KEY = "offlineArchiveAdminAccount";
+export const DEMO_ADMIN_EMAIL = "admin@gmail.com";
+export const DEMO_ADMIN_PASSWORD = "Admin123";
+
+// Cuenta de demostración solo para evaluar el frontend local.
+export async function ensureDemoAdminAccount() {
+  const existente = localStorage.getItem(ADMIN_ACCOUNT_KEY);
+  if (existente) {
+    try {
+      const cuenta = JSON.parse(existente);
+      if (cuenta?.email === DEMO_ADMIN_EMAIL && cuenta?.passwordHash) return cuenta;
+    } catch { /* recrea la cuenta demo si el dato local está corrupto */ }
+  }
+  const cuenta = {
+    name: "Admin",
+    lastName: "Offline",
+    email: DEMO_ADMIN_EMAIL,
+    role: "admin",
+    passwordHash: await hashPassword(DEMO_ADMIN_PASSWORD),
+    createdAt: new Date().toISOString(),
+    demo: true
+  };
+  localStorage.setItem(ADMIN_ACCOUNT_KEY, JSON.stringify(cuenta));
+  return cuenta;
+}
 
 export const REGION_DATA = {
   "Arica y Parinacota": ["Arica", "Putre", "Camarones"],

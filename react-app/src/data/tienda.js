@@ -6,7 +6,11 @@ export const ORDERS_KEY = "offlineArchiveOrders";
 export function leerProductos() {
   try {
     const guardados = JSON.parse(localStorage.getItem(PRODUCTOS_KEY) || "null");
-    return Array.isArray(guardados) ? guardados : productosIniciales;
+    if (!Array.isArray(guardados)) return productosIniciales;
+    // Agrega productos nuevos del catálogo base sin borrar los cambios locales existentes.
+    const codigosGuardados = new Set(guardados.map((p) => p.codigo));
+    const productosNuevos = productosIniciales.filter((p) => !codigosGuardados.has(p.codigo));
+    return [...guardados, ...productosNuevos];
   } catch {
     return productosIniciales;
   }

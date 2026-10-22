@@ -17,7 +17,8 @@ function Productos({ productos, agregarAlCarrito }) {
     "tops",
     "bottoms",
     "accesorios",
-    "outerwear"
+    "outerwear",
+    "ofertas"
   ];
 
   const categoriaActual =
@@ -117,7 +118,8 @@ function Productos({ productos, agregarAlCarrito }) {
               ["tops", "TOPS"],
               ["bottoms", "BOTTOMS"],
               ["accesorios", "ACCESORIOS"],
-              ["outerwear", "OUTERWEAR"]
+              ["outerwear", "OUTERWEAR"],
+              ["ofertas", "OFERTAS"]
             ].map(([valor, texto]) => (
               <button
                 key={valor}

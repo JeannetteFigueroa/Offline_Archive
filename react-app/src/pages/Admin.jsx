@@ -1,14 +1,59 @@
 import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { crearProducto, actualizarProducto, eliminarProducto, leerOrdenes, guardarOrdenes } from "../data/tienda";
+import { crearProducto, actualizarProducto, eliminarProducto, leerOrdenes, guardarOrdenes, ORDERS_KEY } from "../data/tienda";
 import "../styles/admin.css";
 
 const money = (n) => `$${Number(n || 0).toLocaleString("es-CL")}`;
 const initialForm = { codigo: "", nombre: "", categoria: "tops", categoriaLabel: "Tops", precio: "", stock: "", imagen: "/img/camisetaBabyTeeNegraStatic.png", descripcion: "" };
 
+function crearPedidosDemo(productos) {
+  const porId = (id) => productos.find((p) => p.id === id) || productos[0];
+  const muestras = [
+    { meses: 5, cliente: "Camila Rojas", correo: "camila.demo@gmail.com", items: [[1, 3], [4, 1]] },
+    { meses: 4, cliente: "Matías Soto", correo: "matias.demo@gmail.com", items: [[3, 2], [5, 1]] },
+    { meses: 3, cliente: "Antonia Díaz", correo: "antonia.demo@gmail.com", items: [[2, 4]] },
+    { meses: 2, cliente: "Lucas Pérez", correo: "lucas.demo@gmail.com", items: [[7, 1], [8, 1]] },
+    { meses: 1, cliente: "Fernanda Silva", correo: "fernanda.demo@gmail.com", items: [[9, 3], [10, 2]] },
+    { meses: 0, cliente: "Javiera Muñoz", correo: "javiera.demo@gmail.com", items: [[1, 2], [9, 1]] },
+    { meses: 2, cliente: "Tomás Reyes", correo: "tomas.demo@gmail.com", items: [[4, 3], [6, 2]] },
+    { meses: 0, cliente: "Valentina León", correo: "valentina.demo@gmail.com", items: [[10, 2], [3, 1]] }
+  ];
+  return muestras.map((m, index) => {
+    const fecha = new Date();
+    fecha.setMonth(fecha.getMonth() - m.meses);
+    fecha.setDate(Math.min(25, 2 + index * 3));
+    const lineas = m.items.map(([id, cantidad]) => {
+      const producto = porId(id);
+      return { ...producto, cantidad };
+    });
+    const subtotal = lineas.reduce((sum, p) => sum + (p.precioOferta && p.precioOferta < p.precio ? p.precioOferta : p.precio) * p.cantidad, 0);
+    return {
+      id: `DEMO-${String(index + 1).padStart(3, "0")}`,
+      fecha: fecha.toISOString(),
+      cuentaEmail: m.correo,
+      cliente: { nombre: m.cliente, correo: m.correo, telefono: "900000000", region: "Metropolitana de Santiago", comuna: "Santiago", direccion: "Dirección de demostración" },
+      metodoPago: "DEMO",
+      productos: lineas,
+      subtotal,
+      envio: 3990,
+      total: subtotal + 3990,
+      estado: index % 3 === 0 ? "PENDIENTE" : index % 3 === 1 ? "CONFIRMADO" : "PAGADA",
+      demo: true
+    };
+  });
+}
+
+function cargarOrdenesIniciales(productos) {
+  const yaExiste = localStorage.getItem(ORDERS_KEY);
+  if (yaExiste !== null) return leerOrdenes();
+  const demo = crearPedidosDemo(productos);
+  guardarOrdenes(demo);
+  return demo;
+}
+
 function Admin({ productos, setProductos }) {
   const location = useLocation();
-  const [ordenes, setOrdenes] = useState(() => leerOrdenes());
+  const [ordenes, setOrdenes] = useState(() => cargarOrdenesIniciales(productos));
   const [form, setForm] = useState(initialForm);
   const [mensaje, setMensaje] = useState("");
   const [stockId, setStockId] = useState("");
@@ -60,7 +105,7 @@ function Admin({ productos, setProductos }) {
 
   return <main className="admin-page container-fluid py-4 px-3 px-md-5">
     <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
-      <div><p className="admin-eyebrow mb-2">OFF(LINE) ARCHIVE / CONTROL</p><h1 className="admin-title mb-1">PANEL ADMINISTRATIVO.</h1><p className="text-secondary mb-0">Gestión local de inventario, pedidos y estadísticas de la tienda.</p></div>
+      <div><p className="admin-eyebrow mb-2">OFF(LINE) ARCHIVE / CONTROL</p><h1 className="admin-title mb-1">PANEL ADMINISTRATIVO.</h1><p className="text-secondary mb-0">Gestión local de inventario, pedidos y estadísticas de la tienda.</p><span className="badge text-bg-warning mt-2">Incluye pedidos ficticios de demostración</span></div>
       <Link className="btn btn-outline-dark" to="/">Volver a la tienda ↗</Link>
     </div>
     <nav className="admin-nav nav nav-pills flex-wrap gap-2 mb-4">
@@ -94,7 +139,7 @@ function Admin({ productos, setProductos }) {
         <div className="col-12 col-md-5"><label className="form-label">Nombre</label><input className="form-control" value={form.nombre} onChange={e => setForm({...form,nombre:e.target.value})} required/></div>
         <div className="col-6 col-md-2"><label className="form-label">Precio CLP</label><input className="form-control" type="number" min="1" value={form.precio} onChange={e => setForm({...form,precio:e.target.value})} required/></div>
         <div className="col-6 col-md-2"><label className="form-label">Stock inicial</label><input className="form-control" type="number" min="0" value={form.stock} onChange={e => setForm({...form,stock:e.target.value})} required/></div>
-        <div className="col-12 col-md-4"><label className="form-label">Categoría</label><select className="form-select" value={form.categoria} onChange={e => {const categoria=e.target.value; setForm({...form,categoria,categoriaLabel:categoria[0].toUpperCase()+categoria.slice(1)});}}><option value="tops">Tops</option><option value="bottoms">Bottoms</option><option value="accesorios">Accesorios</option><option value="outerwear">Outerwear</option></select></div>
+        <div className="col-12 col-md-4"><label className="form-label">Categoría</label><select className="form-select" value={form.categoria} onChange={e => {const categoria=e.target.value; setForm({...form,categoria,categoriaLabel:categoria[0].toUpperCase()+categoria.slice(1)});}}><option value="tops">Tops</option><option value="bottoms">Bottoms</option><option value="accesorios">Accesorios</option><option value="outerwear">Outerwear</option><option value="ofertas">Ofertas</option></select></div>
         <div className="col-12 col-md-8"><label className="form-label">Descripción</label><input className="form-control" value={form.descripcion} onChange={e => setForm({...form,descripcion:e.target.value})}/></div>
         <div className="col-12"><button className="btn btn-dark" type="submit">Guardar producto</button></div>
       </form>
@@ -103,7 +148,7 @@ function Admin({ productos, setProductos }) {
 
     {seccion === "/stock" && <section className="admin-panel"><h2>Ingreso de stock</h2><p className="text-secondary">El ingreso se suma al stock disponible del producto seleccionado.</p><form className="row g-3 align-items-end" onSubmit={actualizarStock}><div className="col-12 col-md-7"><label className="form-label">Producto</label><select className="form-select" value={stockId} onChange={e => setStockId(e.target.value)} required><option value="">Selecciona un producto</option>{productos.map(p => <option key={p.id} value={p.id}>{p.nombre} — stock actual: {p.stock}</option>)}</select></div><div className="col-12 col-md-3"><label className="form-label">Unidades recibidas</label><input className="form-control" type="number" min="1" step="1" value={cantidadStock} onChange={e => setCantidadStock(e.target.value)} required/></div><div className="col-12 col-md-2"><button className="btn btn-dark w-100">Ingresar</button></div></form></section>}
 
-    {seccion === "/pedidos" && <section className="admin-panel"><h2>Confirmación y preparación de pedidos</h2>{ordenes.length ? <div className="table-responsive"><table className="table align-middle"><thead><tr><th>Pedido</th><th>Cliente</th><th>Fecha</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>{ordenes.map(o => <tr key={o.id}><td>{o.id}</td><td>{o.cliente?.nombre}<br/><small>{o.cliente?.correo}</small></td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td>{money(o.total)}</td><td><span className="badge text-bg-secondary">{o.estado}</span></td><td><div className="d-flex flex-wrap gap-1"><button className="btn btn-sm btn-outline-primary" onClick={() => cambiarEstado(o.id,"CONFIRMADO")}>Aceptar</button><button className="btn btn-sm btn-outline-success" onClick={() => cambiarEstado(o.id,"PREPARADO")}>Preparado</button><button className="btn btn-sm btn-outline-danger" onClick={() => cambiarEstado(o.id,"CANCELADO")}>Cancelar</button></div></td></tr>)}</tbody></table></div> : <p className="text-secondary">No hay pedidos registrados todavía. Realiza una compra de prueba para verla aquí.</p>}</section>}
+    {seccion === "/pedidos" && <section className="admin-panel"><h2>Confirmación y preparación de pedidos</h2>{ordenes.length ? <div className="table-responsive"><table className="table align-middle"><thead><tr><th>Pedido</th><th>Cliente</th><th>Fecha</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>{ordenes.map(o => <tr key={o.id}><td>{o.id}{o.demo && <><br/><span className="badge text-bg-warning">DEMO</span></>}</td><td>{o.cliente?.nombre}<br/><small>{o.cliente?.correo}</small></td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td>{money(o.total)}</td><td><span className="badge text-bg-secondary">{o.estado}</span></td><td><div className="d-flex flex-wrap gap-1"><button className="btn btn-sm btn-outline-primary" onClick={() => cambiarEstado(o.id,"CONFIRMADO")}>Aceptar</button><button className="btn btn-sm btn-outline-success" onClick={() => cambiarEstado(o.id,"PREPARADO")}>Preparado</button><button className="btn btn-sm btn-outline-danger" onClick={() => cambiarEstado(o.id,"CANCELADO")}>Cancelar</button></div></td></tr>)}</tbody></table></div> : <p className="text-secondary">No hay pedidos registrados todavía. Realiza una compra de prueba para verla aquí.</p>}</section>}
 
     {seccion === "/cuenta" && <section className="admin-panel"><h2>Cuenta y ajustes</h2><p>Esta versión corresponde a una demostración frontend offline. Los cambios se guardan en el almacenamiento local de este navegador.</p><p><strong>Productos:</strong> {productos.length} registrados</p><p><strong>Pedidos:</strong> {ordenes.length} registrados</p><button className="btn btn-outline-danger" onClick={() => { if (window.confirm("¿Borrar el historial local de pedidos?")) {setOrdenes([]); guardarOrdenes([]); setMensaje("Historial local eliminado.");} }}>Limpiar historial de pedidos</button></section>}
   </main>;

@@ -11,6 +11,8 @@ import Colecciones from "./pages/Colecciones";
 import Navbar from "./components/Navbar";
 import { leerProductos, guardarProductos } from "./data/tienda";
 import Admin from "./pages/Admin";
+import AdminRoute from "./components/AdminRoute";
+import { obtenerPrecioFinal } from "./utils/precios";
 
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
@@ -134,7 +136,7 @@ function App() {
   }, 0);
 
   const totalCarrito = carrito.reduce((total, producto) => {
-    return total + producto.precio * producto.cantidad;
+    return total + obtenerPrecioFinal(producto) * producto.cantidad;
   }, 0);
 
   return (
@@ -236,7 +238,7 @@ function App() {
         />
         <Route
           path="/admin/*"
-          element={<Admin productos={productosTienda} setProductos={setProductosTienda} />}
+          element={<AdminRoute><Admin productos={productosTienda} setProductos={setProductosTienda} /></AdminRoute>}
         />
       </Routes>
     </BrowserRouter>

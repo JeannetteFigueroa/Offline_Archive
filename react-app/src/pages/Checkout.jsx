@@ -12,6 +12,7 @@ import {
 } from "../utils/auth";
 
 import "../styles/checkout.css";
+import { obtenerPrecioFinal } from "../utils/precios";
 
 function Checkout({
   carrito,
@@ -467,10 +468,7 @@ function Checkout({
 
                 <strong>
                   $
-                  {(
-                    producto.precio *
-                    producto.cantidad
-                  ).toLocaleString("es-CL")}
+                  {(obtenerPrecioFinal(producto) * producto.cantidad).toLocaleString("es-CL")}
                 </strong>
               </div>
             ))}

@@ -94,6 +94,32 @@ const productos = [
     imagen: "/img/sudaderaCarbonDeEsteticaIndustrial.png",
     descripcion:
       "Hoodie oversize color carbón con acabado industrial."
+  },
+  {
+    id: 9,
+    codigo: "OFFER_009",
+    nombre: "Baby Tee Static — Oferta Web",
+    categoria: "ofertas",
+    categoriaLabel: "Ofertas",
+    precio: 19990,
+    precioOferta: 14990,
+    descuento: 25,
+    stock: 10,
+    imagen: "/img/camisetaBabyTeeNegraStatic.png",
+    descripcion: "Baby tee negra de algodón lavado. Oferta exclusiva de la tienda web."
+  },
+  {
+    id: 10,
+    codigo: "OFFER_010",
+    nombre: "Falda Circuit — Oferta Web",
+    categoria: "ofertas",
+    categoriaLabel: "Ofertas",
+    precio: 26990,
+    precioOferta: 19990,
+    descuento: 26,
+    stock: 8,
+    imagen: "/img/miniFaldaNegraPlisadaConCadena.png",
+    descripcion: "Mini falda negra plisada con cadena plateada. Oferta exclusiva de la tienda web."
   }
 ];
 

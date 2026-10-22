@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "../styles/detalle-producto.css";
+import { obtenerPrecioFinal, tieneOferta, calcularDescuento } from "../utils/precios";
 
 function DetalleProducto({
   productos,
@@ -125,8 +126,10 @@ function DetalleProducto({
                   PRECIO
                 </span>
 
-                <strong>
-                  ${producto.precio.toLocaleString("es-CL")}
+                {tieneOferta(producto) && <span className="badge text-bg-danger ms-2">-{calcularDescuento(producto)}% OFERTA WEB</span>}
+                <strong className={tieneOferta(producto) ? "text-danger d-block" : "d-block"}>
+                  {tieneOferta(producto) && <del className="text-secondary me-2">${producto.precio.toLocaleString("es-CL")}</del>}
+                  ${obtenerPrecioFinal(producto).toLocaleString("es-CL")}
                 </strong>
               </div>
 
