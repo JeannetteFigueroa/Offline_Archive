@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   hashPassword,
   isAllowedEmail,
@@ -7,11 +8,13 @@ import {
   ACCOUNT_KEY,
   SESSION_KEY
 } from "../utils/auth";
+
 import AuthVisual from "../components/AuthVisual";
 import PasswordInput from "../components/PasswordInput";
 import PrimaryButton from "../components/PrimaryButton";
 import SecondaryButton from "../components/SecondaryButton";
 import AccountFooter from "../components/AccountFooter";
+
 import "../styles/auth.css";
 
 function Registro() {
@@ -21,6 +24,7 @@ function Registro() {
     name: "",
     lastName: "",
     email: "",
+    phone: "",
     password: "",
     passwordConfirm: "",
     birthDate: "",
@@ -31,13 +35,26 @@ function Registro() {
   });
 
   const [errors, setErrors] = useState({});
-  const [formMessage, setFormMessage] = useState({ text: "", type: "" });
+
+  const [formMessage, setFormMessage] = useState({
+    text: "",
+    type: ""
+  });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const {
+      name,
+      value,
+      type,
+      checked
+    } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]:
+        type === "checkbox"
+          ? checked
+          : value
     }));
 
     if (errors[name]) {
@@ -49,7 +66,9 @@ function Registro() {
   };
 
   const handleRegionChange = (e) => {
-    const selectedRegion = e.target.value;
+    const selectedRegion =
+      e.target.value;
+
     setFormData((prev) => ({
       ...prev,
       region: selectedRegion,
@@ -58,7 +77,12 @@ function Registro() {
 
     setErrors((prev) => ({
       ...prev,
-      region: selectedRegion ? "" : "Debes seleccionar una región.",
+
+      region:
+        selectedRegion
+          ? ""
+          : "Debes seleccionar una región.",
+
       commune: ""
     }));
   };
@@ -66,62 +90,120 @@ function Registro() {
   const validate = () => {
     const newErrors = {};
 
-    const name = formData.name.trim();
+    // NOMBRE
+    const name =
+      formData.name.trim();
+
     if (!name) {
-      newErrors.name = "El nombre es obligatorio.";
+      newErrors.name =
+        "El nombre es obligatorio.";
     } else if (name.length > 50) {
-      newErrors.name = "El nombre no puede superar los 50 caracteres.";
+      newErrors.name =
+        "El nombre no puede superar los 50 caracteres.";
     }
 
-    const lastName = formData.lastName.trim();
+    // APELLIDOS
+    const lastName =
+      formData.lastName.trim();
+
     if (!lastName) {
-      newErrors.lastName = "Los apellidos son obligatorios.";
+      newErrors.lastName =
+        "Los apellidos son obligatorios.";
     } else if (lastName.length > 100) {
-      newErrors.lastName = "Los apellidos no pueden superar los 100 caracteres.";
+      newErrors.lastName =
+        "Los apellidos no pueden superar los 100 caracteres.";
     }
 
-    const email = formData.email.trim();
+    // CORREO
+    const email =
+      formData.email.trim();
+
     if (!email) {
-      newErrors.email = "El correo es obligatorio.";
+      newErrors.email =
+        "El correo es obligatorio.";
     } else if (email.length > 100) {
-      newErrors.email = "El correo no puede superar los 100 caracteres.";
+      newErrors.email =
+        "El correo no puede superar los 100 caracteres.";
     } else if (!isAllowedEmail(email)) {
-      newErrors.email = "Solo se permiten correos @duoc.cl, @profesor.duoc.cl y @gmail.com";
+      newErrors.email =
+        "Solo se permiten correos @duoc.cl, @profesor.duoc.cl y @gmail.com";
     }
 
-    const password = formData.password;
+    // TELÉFONO
+    const phone =
+      formData.phone.replace(/\s/g, "");
+
+    if (!phone) {
+      newErrors.phone =
+        "El teléfono es obligatorio.";
+    } else if (!/^9\d{8}$/.test(phone)) {
+      newErrors.phone =
+        "Ingresa 9 dígitos. Ejemplo: 912345678.";
+    }
+
+    // CONTRASEÑA
+    const password =
+      formData.password;
+
     if (!password) {
-      newErrors.password = "La contraseña es obligatoria.";
-    } else if (password.length < 4 || password.length > 10) {
-      newErrors.password = "La contraseña debe tener entre 4 y 10 caracteres.";
+      newErrors.password =
+        "La contraseña es obligatoria.";
+    } else if (
+      password.length < 4 ||
+      password.length > 10
+    ) {
+      newErrors.password =
+        "La contraseña debe tener entre 4 y 10 caracteres.";
     }
 
-    const passwordConfirm = formData.passwordConfirm;
+    // CONFIRMAR CONTRASEÑA
+    const passwordConfirm =
+      formData.passwordConfirm;
+
     if (!passwordConfirm) {
-      newErrors.passwordConfirm = "La contraseña es obligatoria.";
-    } else if (passwordConfirm.length < 4 || passwordConfirm.length > 10) {
-      newErrors.passwordConfirm = "La contraseña debe tener entre 4 y 10 caracteres.";
-    } else if (passwordConfirm !== password) {
-      newErrors.passwordConfirm = "Las contraseñas no coinciden.";
+      newErrors.passwordConfirm =
+        "La contraseña es obligatoria.";
+    } else if (
+      passwordConfirm.length < 4 ||
+      passwordConfirm.length > 10
+    ) {
+      newErrors.passwordConfirm =
+        "La contraseña debe tener entre 4 y 10 caracteres.";
+    } else if (
+      passwordConfirm !== password
+    ) {
+      newErrors.passwordConfirm =
+        "Las contraseñas no coinciden.";
     }
 
+    // REGIÓN
     if (!formData.region) {
-      newErrors.region = "Debes seleccionar una región.";
+      newErrors.region =
+        "Debes seleccionar una región.";
     }
 
+    // COMUNA
     if (!formData.commune) {
-      newErrors.commune = "Debes seleccionar una comuna.";
+      newErrors.commune =
+        "Debes seleccionar una comuna.";
     }
 
-    const address = formData.address.trim();
+    // DIRECCIÓN
+    const address =
+      formData.address.trim();
+
     if (!address) {
-      newErrors.address = "La dirección es obligatoria.";
+      newErrors.address =
+        "La dirección es obligatoria.";
     } else if (address.length > 300) {
-      newErrors.address = "La dirección no puede superar los 300 caracteres.";
+      newErrors.address =
+        "La dirección no puede superar los 300 caracteres.";
     }
 
+    // TÉRMINOS
     if (!formData.terms) {
-      newErrors.terms = "Debes aceptar los términos y condiciones.";
+      newErrors.terms =
+        "Debes aceptar los términos y condiciones.";
     }
 
     return newErrors;
@@ -129,60 +211,118 @@ function Registro() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormMessage({ text: "", type: "" });
 
-    const validationErrors = validate();
+    setFormMessage({
+      text: "",
+      type: ""
+    });
 
-    if (Object.keys(validationErrors).length > 0) {
+    const validationErrors =
+      validate();
+
+    if (
+      Object.keys(validationErrors).length > 0
+    ) {
       setErrors(validationErrors);
+
       setFormMessage({
-        text: "El formulario contiene errores. Corrige los campos marcados.",
+        text:
+          "El formulario contiene errores. Corrige los campos marcados.",
         type: "error"
       });
+
       return;
     }
 
     setErrors({});
 
-    const normalizedEmail = formData.email.trim().toLowerCase();
-    const existingAccount = JSON.parse(
-      localStorage.getItem(ACCOUNT_KEY) || "null"
-    );
+    const normalizedEmail =
+      formData.email
+        .trim()
+        .toLowerCase();
 
-    if (existingAccount?.email === normalizedEmail) {
+    const existingAccount =
+      JSON.parse(
+        localStorage.getItem(
+          ACCOUNT_KEY
+        ) || "null"
+      );
+
+    if (
+      existingAccount?.email ===
+      normalizedEmail
+    ) {
       setFormMessage({
-        text: "Ya existe una cuenta con ese correo.",
+        text:
+          "Ya existe una cuenta con ese correo.",
         type: "error"
       });
+
       return;
     }
 
-    const passwordHash = await hashPassword(formData.password);
+    const passwordHash =
+      await hashPassword(
+        formData.password
+      );
 
+    // Datos de la cuenta que se guardarán.
     const account = {
-      name: formData.name.trim(),
-      lastName: formData.lastName.trim(),
-      email: normalizedEmail,
+      name:
+        formData.name.trim(),
+
+      lastName:
+        formData.lastName.trim(),
+
+      email:
+        normalizedEmail,
+
+      // Se guarda el teléfono para utilizarlo
+      // posteriormente en Checkout.
+      phone:
+        formData.phone
+          .replace(/\s/g, ""),
+
       passwordHash,
-      birthDate: formData.birthDate || "",
-      region: formData.region,
-      commune: formData.commune,
-      address: formData.address.trim(),
-      createdAt: new Date().toISOString()
+
+      birthDate:
+        formData.birthDate || "",
+
+      region:
+        formData.region,
+
+      commune:
+        formData.commune,
+
+      address:
+        formData.address.trim(),
+
+      createdAt:
+        new Date().toISOString()
     };
 
-    localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account));
+    // Guarda la cuenta.
+    localStorage.setItem(
+      ACCOUNT_KEY,
+      JSON.stringify(account)
+    );
 
+    // Inicia sesión después del registro.
     sessionStorage.setItem(
       SESSION_KEY,
+
       JSON.stringify({
-        email: account.email,
-        loggedAt: new Date().toISOString()
+        email:
+          account.email,
+
+        loggedAt:
+          new Date().toISOString()
       })
     );
 
     setFormMessage({
-      text: "Cuenta creada correctamente. Volviendo al archivo...",
+      text:
+        "Cuenta creada correctamente. Volviendo al archivo...",
       type: "success"
     });
 
@@ -193,31 +333,45 @@ function Registro() {
 
   return (
     <div className="auth-page register-page register-layout">
+
       <main className="auth-shell">
-        {/* Panel visual compartido */}
+
+        {/* PANEL VISUAL */}
         <AuthVisual
           systemCode="SYSTEM_02 / REGISTER"
           status="READY"
           statusTag="NEW_USER / 001"
         >
-          CREA TU PERFIL.<br />
-          DESBLOQUEA EL <strong>ARCHIVO.</strong>
+          CREA TU PERFIL.
+          <br />
+
+          DESBLOQUEA EL{" "}
+          <strong>
+            ARCHIVO.
+          </strong>
         </AuthVisual>
 
-        {/* Panel del formulario */}
+        {/* FORMULARIO */}
         <section className="auth-form-panel">
+
           <div className="auth-header">
+
             <p className="eyebrow">
               SYSTEM_02 / ACCOUNT
             </p>
 
             <h2>
-              JOIN THE <span>ARCHIVE</span>
+              JOIN THE{" "}
+              <span>
+                ARCHIVE
+              </span>
             </h2>
 
             <p>
-              Crea una cuenta para acceder a la tienda.
+              Crea una cuenta para acceder
+              a la tienda.
             </p>
+
           </div>
 
           <form
@@ -226,9 +380,18 @@ function Registro() {
             noValidate
             onSubmit={handleSubmit}
           >
+
             <div className="form-grid">
-              {/* Nombre */}
-              <div className={`field ${errors.name ? "is-invalid" : ""}`}>
+
+              {/* NOMBRE */}
+              <div
+                className={`field ${
+                  errors.name
+                    ? "is-invalid"
+                    : ""
+                }`}
+              >
+
                 <label htmlFor="registerName">
                   Nombre
                 </label>
@@ -252,10 +415,18 @@ function Registro() {
                 >
                   {errors.name}
                 </small>
+
               </div>
 
-              {/* Apellidos */}
-              <div className={`field ${errors.lastName ? "is-invalid" : ""}`}>
+              {/* APELLIDOS */}
+              <div
+                className={`field ${
+                  errors.lastName
+                    ? "is-invalid"
+                    : ""
+                }`}
+              >
+
                 <label htmlFor="registerLastName">
                   Apellidos
                 </label>
@@ -279,14 +450,18 @@ function Registro() {
                 >
                   {errors.lastName}
                 </small>
+
               </div>
 
-              {/* Correo */}
+              {/* CORREO */}
               <div
                 className={`field field-full ${
-                  errors.email ? "is-invalid" : ""
+                  errors.email
+                    ? "is-invalid"
+                    : ""
                 }`}
               >
+
                 <label htmlFor="registerEmail">
                   Correo electrónico
                 </label>
@@ -308,7 +483,9 @@ function Registro() {
                   id="registerEmailHint"
                   className="field-hint"
                 >
-                  Permitidos: @duoc.cl, @profesor.duoc.cl y @gmail.com.
+                  Permitidos: @duoc.cl,
+                  @profesor.duoc.cl y
+                  @gmail.com.
                 </small>
 
                 <small
@@ -318,10 +495,58 @@ function Registro() {
                 >
                   {errors.email}
                 </small>
+
               </div>
 
-              {/* Contraseña */}
-              <div className={`field ${errors.password ? "is-invalid" : ""}`}>
+              {/* TELÉFONO */}
+              <div
+                className={`field field-full ${
+                  errors.phone
+                    ? "is-invalid"
+                    : ""
+                }`}
+              >
+
+                <label htmlFor="registerPhone">
+                  Teléfono
+                </label>
+
+                <input
+                  type="tel"
+                  id="registerPhone"
+                  name="phone"
+                  autoComplete="tel"
+                  maxLength={9}
+                  placeholder="912345678"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+
+                <small className="field-hint">
+                  Ingresa 9 dígitos.
+                  Ejemplo: 912345678.
+                </small>
+
+                <small
+                  id="registerPhoneError"
+                  className="field-error"
+                  aria-live="polite"
+                >
+                  {errors.phone}
+                </small>
+
+              </div>
+
+              {/* CONTRASEÑA */}
+              <div
+                className={`field ${
+                  errors.password
+                    ? "is-invalid"
+                    : ""
+                }`}
+              >
+
                 <label htmlFor="registerPassword">
                   Contraseña
                 </label>
@@ -345,14 +570,18 @@ function Registro() {
                 >
                   {errors.password}
                 </small>
+
               </div>
 
-              {/* Confirmar contraseña */}
+              {/* CONFIRMAR CONTRASEÑA */}
               <div
                 className={`field ${
-                  errors.passwordConfirm ? "is-invalid" : ""
+                  errors.passwordConfirm
+                    ? "is-invalid"
+                    : ""
                 }`}
               >
+
                 <label htmlFor="registerPasswordConfirm">
                   Confirmar contraseña
                 </label>
@@ -376,13 +605,17 @@ function Registro() {
                 >
                   {errors.passwordConfirm}
                 </small>
+
               </div>
 
-              {/* Fecha de nacimiento */}
+              {/* FECHA DE NACIMIENTO */}
               <div className="field">
+
                 <label htmlFor="birthDate">
                   Fecha de nacimiento{" "}
-                  <span className="optional">(opcional)</span>
+                  <span className="optional">
+                    (opcional)
+                  </span>
                 </label>
 
                 <input
@@ -393,10 +626,18 @@ function Registro() {
                   value={formData.birthDate}
                   onChange={handleChange}
                 />
+
               </div>
 
-              {/* Región */}
-              <div className={`field ${errors.region ? "is-invalid" : ""}`}>
+              {/* REGIÓN */}
+              <div
+                className={`field ${
+                  errors.region
+                    ? "is-invalid"
+                    : ""
+                }`}
+              >
+
                 <label htmlFor="region">
                   Región
                 </label>
@@ -408,17 +649,24 @@ function Registro() {
                   onChange={handleRegionChange}
                   required
                 >
+
                   <option value="">
                     Selecciona una región
                   </option>
-                  {Object.keys(REGION_DATA).map((regionName) => (
-                    <option
-                      key={regionName}
-                      value={regionName}
-                    >
-                      {regionName}
-                    </option>
-                  ))}
+
+                  {Object.keys(
+                    REGION_DATA
+                  ).map(
+                    (regionName) => (
+                      <option
+                        key={regionName}
+                        value={regionName}
+                      >
+                        {regionName}
+                      </option>
+                    )
+                  )}
+
                 </select>
 
                 <small
@@ -428,10 +676,18 @@ function Registro() {
                 >
                   {errors.region}
                 </small>
+
               </div>
 
-              {/* Comuna */}
-              <div className={`field ${errors.commune ? "is-invalid" : ""}`}>
+              {/* COMUNA */}
+              <div
+                className={`field ${
+                  errors.commune
+                    ? "is-invalid"
+                    : ""
+                }`}
+              >
+
                 <label htmlFor="commune">
                   Comuna
                 </label>
@@ -444,20 +700,27 @@ function Registro() {
                   disabled={!formData.region}
                   required
                 >
+
                   <option value="">
                     {formData.region
                       ? "Selecciona una comuna"
                       : "Primero selecciona una región"}
                   </option>
+
                   {formData.region &&
-                    REGION_DATA[formData.region]?.map((communeName) => (
-                      <option
-                        key={communeName}
-                        value={communeName}
-                      >
-                        {communeName}
-                      </option>
-                    ))}
+                    REGION_DATA[
+                      formData.region
+                    ]?.map(
+                      (communeName) => (
+                        <option
+                          key={communeName}
+                          value={communeName}
+                        >
+                          {communeName}
+                        </option>
+                      )
+                    )}
+
                 </select>
 
                 <small
@@ -467,14 +730,18 @@ function Registro() {
                 >
                   {errors.commune}
                 </small>
+
               </div>
 
-              {/* Dirección */}
+              {/* DIRECCIÓN */}
               <div
                 className={`field field-full ${
-                  errors.address ? "is-invalid" : ""
+                  errors.address
+                    ? "is-invalid"
+                    : ""
                 }`}
               >
+
                 <label htmlFor="address">
                   Dirección
                 </label>
@@ -488,7 +755,7 @@ function Registro() {
                   value={formData.address}
                   onChange={handleChange}
                   required
-                ></textarea>
+                />
 
                 <small
                   id="addressError"
@@ -497,11 +764,14 @@ function Registro() {
                 >
                   {errors.address}
                 </small>
+
               </div>
+
             </div>
 
-            {/* Términos y condiciones */}
+            {/* TÉRMINOS */}
             <label className="check-control terms-control">
+
               <input
                 type="checkbox"
                 id="terms"
@@ -510,10 +780,13 @@ function Registro() {
                 onChange={handleChange}
                 required
               />
+
               <span className="custom-check"></span>
+
               <span>
                 Acepto los términos y condiciones.
               </span>
+
             </label>
 
             <small
@@ -538,13 +811,19 @@ function Registro() {
                 {formMessage.text}
               </div>
             )}
+
           </form>
 
           <div className="auth-divider">
-            <span>OR</span>
+            <span>
+              OR
+            </span>
           </div>
 
-          <SecondaryButton to="/login" arrow="left">
+          <SecondaryButton
+            to="/login"
+            arrow="left"
+          >
             VOLVER AL LOGIN
           </SecondaryButton>
 
@@ -556,8 +835,11 @@ function Registro() {
           </Link>
 
           <AccountFooter className="auth-footer" />
+
         </section>
+
       </main>
+
     </div>
   );
 }
