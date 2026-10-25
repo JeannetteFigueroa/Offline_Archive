@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import DetalleProducto from "./pages/DetalleProducto";
+
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  useLocation
 } from "react-router-dom";
 
-import Colecciones from "./pages/Colecciones";
-
 import Navbar from "./components/Navbar";
-import { leerProductos, guardarProductos } from "./data/tienda";
-import Admin from "./pages/Admin";
 import AdminRoute from "./components/AdminRoute";
+
+import {
+  leerProductos,
+  guardarProductos
+} from "./data/tienda";
+
 import { obtenerPrecioFinal } from "./utils/precios";
 
 import Home from "./pages/Home";
+import Colecciones from "./pages/Colecciones";
 import Productos from "./pages/Productos";
+import DetalleProducto from "./pages/DetalleProducto";
 import Carrito from "./pages/Carrito";
 import Checkout from "./pages/Checkout";
 import CompraExitosa from "./pages/CompraExitosa";
@@ -25,12 +30,27 @@ import Contacto from "./pages/Contacto";
 import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import Cuenta from "./pages/Cuenta";
+import Admin from "./pages/Admin";
 
-function App() {
-  const [productosTienda, setProductosTienda] = useState(() => leerProductos());
-  useEffect(() => { guardarProductos(productosTienda); }, [productosTienda]);
+function AppContent() {
+  const location = useLocation();
+
+  // Detecta si estamos dentro de cualquier página del administrador.
+  const esPaginaAdmin =
+    location.pathname.startsWith("/admin");
+
+  // Catálogo general de productos.
+  const [productosTienda, setProductosTienda] =
+    useState(() => leerProductos());
+
+  useEffect(() => {
+    guardarProductos(productosTienda);
+  }, [productosTienda]);
+
+  // Carrito.
   const [carrito, setCarrito] = useState(() => {
-    const carritoGuardado = localStorage.getItem("carrito");
+    const carritoGuardado =
+      localStorage.getItem("carrito");
 
     return carritoGuardado
       ? JSON.parse(carritoGuardado)
@@ -44,30 +64,34 @@ function App() {
     );
   }, [carrito]);
 
+  // Agregar producto al carrito.
   const agregarAlCarrito = (producto) => {
     const productoExiste = carrito.find(
       (item) => item.id === producto.id
     );
 
     if (productoExiste) {
-
-      if (productoExiste.cantidad >= producto.stock) {
+      if (
+        productoExiste.cantidad >=
+        producto.stock
+      ) {
         return;
       }
 
-      const carritoActualizado = carrito.map((item) =>
-        item.id === producto.id
-          ? {
-              ...item,
-              cantidad: item.cantidad + 1
-            }
-          : item
-      );
+      const carritoActualizado =
+        carrito.map((item) =>
+          item.id === producto.id
+            ? {
+                ...item,
+                cantidad:
+                  item.cantidad + 1
+              }
+            : item
+        );
 
       setCarrito(carritoActualizado);
 
     } else {
-
       if (producto.stock <= 0) {
         return;
       }
@@ -82,86 +106,116 @@ function App() {
     }
   };
 
+  // Eliminar producto del carrito.
   const eliminarDelCarrito = (id) => {
-    const nuevoCarrito = carrito.filter(
-      (producto) => producto.id !== id
-    );
+    const nuevoCarrito =
+      carrito.filter(
+        (producto) =>
+          producto.id !== id
+      );
 
     setCarrito(nuevoCarrito);
   };
 
+  // Aumentar cantidad.
   const aumentarCantidad = (id) => {
-    const carritoActualizado = carrito.map((producto) =>
-      producto.id === id &&
-      producto.cantidad < producto.stock
-        ? {
-            ...producto,
-            cantidad: producto.cantidad + 1
-          }
-        : producto
-    );
+    const carritoActualizado =
+      carrito.map((producto) =>
+        producto.id === id &&
+        producto.cantidad < producto.stock
+          ? {
+              ...producto,
+              cantidad:
+                producto.cantidad + 1
+            }
+          : producto
+      );
 
     setCarrito(carritoActualizado);
   };
 
+  // Disminuir cantidad.
   const disminuirCantidad = (id) => {
-    const carritoActualizado = carrito.map((producto) =>
-      producto.id === id &&
-      producto.cantidad > 1
-        ? {
-            ...producto,
-            cantidad: producto.cantidad - 1
-          }
-        : producto
-    );
+    const carritoActualizado =
+      carrito.map((producto) =>
+        producto.id === id &&
+        producto.cantidad > 1
+          ? {
+              ...producto,
+              cantidad:
+                producto.cantidad - 1
+            }
+          : producto
+      );
 
     setCarrito(carritoActualizado);
   };
 
+  // Vaciar carrito.
   const vaciarCarrito = () => {
     setCarrito([]);
   };
 
-  const descontarStockCompra = (productosComprados) => {
-    setProductosTienda((actuales) => actuales.map((producto) => {
-      const comprado = productosComprados.find((item) => item.id === producto.id);
-      return comprado
-        ? { ...producto, stock: Math.max(0, producto.stock - comprado.cantidad) }
-        : producto;
-    }));
+  // Descontar stock después de una compra.
+  const descontarStockCompra = (
+    productosComprados
+  ) => {
+    setProductosTienda((actuales) =>
+      actuales.map((producto) => {
+        const comprado =
+          productosComprados.find(
+            (item) =>
+              item.id === producto.id
+          );
+
+        return comprado
+          ? {
+              ...producto,
+
+              stock: Math.max(
+                0,
+                producto.stock -
+                  comprado.cantidad
+              )
+            }
+          : producto;
+      })
+    );
   };
 
-  const cantidadTotal = carrito.reduce((total, producto) => {
-    return total + producto.cantidad;
-  }, 0);
+  // Cantidad total del carrito.
+  const cantidadTotal =
+    carrito.reduce(
+      (total, producto) =>
+        total + producto.cantidad,
+      0
+    );
 
-  const totalCarrito = carrito.reduce((total, producto) => {
-    return total + obtenerPrecioFinal(producto) * producto.cantidad;
-  }, 0);
+  // Precio total respetando ofertas.
+  const totalCarrito =
+    carrito.reduce(
+      (total, producto) =>
+        total +
+        obtenerPrecioFinal(producto) *
+          producto.cantidad,
+      0
+    );
 
   return (
-    <BrowserRouter>
-      <Navbar
-        cantidadCarrito={cantidadTotal}
-      />
+    <>
+      {/* Navbar de la tienda.
+          No se muestra dentro del administrador. */}
+      {!esPaginaAdmin && (
+        <Navbar
+          cantidadCarrito={cantidadTotal}
+        />
+      )}
 
       <Routes>
+
         <Route
           path="/"
           element={<Home />}
-
-        
-        />
-
-        <Route
-          path="/productos/:id"
-          element={
-            <DetalleProducto
-              productos={productosTienda}
-              carrito={carrito}
-              agregarAlCarrito={agregarAlCarrito}
-            />
-          }
         />
 
         <Route
@@ -174,7 +228,22 @@ function App() {
           element={
             <Productos
               productos={productosTienda}
-              agregarAlCarrito={agregarAlCarrito}
+              agregarAlCarrito={
+                agregarAlCarrito
+              }
+            />
+          }
+        />
+
+        <Route
+          path="/productos/:id"
+          element={
+            <DetalleProducto
+              productos={productosTienda}
+              carrito={carrito}
+              agregarAlCarrito={
+                agregarAlCarrito
+              }
             />
           }
         />
@@ -184,12 +253,24 @@ function App() {
           element={
             <Carrito
               carrito={carrito}
-              eliminarDelCarrito={eliminarDelCarrito}
-              aumentarCantidad={aumentarCantidad}
-              disminuirCantidad={disminuirCantidad}
-              vaciarCarrito={vaciarCarrito}
-              cantidadTotal={cantidadTotal}
-              totalCarrito={totalCarrito}
+              eliminarDelCarrito={
+                eliminarDelCarrito
+              }
+              aumentarCantidad={
+                aumentarCantidad
+              }
+              disminuirCantidad={
+                disminuirCantidad
+              }
+              vaciarCarrito={
+                vaciarCarrito
+              }
+              cantidadTotal={
+                cantidadTotal
+              }
+              totalCarrito={
+                totalCarrito
+              }
             />
           }
         />
@@ -199,48 +280,94 @@ function App() {
           element={
             <Checkout
               carrito={carrito}
-              totalCarrito={totalCarrito}
-              vaciarCarrito={vaciarCarrito}
-              descontarStockCompra={descontarStockCompra}
+              totalCarrito={
+                totalCarrito
+              }
+              vaciarCarrito={
+                vaciarCarrito
+              }
+              descontarStockCompra={
+                descontarStockCompra
+              }
             />
           }
         />
 
         <Route
           path="/compra-exitosa"
-          element={<CompraExitosa />}
+          element={
+            <CompraExitosa />
+          }
         />
 
         <Route
           path="/pago-rechazado"
-          element={<PagoRechazado />}
+          element={
+            <PagoRechazado />
+          }
         />
 
         <Route
           path="/SobreNosotros"
-          element={<SobreNosotros />}
+          element={
+            <SobreNosotros />
+          }
         />
+
         <Route
           path="/contacto"
-          element={<Contacto />}
+          element={
+            <Contacto />
+          }
         />
+
         <Route
           path="/login"
-          element={<Login />}
+          element={
+            <Login />
+          }
         />
+
         <Route
           path="/registro"
-          element={<Registro />}
+          element={
+            <Registro />
+          }
         />
+
         <Route
           path="/cuenta"
-          element={<Cuenta />}
+          element={
+            <Cuenta />
+          }
         />
+
+        {/* ADMIN */}
         <Route
           path="/admin/*"
-          element={<AdminRoute><Admin productos={productosTienda} setProductos={setProductosTienda} /></AdminRoute>}
+          element={
+            <AdminRoute>
+              <Admin
+                productos={
+                  productosTienda
+                }
+                setProductos={
+                  setProductosTienda
+                }
+              />
+            </AdminRoute>
+          }
         />
+
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
