@@ -173,6 +173,15 @@ describe("Página Checkout", () => {
     );
 
     fireEvent.change(
+      screen.getByLabelText("TIPO DE ENTREGA"),
+      {
+        target: {
+          value: "domicilio"
+        }
+      }
+    );
+
+    fireEvent.change(
       screen.getByLabelText("MÉTODO DE PAGO"),
       {
         target: {
@@ -194,7 +203,17 @@ describe("Página Checkout", () => {
     );
 
     expect(ordenGuardada).toBeTruthy();
+
     expect(ordenGuardada.estado).toBe("PAGADA");
+    
+    expect(
+      ordenGuardada.tipoEntrega
+    ).toBe("domicilio");
+
+    expect(
+      ordenGuardada.envio
+    ).toBe(3990);
+
     expect(ordenGuardada.total).toBe(23980);
 
     expect(

@@ -126,7 +126,7 @@ function DetalleProducto({
                   PRECIO
                 </span>
 
-                {tieneOferta(producto) && <span className="badge text-bg-danger ms-2">-{calcularDescuento(producto)}% OFERTA WEB</span>}
+                {tieneOferta(producto) && <span className="badge text-bg-danger ms-2">-{calcularDescuento(producto)}% OFERTA</span>}
                 <strong className={tieneOferta(producto) ? "text-danger d-block" : "d-block"}>
                   {tieneOferta(producto) && <del className="text-secondary me-2">${producto.precio.toLocaleString("es-CL")}</del>}
                   ${obtenerPrecioFinal(producto).toLocaleString("es-CL")}

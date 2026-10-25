@@ -2,15 +2,24 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
+import { tieneOferta } from "../utils/precios";
+
 import "../styles/productos.css";
 
-function Productos({ productos, agregarAlCarrito }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+function Productos({
+  productos,
+  agregarAlCarrito
+}) {
+  const [
+    searchParams,
+    setSearchParams
+  ] = useSearchParams();
 
   const categoriaUrl =
     searchParams.get("categoria") || "todos";
 
-  const [busqueda, setBusqueda] = useState("");
+  const [busqueda, setBusqueda] =
+    useState("");
 
   const categoriasValidas = [
     "todos",
@@ -26,36 +35,60 @@ function Productos({ productos, agregarAlCarrito }) {
       ? categoriaUrl
       : "todos";
 
-  const normalizarTexto = (texto) => {
+  const normalizarTexto = (texto = "") => {
     return texto
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
   };
 
-  const productosFiltrados = productos.filter((producto) => {
-    const coincideCategoria =
-      categoriaActual === "todos" ||
-      producto.categoria === categoriaActual;
+  const productosFiltrados =
+    productos.filter((producto) => {
 
-    const textoProducto = normalizarTexto(
-      `${producto.nombre} ${producto.categoriaLabel} ${producto.descripcion}`
-    );
+      let coincideCategoria = false;
 
-    const coincideBusqueda =
-      textoProducto.includes(
-        normalizarTexto(busqueda)
+      // TODOS
+      if (categoriaActual === "todos") {
+        coincideCategoria = true;
+      }
+
+      // OFERTAS
+      else if (categoriaActual === "ofertas") {
+        coincideCategoria =
+          tieneOferta(producto);
+      }
+
+      // CATEGORÍAS NORMALES
+      else {
+        coincideCategoria =
+          producto.categoria ===
+          categoriaActual;
+      }
+
+      const textoProducto =
+        normalizarTexto(
+          `${producto.nombre || ""} ${
+            producto.categoriaLabel || ""
+          } ${producto.descripcion || ""}`
+        );
+
+      const coincideBusqueda =
+        textoProducto.includes(
+          normalizarTexto(busqueda)
+        );
+
+      return (
+        coincideCategoria &&
+        coincideBusqueda
       );
-
-    return coincideCategoria && coincideBusqueda;
-  });
+    });
 
   const cambiarCategoria = (categoria) => {
     if (categoria === "todos") {
       setSearchParams({});
     } else {
       setSearchParams({
-        categoria: categoria
+        categoria
       });
     }
   };
@@ -79,8 +112,7 @@ function Productos({ productos, agregarAlCarrito }) {
             <p className="products-summary">
               <span>
                 {productosFiltrados.length}
-              </span>
-              {" "}
+              </span>{" "}
               PIEZAS DISPONIBLES
             </p>
 
@@ -105,7 +137,9 @@ function Productos({ productos, agregarAlCarrito }) {
               placeholder="Nombre o categoría..."
               value={busqueda}
               onChange={(event) =>
-                setBusqueda(event.target.value)
+                setBusqueda(
+                  event.target.value
+                )
               }
             />
 
@@ -120,22 +154,24 @@ function Productos({ productos, agregarAlCarrito }) {
               ["accesorios", "ACCESORIOS"],
               ["outerwear", "OUTERWEAR"],
               ["ofertas", "OFERTAS"]
-            ].map(([valor, texto]) => (
-              <button
-                key={valor}
-                type="button"
-                className={
-                  categoriaActual === valor
-                    ? "filter-button active"
-                    : "filter-button"
-                }
-                onClick={() =>
-                  cambiarCategoria(valor)
-                }
-              >
-                {texto}
-              </button>
-            ))}
+            ].map(
+              ([valor, texto]) => (
+                <button
+                  key={valor}
+                  type="button"
+                  className={
+                    categoriaActual === valor
+                      ? "filter-button active"
+                      : "filter-button"
+                  }
+                  onClick={() =>
+                    cambiarCategoria(valor)
+                  }
+                >
+                  {texto}
+                </button>
+              )
+            )}
 
           </div>
 
@@ -150,14 +186,21 @@ function Productos({ productos, agregarAlCarrito }) {
           ) : (
             <div className="products-grid row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
 
-              {productosFiltrados.map((producto) => (
-                <div className="col" key={producto.id}>
-                  <ProductCard
-                    producto={producto}
-                    agregarAlCarrito={agregarAlCarrito}
-                  />
-                </div>
-              ))}
+              {productosFiltrados.map(
+                (producto) => (
+                  <div
+                    className="col"
+                    key={producto.id}
+                  >
+                    <ProductCard
+                      producto={producto}
+                      agregarAlCarrito={
+                        agregarAlCarrito
+                      }
+                    />
+                  </div>
+                )
+              )}
 
             </div>
           )}
@@ -167,6 +210,7 @@ function Productos({ productos, agregarAlCarrito }) {
       </main>
 
       <footer className="products-footer">
+
         <span>
           (OFF)LINE ARCHIVE
         </span>
@@ -174,6 +218,7 @@ function Productos({ productos, agregarAlCarrito }) {
         <span>
           VER_2003 | GRUPO 07
         </span>
+
       </footer>
     </>
   );
