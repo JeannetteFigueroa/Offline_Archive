@@ -22,28 +22,47 @@ function Checkout({
 }) {
   const navigate = useNavigate();
 
-  // El envío tendrá un valor fijo para esta simulación.
-  const costoEnvio = 3990;
-  const totalCompra = totalCarrito + costoEnvio;
-
   // Datos ingresados por el cliente.
   const [formulario, setFormulario] = useState(() => {
     const account = getAccount();
     const session = getStoredSession();
-    const usuarioActivo = account && session && account.email === session.email ? account : null;
+
+    const usuarioActivo =
+      account &&
+      session &&
+      account.email === session.email
+        ? account
+        : null;
+
     return {
-      nombre: usuarioActivo ? `${usuarioActivo.name || ""} ${usuarioActivo.lastName || ""}`.trim() : "",
+      nombre: usuarioActivo
+        ? `${usuarioActivo.name || ""} ${usuarioActivo.lastName || ""}`.trim()
+        : "",
+
       correo: usuarioActivo?.email || "",
       telefono: usuarioActivo?.phone || "",
       region: usuarioActivo?.region || "",
       comuna: usuarioActivo?.commune || "",
       direccion: usuarioActivo?.address || "",
+
+      // Nueva opción de entrega.
+      tipoEntrega: "",
+
       metodoPago: ""
     };
   });
 
-  // Aquí se guardan los errores de cada campo.
+  // Errores del formulario.
   const [errores, setErrores] = useState({});
+
+  // El envío depende de la opción seleccionada.
+  const costoEnvio =
+    formulario.tipoEntrega === "domicilio"
+      ? 3990
+      : 0;
+
+  const totalCompra =
+    totalCarrito + costoEnvio;
 
   // Comunas correspondientes a la región seleccionada.
   const comunasDisponibles =
@@ -54,15 +73,18 @@ function Checkout({
 
     setFormulario((datosAnteriores) => ({
       ...datosAnteriores,
+
       [name]: value,
 
-      // Si cambia la región, se limpia la comuna.
+      // Si cambia la región,
+      // se limpia la comuna seleccionada.
       ...(name === "region"
         ? { comuna: "" }
         : {})
     }));
 
-    // Limpia el error del campo cuando el usuario escribe.
+    // Limpia el error del campo
+    // cuando el usuario lo modifica.
     setErrores((erroresAnteriores) => ({
       ...erroresAnteriores,
       [name]: ""
@@ -72,12 +94,19 @@ function Checkout({
   const validarFormulario = () => {
     const nuevosErrores = {};
 
-    const nombre = formulario.nombre.trim();
-    const correo = formulario.correo.trim();
-    const telefono = formulario.telefono
-      .replace(/\s/g, "");
-    const direccion = formulario.direccion.trim();
+    const nombre =
+      formulario.nombre.trim();
 
+    const correo =
+      formulario.correo.trim();
+
+    const telefono =
+      formulario.telefono.replace(/\s/g, "");
+
+    const direccion =
+      formulario.direccion.trim();
+
+    // Validación nombre.
     if (!nombre) {
       nuevosErrores.nombre =
         "Ingresa el nombre del comprador.";
@@ -86,6 +115,7 @@ function Checkout({
         "El nombre no puede superar los 100 caracteres.";
     }
 
+    // Validación correo.
     if (!correo) {
       nuevosErrores.correo =
         "Ingresa un correo electrónico.";
@@ -94,6 +124,7 @@ function Checkout({
         "Utiliza un correo @duoc.cl, @profesor.duoc.cl o @gmail.com.";
     }
 
+    // Validación teléfono.
     if (!telefono) {
       nuevosErrores.telefono =
         "Ingresa un número de teléfono.";
@@ -102,16 +133,19 @@ function Checkout({
         "Ingresa 9 dígitos. Ejemplo: 912345678.";
     }
 
+    // Validación región.
     if (!formulario.region) {
       nuevosErrores.region =
         "Selecciona una región.";
     }
 
+    // Validación comuna.
     if (!formulario.comuna) {
       nuevosErrores.comuna =
         "Selecciona una comuna.";
     }
 
+    // Validación dirección.
     if (!direccion) {
       nuevosErrores.direccion =
         "Ingresa la dirección de entrega.";
@@ -120,6 +154,13 @@ function Checkout({
         "La dirección no puede superar los 300 caracteres.";
     }
 
+    // Validación tipo de entrega.
+    if (!formulario.tipoEntrega) {
+      nuevosErrores.tipoEntrega =
+        "Selecciona una opción de entrega.";
+    }
+
+    // Validación método de pago.
     if (!formulario.metodoPago) {
       nuevosErrores.metodoPago =
         "Selecciona un método de pago.";
@@ -131,81 +172,125 @@ function Checkout({
   const finalizarCompra = (event) => {
     event.preventDefault();
 
-    const nuevosErrores = validarFormulario();
+    const nuevosErrores =
+      validarFormulario();
 
-    if (Object.keys(nuevosErrores).length > 0) {
+    if (
+      Object.keys(nuevosErrores).length > 0
+    ) {
       setErrores(nuevosErrores);
       return;
     }
 
-    // orden sencilla para simular una compra
+    // Orden sencilla para simular una compra.
     const nuevaOrden = {
       id: `OFF-${Date.now()}`,
-      fecha: new Date().toISOString(),
-      cuentaEmail: getStoredSession()?.email || null,
+
+      fecha:
+        new Date().toISOString(),
+
+      cuentaEmail:
+        getStoredSession()?.email || null,
+
       cliente: {
-        nombre: formulario.nombre.trim(),
-        correo: formulario.correo
-          .trim()
-          .toLowerCase(),
-        telefono: formulario.telefono
-          .replace(/\s/g, ""),
-        region: formulario.region,
-        comuna: formulario.comuna,
-        direccion: formulario.direccion.trim()
+        nombre:
+          formulario.nombre.trim(),
+
+        correo:
+          formulario.correo
+            .trim()
+            .toLowerCase(),
+
+        telefono:
+          formulario.telefono
+            .replace(/\s/g, ""),
+
+        region:
+          formulario.region,
+
+        comuna:
+          formulario.comuna,
+
+        direccion:
+          formulario.direccion.trim()
       },
-      metodoPago: formulario.metodoPago,
-      productos: carrito,
-      subtotal: totalCarrito,
-      envio: costoEnvio,
-      total: totalCompra,
-      estado: "PAGADA"
+
+      metodoPago:
+        formulario.metodoPago,
+
+      // Guarda la opción escogida.
+      tipoEntrega:
+        formulario.tipoEntrega,
+
+      productos:
+        carrito,
+
+      subtotal:
+        totalCarrito,
+
+      envio:
+        costoEnvio,
+
+      total:
+        totalCompra,
+
+      estado:
+        "PAGADA"
     };
 
-    // aqui se recuperan las ordenes anteriores.
+    // Recupera las órdenes anteriores.
     const ordenesGuardadas = JSON.parse(
-      localStorage.getItem("offlineArchiveOrders") ||
-        "[]"
+      localStorage.getItem(
+        "offlineArchiveOrders"
+      ) || "[]"
     );
 
-    // aqui se guarda la nueva orden en el historial.
+    // Guarda la nueva orden.
     localStorage.setItem(
       "offlineArchiveOrders",
+
       JSON.stringify([
         ...ordenesGuardadas,
         nuevaOrden
       ])
     );
 
-    // se guarda la última orden para mostrarla
-    // en la pagina de compra exitosa
+    // Guarda la última orden
+    // para mostrarla en compra exitosa.
     localStorage.setItem(
       "offlineArchiveLastOrder",
       JSON.stringify(nuevaOrden)
     );
 
-    // Actualiza el inventario con las unidades vendidas.
+    // Actualiza el inventario
+    // con las unidades vendidas.
     if (descontarStockCompra) {
       descontarStockCompra(carrito);
     }
 
-    // Después de comprar se vacía el carrito.
+    // Vacía el carrito.
     vaciarCarrito();
 
     navigate("/compra-exitosa");
   };
 
-  // Evita mostrar el formulario si no hay productos
+  // Evita mostrar el formulario
+  // cuando no existen productos.
   if (carrito.length === 0) {
     return (
       <main className="checkout-page">
         <section className="checkout-empty">
-          <p>ORDER_SYSTEM / EMPTY</p>
+          <p>
+            ORDER_SYSTEM / EMPTY
+          </p>
 
-          <h1>NO HAY PRODUCTOS.</h1>
+          <h1>
+            NO HAY PRODUCTOS.
+          </h1>
 
           <span>
-            Agrega productos antes de continuar con la compra.
+            Agrega productos antes de continuar
+            con la compra.
           </span>
 
           <Link to="/productos">
@@ -218,21 +303,35 @@ function Checkout({
 
   return (
     <main className="checkout-page">
-      <header className="checkout-header">
-        <p>SECURE_ORDER_SYSTEM / 2003</p>
 
-        <h1>FINALIZAR COMPRA.</h1>
+      <header className="checkout-header">
+        <p>
+          SECURE_ORDER_SYSTEM / 2003
+        </p>
+
+        <h1>
+          FINALIZAR COMPRA.
+        </h1>
 
         <span>
-          Completa tus datos para realizar la compra simulada.
+          Completa tus datos para realizar
+          la compra simulada.
         </span>
       </header>
 
       <div className="checkout-layout">
+
+        {/* FORMULARIO */}
         <section className="checkout-form-card">
+
           <div className="checkout-card-header">
-            <span>DELIVERY_DATA / 001</span>
-            <span>STATUS: ACTIVE</span>
+            <span>
+              DELIVERY_DATA / 001
+            </span>
+
+            <span>
+              STATUS: ACTIVE
+            </span>
           </div>
 
           <form
@@ -240,8 +339,12 @@ function Checkout({
             noValidate
             onSubmit={finalizarCompra}
           >
+
             <div className="checkout-grid">
+
+              {/* NOMBRE */}
               <div className="checkout-field checkout-field-full">
+
                 <label htmlFor="checkoutName">
                   NOMBRE COMPLETO
                 </label>
@@ -259,9 +362,12 @@ function Checkout({
                 <small className="checkout-error">
                   {errores.nombre}
                 </small>
+
               </div>
 
+              {/* CORREO */}
               <div className="checkout-field">
+
                 <label htmlFor="checkoutEmail">
                   CORREO
                 </label>
@@ -280,9 +386,12 @@ function Checkout({
                 <small className="checkout-error">
                   {errores.correo}
                 </small>
+
               </div>
 
+              {/* TELÉFONO */}
               <div className="checkout-field">
+
                 <label htmlFor="checkoutPhone">
                   TELÉFONO
                 </label>
@@ -301,9 +410,12 @@ function Checkout({
                 <small className="checkout-error">
                   {errores.telefono}
                 </small>
+
               </div>
 
+              {/* REGIÓN */}
               <div className="checkout-field">
+
                 <label htmlFor="checkoutRegion">
                   REGIÓN
                 </label>
@@ -314,6 +426,7 @@ function Checkout({
                   value={formulario.region}
                   onChange={manejarCambio}
                 >
+
                   <option value="">
                     Selecciona una región
                   </option>
@@ -328,14 +441,18 @@ function Checkout({
                       </option>
                     )
                   )}
+
                 </select>
 
                 <small className="checkout-error">
                   {errores.region}
                 </small>
+
               </div>
 
+              {/* COMUNA */}
               <div className="checkout-field">
+
                 <label htmlFor="checkoutCommune">
                   COMUNA
                 </label>
@@ -347,26 +464,33 @@ function Checkout({
                   onChange={manejarCambio}
                   disabled={!formulario.region}
                 >
+
                   <option value="">
                     Selecciona una comuna
                   </option>
 
-                  {comunasDisponibles.map((comuna) => (
-                    <option
-                      key={comuna}
-                      value={comuna}
-                    >
-                      {comuna}
-                    </option>
-                  ))}
+                  {comunasDisponibles.map(
+                    (comuna) => (
+                      <option
+                        key={comuna}
+                        value={comuna}
+                      >
+                        {comuna}
+                      </option>
+                    )
+                  )}
+
                 </select>
 
                 <small className="checkout-error">
                   {errores.comuna}
                 </small>
+
               </div>
 
+              {/* DIRECCIÓN */}
               <div className="checkout-field checkout-field-full">
+
                 <label htmlFor="checkoutAddress">
                   DIRECCIÓN
                 </label>
@@ -385,9 +509,46 @@ function Checkout({
                 <small className="checkout-error">
                   {errores.direccion}
                 </small>
+
               </div>
 
+              {/* TIPO DE ENTREGA */}
               <div className="checkout-field checkout-field-full">
+
+                <label htmlFor="checkoutDelivery">
+                  TIPO DE ENTREGA
+                </label>
+
+                <select
+                  id="checkoutDelivery"
+                  name="tipoEntrega"
+                  value={formulario.tipoEntrega}
+                  onChange={manejarCambio}
+                >
+
+                  <option value="">
+                    Selecciona una opción
+                  </option>
+
+                  <option value="domicilio">
+                    Despacho a domicilio — $3.990
+                  </option>
+
+                  <option value="retiro">
+                    Retiro en tienda — Gratis
+                  </option>
+
+                </select>
+
+                <small className="checkout-error">
+                  {errores.tipoEntrega}
+                </small>
+
+              </div>
+
+              {/* MÉTODO DE PAGO */}
+              <div className="checkout-field checkout-field-full">
+
                 <label htmlFor="checkoutPayment">
                   MÉTODO DE PAGO
                 </label>
@@ -398,6 +559,7 @@ function Checkout({
                   value={formulario.metodoPago}
                   onChange={manejarCambio}
                 >
+
                   <option value="">
                     Selecciona un método
                   </option>
@@ -413,12 +575,15 @@ function Checkout({
                   <option value="Transferencia">
                     Transferencia bancaria
                   </option>
+
                 </select>
 
                 <small className="checkout-error">
                   {errores.metodoPago}
                 </small>
+
               </div>
+
             </div>
 
             <button
@@ -445,60 +610,109 @@ function Checkout({
             >
               ← VOLVER AL CARRITO
             </Link>
+
           </form>
+
         </section>
 
-        <aside className="checkout-summary">
-          <p className="checkout-summary-code">
-            ORDER_SUMMARY / 002
-          </p>
+        {/* RESUMEN DE COMPRA */}
+        <section className="checkout-form-card">
 
-          <h2>RESUMEN</h2>
+          <div className="checkout-card-header">
+            <span>
+              ORDER_SUMMARY / 002
+            </span>
 
-          <div className="checkout-summary-list">
+            <span>
+              {carrito.length} ITEM(S)
+            </span>
+          </div>
+
+          <div className="p-3">
+
             {carrito.map((producto) => (
               <div
-                className="checkout-summary-product"
                 key={producto.id}
+                className="d-flex justify-content-between gap-3 border-bottom py-3"
               >
-                <span>
-                  {producto.nombre} x
-                  {producto.cantidad}
-                </span>
+
+                <div>
+                  <strong>
+                    {producto.nombre}
+                  </strong>
+
+                  <div>
+                    Cantidad: {producto.cantidad}
+                  </div>
+                </div>
 
                 <strong>
                   $
-                  {(obtenerPrecioFinal(producto) * producto.cantidad).toLocaleString("es-CL")}
+                  {(
+                    obtenerPrecioFinal(producto) *
+                    producto.cantidad
+                  ).toLocaleString("es-CL")}
                 </strong>
+
               </div>
             ))}
+
+            <div className="d-flex justify-content-between mt-4">
+              <span>
+                SUBTOTAL
+              </span>
+
+              <strong>
+                $
+                {totalCarrito.toLocaleString("es-CL")}
+              </strong>
+            </div>
+
+            <div className="d-flex justify-content-between mt-2">
+              <span>
+                ENTREGA
+              </span>
+
+              <strong>
+                {formulario.tipoEntrega === "retiro"
+                  ? "GRATIS"
+                  : `$${costoEnvio.toLocaleString("es-CL")}`}
+              </strong>
+            </div>
+
+            {formulario.tipoEntrega && (
+              <div className="d-flex justify-content-between mt-2">
+                <span>
+                  MODALIDAD
+                </span>
+
+                <strong>
+                  {formulario.tipoEntrega === "domicilio"
+                    ? "DESPACHO A DOMICILIO"
+                    : "RETIRO EN TIENDA"}
+                </strong>
+              </div>
+            )}
+
+            <hr />
+
+            <div className="d-flex justify-content-between align-items-center">
+              <strong>
+                TOTAL
+              </strong>
+
+              <strong>
+                $
+                {totalCompra.toLocaleString("es-CL")}
+              </strong>
+            </div>
+
           </div>
 
-          <div className="checkout-row">
-            <span>Subtotal</span>
+        </section>
 
-            <strong>
-              ${totalCarrito.toLocaleString("es-CL")}
-            </strong>
-          </div>
-
-          <div className="checkout-row">
-            <span>Envío</span>
-
-            <strong>
-              ${costoEnvio.toLocaleString("es-CL")}
-            </strong>
-          </div>
-
-          <div className="checkout-row checkout-total">
-            <span>TOTAL</span>
-
-            <strong>
-              ${totalCompra.toLocaleString("es-CL")}
-            </strong>
-          </div>
-        </aside>
       </div>
+
     </main>
   );
 }
