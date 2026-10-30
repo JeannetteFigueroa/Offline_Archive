@@ -2,13 +2,13 @@ import { isAllowedEmail, ensureDemoAdminAccount, ADMIN_ACCOUNT_KEY, DEMO_ADMIN_E
 
 describe("Validación de correos", () => {
     it("deberia aceptar los dominios permitidos", () => {
-        expect(isAllowedEmail("alumno@duoc.cl")).toBeTrue();
-        expect(isAllowedEmail("docente@profesor.duoc.cl")).toBeTrue();
-        expect(isAllowedEmail("usuario@gmail.com")).toBeTrue();
+        expect(isAllowedEmail("alumno@duoc.cl")).toBe(true);
+        expect(isAllowedEmail("docente@profesor.duoc.cl")).toBe(true);
+        expect(isAllowedEmail("usuario@gmail.com")).toBe(true);
     });
 
     it("deberia rechazar un dominio no permitido", () => {
-        expect(isAllowedEmail("usuario@hotmail.com")).toBeFalse();
+        expect(isAllowedEmail("usuario@hotmail.com")).toBe(false);
     });
 });
 

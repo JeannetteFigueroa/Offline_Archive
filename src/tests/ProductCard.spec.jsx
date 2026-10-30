@@ -3,6 +3,8 @@ import { MemoryRouter } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard.jsx";
 
+import { vi } from 'vitest'
+
 // simulacion de un producto para las pruebas
 const productoPrueba = {
   id: 1,
@@ -23,7 +25,7 @@ afterEach(() => {
 
 describe("Componente ProductCard", () => {
   it("debería mostrar la información recibida mediante props", () => {
-    const agregarAlCarrito = jasmine.createSpy("agregarAlCarrito");
+    const agregarAlCarrito = vi.fn();
 
     render(
       <MemoryRouter>
@@ -48,7 +50,7 @@ describe("Componente ProductCard", () => {
   });
 
   it("debería crear un enlace hacia el detalle del producto", () => {
-    const agregarAlCarrito = jasmine.createSpy("agregarAlCarrito");
+    const agregarAlCarrito = vi.fn();
 
     render(
       <MemoryRouter>
@@ -69,7 +71,7 @@ describe("Componente ProductCard", () => {
   });
 
   it("debería ejecutar agregarAlCarrito al presionar AGREGAR", () => {
-    const agregarAlCarrito = jasmine.createSpy("agregarAlCarrito");
+    const agregarAlCarrito = vi.fn();
 
     render(
       <MemoryRouter>

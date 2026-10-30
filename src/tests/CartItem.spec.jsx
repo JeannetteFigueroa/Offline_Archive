@@ -2,6 +2,8 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 
 import CartItem from "../components/CartItem.jsx";
 
+import { vi } from 'vitest'
+
 // simulacion con 2 unidades para las pruebas
 const productoPrueba = {
   id: 3,
@@ -59,7 +61,7 @@ describe("Componente CartItem", () => {
   });
 
   it("debería solicitar aumentar la cantidad", () => {
-    const aumentarCantidad = jasmine.createSpy("aumentarCantidad");
+    const aumentarCantidad = vi.fn();
 
     render(
       <CartItem
@@ -80,7 +82,7 @@ describe("Componente CartItem", () => {
   });
 
   it("debería solicitar disminuir la cantidad", () => {
-    const disminuirCantidad = jasmine.createSpy("disminuirCantidad");
+    const disminuirCantidad = vi.fn();
 
     render(
       <CartItem
@@ -101,7 +103,7 @@ describe("Componente CartItem", () => {
   });
 
   it("debería enviar el identificador al eliminar el producto", () => {
-    const eliminarDelCarrito = jasmine.createSpy("eliminarDelCarrito");
+    const eliminarDelCarrito = vi.fn();
 
     render(
       <CartItem
