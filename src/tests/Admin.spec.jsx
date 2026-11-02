@@ -17,6 +17,7 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Admin from "../pages/Admin.jsx";
+import { vi } from 'vitest'
 
 // ─── Datos de prueba ─────────────────────────────────────────────────────────
 const productosPrueba = [
@@ -190,7 +191,7 @@ describe("Panel de Administración — Estado y Eventos", () => {
   });
 
   it("llama a setProductos al alternar visibilidad de un producto", () => {
-    const setProductosMock = jasmine.createSpy("setProductos");
+    const setProductosMock = vi.fn();
 
     render(
       <MemoryRouter initialEntries={["/admin/inventario"]}>

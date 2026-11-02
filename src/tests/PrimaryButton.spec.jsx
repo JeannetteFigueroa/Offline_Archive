@@ -1,6 +1,8 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import PrimaryButton from "../components/PrimaryButton.jsx";
 
+import { vi } from 'vitest'
+
 afterEach(() => {
   cleanup();
 });
@@ -17,7 +19,7 @@ describe("Componente PrimaryButton (Pruebas de Props y Eventos)", () => {
   });
 
   it("recibe la función de evento onClick y la ejecuta al hacer clic", () => {
-    const handleClick = jasmine.createSpy("handleClick");
+    const handleClick = vi.fn();
 
     render(
       <PrimaryButton onClick={handleClick}>

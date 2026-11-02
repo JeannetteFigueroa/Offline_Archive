@@ -78,12 +78,12 @@ describe("Gestión de categorías", () => {
     const actualizado = crearCategoria(base, { id: "calzado", label: "Calzado" });
 
     // La categoría debe estar en el array retornado
-    expect(actualizado.some((c) => c.id === "calzado")).toBeTrue();
+    expect(actualizado.some((c) => c.id === "calzado")).toBe(true);
 
     // Y también persisted en localStorage
     const guardado = JSON.parse(localStorage.getItem(CATEGORIAS_KEY));
-    expect(Array.isArray(guardado)).toBeTrue();
-    expect(guardado.some((c) => c.id === "calzado")).toBeTrue();
+    expect(Array.isArray(guardado)).toBe(true);
+    expect(guardado.some((c) => c.id === "calzado")).toBe(true);
   });
 
   it("no crea una categoría duplicada (misma id)", () => {
@@ -97,7 +97,7 @@ describe("Gestión de categorías", () => {
     const base = leerCategorias();
     const conNueva = crearCategoria(base, { id: "joyeria", label: "Joyería" });
     const sinJoyeria = eliminarCategoria(conNueva, "joyeria");
-    expect(sinJoyeria.some((c) => c.id === "joyeria")).toBeFalse();
+    expect(sinJoyeria.some((c) => c.id === "joyeria")).toBe(false);
   });
 });
 

@@ -13,6 +13,8 @@ import {
 
 import Checkout from "../pages/Checkout.jsx";
 
+import { vi } from 'vitest'
+
 // Producto utilizado solamente durante las pruebas.
 const productoPrueba = {
   id: 1,
@@ -90,9 +92,7 @@ describe("Página Checkout", () => {
   });
 
   it("debería guardar la orden y vaciar el carrito", () => {
-    const vaciarCarrito = jasmine.createSpy(
-      "vaciarCarrito"
-    );
+    const vaciarCarrito = vi.fn();
 
     render(
       <MemoryRouter initialEntries={["/checkout"]}>
@@ -226,9 +226,7 @@ describe("Página Checkout", () => {
   });
 
   it("debería conservar el carrito al simular un pago rechazado", () => {
-    const vaciarCarrito = jasmine.createSpy(
-      "vaciarCarrito"
-    );
+    const vaciarCarrito = vi.fn();
 
     render(
       <MemoryRouter initialEntries={["/checkout"]}>
