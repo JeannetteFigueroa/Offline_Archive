@@ -10,6 +10,10 @@ export default defineConfig({
 
     coverage: {
       provider: 'v8',
+      exclude: [
+        'src/styles/**',
+        'src/**/*.css',
+      ],
     },
   },
 })
