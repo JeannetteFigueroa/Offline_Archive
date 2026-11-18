@@ -7,21 +7,37 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+dist-ssr/
+frontend/dist-ssr/
+coverage/
+frontend/coverage/
 *.local
+
+# Java / Backend
+backend/target/
+target/
+*.class
+*.jar
+*.war
+*.ear
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.DS_Store
 
-# Reportes generados por Karma
-coverage/
+# Environment files
+.env
+.env.local
+.env.*.local
