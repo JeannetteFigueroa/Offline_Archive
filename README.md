@@ -157,3 +157,4 @@ cd backend
 - **Asignatura:** DSY1104 - Desarrollo Fullstack II
 - **Institución:** Duoc UC
 - **Evaluación:** Evaluación Parcial N° 3
+- **Integrantes:** Misael Rojas y Jeannette Figueroa
