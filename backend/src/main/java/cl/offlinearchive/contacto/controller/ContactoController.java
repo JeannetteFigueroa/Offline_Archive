@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/contacto")
+@RequestMapping("/v1/contacto")
 @Tag(name = "Contacto y Soporte", description = "Endpoints para envío de consultas ciudadanas y bandeja de entrada de administrador")
 public class ContactoController {
 

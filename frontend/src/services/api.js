@@ -12,7 +12,7 @@
  *  - Cola de peticiones para evitar renovaciones concurrentes duplicadas.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/v1";
 
 // Access Token mantenido en memoria
 let currentAccessToken = null;

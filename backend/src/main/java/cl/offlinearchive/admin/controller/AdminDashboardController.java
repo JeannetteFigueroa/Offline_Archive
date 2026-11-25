@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/admin/dashboard")
+@RequestMapping("/v1/admin/dashboard")
 @Tag(name = "Administración - Dashboard", description = "Métricas comerciales y estadísticas calculadas desde PostgreSQL")
 @SecurityRequirement(name = "BearerAuth")
 public class AdminDashboardController {

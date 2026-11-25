@@ -50,32 +50,39 @@ public class SecurityConfig {
                                 "/v3/api-docs"
                         ).permitAll()
 
-                        // 2. Endpoints de autenticación públicos
+                        // 2. Endpoints de autenticación públicos versionados v1
                         .requestMatchers(
-                                "/auth/login",
-                                "/auth/registro",
-                                "/auth/refresh",
-                                "/auth/logout"
+                                "/v1/auth/login",
+                                "/v1/auth/registro",
+                                "/v1/auth/refresh",
+                                "/v1/auth/logout"
                         ).permitAll()
 
                         // 3. Catálogo, ubicaciones y consulta de pedidos públicos en modo lectura (GET)
-                        .requestMatchers(HttpMethod.GET, "/productos/**", "/categorias/**", "/ubicaciones/**", "/pedidos/tipos-entrega", "/pedidos/metodos-pago", "/pedidos/{numeroPedido:[A-Z0-9_-]+}").permitAll()
+                        .requestMatchers(HttpMethod.GET, 
+                                "/v1/productos/**", 
+                                "/v1/categorias/**", 
+                                "/v1/ubicaciones/**", 
+                                "/v1/pedidos/tipos-entrega", 
+                                "/v1/pedidos/metodos-pago", 
+                                "/v1/pedidos/{numeroPedido:[A-Z0-9_-]+}"
+                        ).permitAll()
 
                         // 4. Procesamiento de pedidos y formulario de contacto (Público)
-                        .requestMatchers(HttpMethod.POST, "/pedidos", "/contacto").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/v1/pedidos", "/v1/contacto").permitAll()
 
                         // 5. Operaciones de escritura en catálogo requieren ROL ADMIN
-                        .requestMatchers(HttpMethod.POST, "/productos/**", "/categorias/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/productos/**", "/categorias/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/productos/**", "/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/v1/productos/**", "/v1/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/v1/productos/**", "/v1/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/v1/productos/**", "/v1/categorias/**").hasRole("ADMIN")
 
                         // 6. Perfil, cambio de contraseña y mis pedidos requieren autenticación
-                        .requestMatchers("/auth/perfil", "/auth/cambiar-password", "/pedidos/mis-pedidos").authenticated()
+                        .requestMatchers("/v1/auth/perfil", "/v1/auth/cambiar-password", "/v1/pedidos/mis-pedidos").authenticated()
 
                         // 7. Rutas administrativas
-                        .requestMatchers("/admin/**", "/pedidos/admin/**", "/contacto/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/v1/admin/**", "/v1/pedidos/admin/**", "/v1/contacto/admin/**").hasRole("ADMIN")
 
-                        // 6. Cualquier otra petición requiere autenticación
+                        // 8. Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

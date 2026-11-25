@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("/v1/pedidos")
 @Tag(name = "Pedidos y Checkout", description = "Endpoints para procesamiento de órdenes de compra, pagos y seguimiento de pedidos")
 public class PedidoController {
 

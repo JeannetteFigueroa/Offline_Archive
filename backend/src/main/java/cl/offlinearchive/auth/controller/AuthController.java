@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/v1/auth")
 @Tag(name = "Autenticación", description = "Gestión de sesiones, registro y tokens JWT (Access y Refresh Tokens)")
 public class AuthController {
 

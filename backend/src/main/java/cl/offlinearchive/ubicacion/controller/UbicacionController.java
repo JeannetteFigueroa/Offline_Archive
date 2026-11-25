@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ubicaciones")
+@RequestMapping("/v1/ubicaciones")
 @Tag(name = "Ubicaciones - Regiones y Comunas", description = "Endpoints de cobertura territorial para formularios de despacho y registro")
 public class UbicacionController {
 

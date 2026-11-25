@@ -10,7 +10,6 @@
 
 import { useState } from "react";
 import authService from "../../services/authService";
-import { hashPassword, ADMIN_ACCOUNT_KEY } from "../../utils/auth";
 
 function AdminCuenta({ productos = [], ordenes = [], metricasDb = null, setMensaje }) {
   // Estado para el formulario de cambio de contraseña
@@ -63,32 +62,6 @@ function AdminCuenta({ productos = [], ordenes = [], metricasDb = null, setMensa
         setMensaje("Contraseña actualizada exitosamente.");
       }
     } catch (err) {
-      // Si el servidor responde 403 / 401 debido a credencial de sesión demo o expirada,
-      // intentamos verificar y sincronizar con la cuenta admin local para asegurar operatividad continua
-      try {
-        const adminLocalRaw = localStorage.getItem(ADMIN_ACCOUNT_KEY);
-        if (adminLocalRaw) {
-          const adminLocal = JSON.parse(adminLocalRaw);
-          const hashActual = await hashPassword(formPassword.passwordActual);
-          if (adminLocal.passwordHash && adminLocal.passwordHash === hashActual) {
-            adminLocal.passwordHash = await hashPassword(formPassword.nuevaPassword);
-            localStorage.setItem(ADMIN_ACCOUNT_KEY, JSON.stringify(adminLocal));
-            setPasswordSuccess("Contraseña de administrador actualizada con éxito.");
-            setFormPassword({
-              passwordActual: "",
-              nuevaPassword: "",
-              confirmarPassword: ""
-            });
-            if (typeof setMensaje === "function") {
-              setMensaje("Contraseña actualizada exitosamente.");
-            }
-            return;
-          }
-        }
-      } catch {
-        // continúa hacia el mensaje de error normal
-      }
-
       setPasswordError(
         err.message || "No se pudo cambiar la contraseña. Verifica la contraseña actual."
       );
@@ -326,7 +299,7 @@ function AdminCuenta({ productos = [], ordenes = [], metricasDb = null, setMensa
                 </li>
                 <li className="list-group-item d-flex justify-content-between px-0 py-1 border-0">
                   <span className="text-muted">Servidor Backend:</span>
-                  <code>Spring Boot (puerto 8080)</code>
+                  <code>Spring Boot /api/v1 (puerto 8080)</code>
                 </li>
                 <li className="list-group-item d-flex justify-content-between px-0 py-1 border-0">
                   <span className="text-muted">Documentación API:</span>

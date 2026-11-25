@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/authService";
-import {
-  hashPassword,
-  isAllowedEmail,
-  ACCOUNT_KEY,
-  SESSION_KEY,
-  ADMIN_ACCOUNT_KEY,
-  DEMO_ADMIN_EMAIL,
-  ensureDemoAdminAccount,
-  clearSession
-} from "../utils/auth";
+import { isAllowedEmail } from "../utils/auth";
 import AuthVisual from "../components/AuthVisual";
 import PasswordInput from "../components/PasswordInput";
 import PrimaryButton from "../components/PrimaryButton";
@@ -29,13 +20,6 @@ function Login() {
 
   const [errors, setErrors] = useState({});
   const [formMessage, setFormMessage] = useState({ text: "", type: "" });
-
-  useEffect(() => {
-    // Limpieza preventiva de cuentas demo locales obsoletas para priorizar autenticación real Spring Boot
-    if (localStorage.getItem(ADMIN_ACCOUNT_KEY)) {
-      localStorage.removeItem(ADMIN_ACCOUNT_KEY);
-    }
-  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -93,7 +77,7 @@ function Login() {
 
     const normalizedEmail = formData.email.trim().toLowerCase();
 
-    // 1. Intento de inicio de sesión con backend real (Spring Boot + JWT)
+    // Autenticación centralizada y exclusiva con Spring Boot + JWT
     try {
       setFormMessage({ text: "Verificando credenciales en el servidor...", type: "info" });
       const authData = await authService.login(normalizedEmail, formData.password, formData.remember);
@@ -106,7 +90,6 @@ function Login() {
         setFormMessage({ text: "Inicio de sesión correcto. Entrando a tu cuenta...", type: "success" });
         setTimeout(() => navigate("/cuenta"), 500);
       }
-      return;
     } catch (err) {
       if (err.status === 401) {
         setFormMessage({ text: "Correo o contraseña incorrectos.", type: "error" });
@@ -116,72 +99,11 @@ function Login() {
         setFormMessage({ text: err.message, type: "error" });
         return;
       }
-      // Si el backend no responde (modo offline o tests unitarios locales), continuamos con fallback
-    }
-
-    const passwordHash = await hashPassword(formData.password);
-
-    // El administrador de prueba se mantiene separado de la cuenta de cliente.
-    if (normalizedEmail === DEMO_ADMIN_EMAIL) {
-      await ensureDemoAdminAccount();
-      const adminAccount = JSON.parse(localStorage.getItem(ADMIN_ACCOUNT_KEY) || "null");
-      if (adminAccount?.passwordHash === passwordHash) {
-        const session = { email: adminAccount.email, role: "admin", loggedAt: new Date().toISOString() };
-        clearSession();
-        if (formData.remember) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-        else sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-        setFormMessage({ text: "Acceso de administrador correcto. Abriendo dashboard...", type: "success" });
-        setTimeout(() => navigate("/admin"), 500);
-        return;
-      }
-      setFormMessage({ text: "Correo o contraseña de administrador incorrectos.", type: "error" });
-      return;
-    }
-
-    const account = JSON.parse(
-      localStorage.getItem(ACCOUNT_KEY) || "null"
-    );
-
-    if (!account) {
       setFormMessage({
-        text: "No existe una cuenta registrada. Crea una cuenta primero.",
+        text: err.message || "No fue posible conectar con el servidor de autenticación. Verifica que el backend esté activo.",
         type: "error"
       });
-      return;
     }
-
-    if (
-      account.email !== normalizedEmail ||
-      account.passwordHash !== passwordHash
-    ) {
-      setFormMessage({
-        text: "Correo o contraseña incorrectos.",
-        type: "error"
-      });
-      return;
-    }
-
-    const session = {
-      email: account.email,
-      role: "customer",
-      loggedAt: new Date().toISOString()
-    };
-
-    clearSession();
-    if (formData.remember) {
-      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-    } else {
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-    }
-
-    setFormMessage({
-      text: "Inicio de sesión correcto. Entrando a tu cuenta...",
-      type: "success"
-    });
-
-    setTimeout(() => {
-      navigate("/cuenta");
-    }, 700);
   };
 
   const handleForgotPassword = () => {

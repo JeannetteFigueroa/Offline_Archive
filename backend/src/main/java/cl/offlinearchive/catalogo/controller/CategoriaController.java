@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/v1/categorias")
 @Tag(name = "Catálogo - Categorías", description = "Endpoints para consulta pública y administración de categorías")
 public class CategoriaController {
 

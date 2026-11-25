@@ -19,9 +19,9 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("(Off)line Archive API")
-                        .version("1.0.0")
-                        .description("API REST para la tienda online (Off)line Archive. " +
+                        .title("(Off)line Archive API v1")
+                        .version("1.0.0 (v1)")
+                        .description("API REST versionada (/api/v1) para la tienda online (Off)line Archive. " +
                                 "Permite gestionar el catálogo, pedidos, inventario, usuarios y autenticación segura con JWT.")
                         .contact(new Contact()
                                 .name("Equipo de Desarrollo (Off)line Archive")
