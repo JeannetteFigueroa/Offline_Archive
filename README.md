@@ -39,12 +39,6 @@ Offline_Archive/
 │   ├── mvnw / mvnw.cmd   # Maven Wrapper
 │   └── .mvn/
 │
-├── docs/                 # Documentación técnica y de entrega
-│   ├── EVALUACION.md     # Requisitos académicos y rúbrica
-│   ├── MER.md            # Diccionario de datos y diagrama relacional
-│   ├── PLAN_IMPLEMENTACION.md # Arquitectura, seguridad y fases
-│   └── AVANCE_BACKEND.md # Registro de continuidad y memoria
-│
 ├── README.md             # Guía general de instalación y uso
 └── .gitignore            # Exclusiones de Git
 ```
