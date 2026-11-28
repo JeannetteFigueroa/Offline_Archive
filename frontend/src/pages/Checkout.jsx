@@ -65,6 +65,8 @@ function Checkout({
 
   // Errores del formulario.
   const [errores, setErrores] = useState({});
+  const [procesando, setProcesando] = useState(false);
+  const [errorCompra, setErrorCompra] = useState("");
 
   // El envío depende de la opción seleccionada.
   const costoEnvio =
@@ -185,108 +187,40 @@ function Checkout({
 
   const finalizarCompra = async (event) => {
     event.preventDefault();
+    if (procesando || carrito.length === 0) return;
 
-    const nuevosErrores =
-      validarFormulario();
+    const nuevosErrores = validarFormulario();
+    setErrores(nuevosErrores);
+    setErrorCompra("");
 
-    if (
-      Object.keys(nuevosErrores).length > 0
-    ) {
-      setErrores(nuevosErrores);
-      return;
+    if (Object.keys(nuevosErrores).length > 0) return;
+
+    setProcesando(true);
+
+    try {
+      // Esperamos que el backend registre el pedido y valide el stock.
+      const pedido = await pedidoService.crearPedido({
+        ...formulario,
+        carrito
+      });
+
+      // Solo actualizamos la tienda si el pedido fue confirmado.
+      if (descontarStockCompra) {
+        descontarStockCompra(carrito);
+      }
+
+      vaciarCarrito();
+
+      // Enviamos el pedido real a la pantalla de confirmación.
+      navigate("/compra-exitosa", {
+        state: { orden: pedido, metodoPago: formulario.metodoPago }
+      });
+    } catch (error) {
+      // Si falla la compra, conservamos los productos del carrito.
+      setErrorCompra(error.message || "No se pudo registrar la compra.");
+    } finally {
+      setProcesando(false);
     }
-
-    // Orden sencilla para simular una compra.
-    const nuevaOrden = {
-      id: `OFF-${Date.now()}`,
-
-      fecha:
-        new Date().toISOString(),
-
-      cuentaEmail:
-        getStoredSession()?.email || null,
-
-      cliente: {
-        nombre:
-          formulario.nombre.trim(),
-
-        correo:
-          formulario.correo
-            .trim()
-            .toLowerCase(),
-
-        telefono:
-          formulario.telefono
-            .replace(/\s/g, ""),
-
-        region:
-          formulario.region,
-
-        comuna:
-          formulario.comuna,
-
-        direccion:
-          formulario.direccion.trim()
-      },
-
-      metodoPago:
-        formulario.metodoPago,
-
-      // Guarda la opción escogida.
-      tipoEntrega:
-        formulario.tipoEntrega,
-
-      productos:
-        carrito,
-
-      subtotal:
-        totalCarrito,
-
-      envio:
-        costoEnvio,
-
-      total:
-        totalCompra,
-
-      estado:
-        "PAGADA"
-    };
-
-    // Guarda la nueva orden y actualiza estado sincrónico
-    const ordenesGuardadas = JSON.parse(
-      localStorage.getItem(
-        "offlineArchiveOrders"
-      ) || "[]"
-    );
-
-    localStorage.setItem(
-      "offlineArchiveOrders",
-      JSON.stringify([
-        ...ordenesGuardadas,
-        nuevaOrden
-      ])
-    );
-
-    localStorage.setItem(
-      "offlineArchiveLastOrder",
-      JSON.stringify(nuevaOrden)
-    );
-
-    if (descontarStockCompra) {
-      descontarStockCompra(carrito);
-    }
-
-    vaciarCarrito();
-
-    // Sincronización asíncrona con el backend Spring Boot (sin bloquear la UI ni los tests)
-    pedidoService.crearPedido({
-      ...formulario,
-      carrito
-    }).catch(() => {
-      // Si el backend está offline o en pruebas unitarias, se conserva en localStorage
-    });
-
-    navigate("/compra-exitosa");
   };
 
   // Evita mostrar el formulario
@@ -640,17 +574,23 @@ function Checkout({
 
             </div>
 
+            {errorCompra && (
+              <p className="checkout-error" role="alert">{errorCompra}</p>
+            )}
+
             <button
               type="submit"
               className="checkout-submit"
+              disabled={procesando}
             >
-              CONFIRMAR COMPRA
+              {procesando ? "PROCESANDO COMPRA..." : "CONFIRMAR COMPRA"}
               <span>→</span>
             </button>
 
             <button
               type="button"
               className="checkout-reject"
+              disabled={procesando}
               onClick={() =>
                 navigate("/pago-rechazado")
               }

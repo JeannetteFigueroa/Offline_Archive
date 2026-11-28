@@ -1,25 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "../styles/resultado-compra.css";
 
-// Recupera la última orden almacenada
-// El try evita que la página falle si el dato está dañado
-function obtenerUltimaOrden() {
-  try {
-    return JSON.parse(
-      localStorage.getItem(
-        "offlineArchiveLastOrder"
-      ) || "null"
-    );
-  } catch {
-    return null;
-  }
-}
-
 function CompraExitosa() {
-  const orden = obtenerUltimaOrden();
+  // Recibe el pedido confirmado por el backend desde Checkout.
+  const { state } = useLocation();
+  const orden = state?.orden;
 
-  // Esta vista aparece si no existe una compra guardada
+  // Esta vista aparece si no existe un pedido confirmado.
   if (!orden) {
     return (
       <main className="result-page">
@@ -71,27 +59,27 @@ function CompraExitosa() {
         <div className="result-order">
           <div className="result-row">
             <span>Número de orden</span>
-            <strong>{orden.id}</strong>
+            <strong>{orden.numeroPedido}</strong>
           </div>
 
           <div className="result-row">
             <span>Cliente</span>
             <strong>
-              {orden.cliente.nombre}
+              {orden.clienteNombre}
             </strong>
           </div>
 
           <div className="result-row">
             <span>Correo</span>
             <strong>
-              {orden.cliente.correo}
+              {orden.clienteCorreo}
             </strong>
           </div>
 
           <div className="result-row">
             <span>Productos</span>
             <strong>
-              {orden.productos.reduce(
+              {(orden.detalles || []).reduce(
                 (total, producto) =>
                   total + producto.cantidad,
                 0
@@ -102,14 +90,14 @@ function CompraExitosa() {
           <div className="result-row">
             <span>Método de pago</span>
             <strong>
-              {orden.metodoPago}
+              {state?.metodoPago || "Simulado"}
             </strong>
           </div>
 
           <div className="result-row result-total">
             <span>Total pagado</span>
             <strong>
-              ${orden.total.toLocaleString("es-CL")}
+              ${Number(orden.total).toLocaleString("es-CL")}
             </strong>
           </div>
         </div>

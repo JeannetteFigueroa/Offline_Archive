@@ -3,6 +3,7 @@ package cl.offlinearchive.pedido.entity;
 import cl.offlinearchive.ubicacion.entity.Comuna;
 import cl.offlinearchive.usuario.entity.Usuario;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Generated;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Recupera el número de pedido generado por PostgreSQL.
+    @Generated
     @Column(name = "numero_pedido", insertable = false, updatable = false)
     private String numeroPedido;
 
@@ -63,53 +66,131 @@ public class Pedido {
 
     @PrePersist
     void onCreate() {
-        if (fecha == null) fecha = OffsetDateTime.now();
+        if (fecha == null) {
+            fecha = OffsetDateTime.now();
+        }
     }
 
-    public Pedido() {}
+    public Pedido() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getNumeroPedido() { return numeroPedido; }
-    public void setNumeroPedido(String numeroPedido) { this.numeroPedido = numeroPedido; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public String getNumeroPedido() {
+        return numeroPedido;
+    }
 
-    public EstadoPedido getEstado() { return estado; }
-    public void setEstado(EstadoPedido estado) { this.estado = estado; }
+    public void setNumeroPedido(String numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
 
-    public TipoEntrega getTipoEntrega() { return tipoEntrega; }
-    public void setTipoEntrega(TipoEntrega tipoEntrega) { this.tipoEntrega = tipoEntrega; }
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-    public Comuna getComuna() { return comuna; }
-    public void setComuna(Comuna comuna) { this.comuna = comuna; }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-    public String getClienteNombre() { return clienteNombre; }
-    public void setClienteNombre(String clienteNombre) { this.clienteNombre = clienteNombre; }
+    public EstadoPedido getEstado() {
+        return estado;
+    }
 
-    public String getClienteCorreo() { return clienteCorreo; }
-    public void setClienteCorreo(String clienteCorreo) { this.clienteCorreo = clienteCorreo; }
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
+    }
 
-    public String getClienteTelefono() { return clienteTelefono; }
-    public void setClienteTelefono(String clienteTelefono) { this.clienteTelefono = clienteTelefono; }
+    public TipoEntrega getTipoEntrega() {
+        return tipoEntrega;
+    }
 
-    public String getDireccionEntrega() { return direccionEntrega; }
-    public void setDireccionEntrega(String direccionEntrega) { this.direccionEntrega = direccionEntrega; }
+    public void setTipoEntrega(TipoEntrega tipoEntrega) {
+        this.tipoEntrega = tipoEntrega;
+    }
 
-    public Integer getSubtotal() { return subtotal; }
-    public void setSubtotal(Integer subtotal) { this.subtotal = subtotal; }
+    public Comuna getComuna() {
+        return comuna;
+    }
 
-    public Integer getCostoEnvio() { return costoEnvio; }
-    public void setCostoEnvio(Integer costoEnvio) { this.costoEnvio = costoEnvio; }
+    public void setComuna(Comuna comuna) {
+        this.comuna = comuna;
+    }
 
-    public Integer getTotal() { return total; }
-    public void setTotal(Integer total) { this.total = total; }
+    public String getClienteNombre() {
+        return clienteNombre;
+    }
 
-    public OffsetDateTime getFecha() { return fecha; }
-    public void setFecha(OffsetDateTime fecha) { this.fecha = fecha; }
+    public void setClienteNombre(String clienteNombre) {
+        this.clienteNombre = clienteNombre;
+    }
 
-    public List<DetallePedido> getDetalles() { return detalles; }
-    public void setDetalles(List<DetallePedido> detalles) { this.detalles = detalles; }
+    public String getClienteCorreo() {
+        return clienteCorreo;
+    }
+
+    public void setClienteCorreo(String clienteCorreo) {
+        this.clienteCorreo = clienteCorreo;
+    }
+
+    public String getClienteTelefono() {
+        return clienteTelefono;
+    }
+
+    public void setClienteTelefono(String clienteTelefono) {
+        this.clienteTelefono = clienteTelefono;
+    }
+
+    public String getDireccionEntrega() {
+        return direccionEntrega;
+    }
+
+    public void setDireccionEntrega(String direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
+    }
+
+    public Integer getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Integer subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public Integer getCostoEnvio() {
+        return costoEnvio;
+    }
+
+    public void setCostoEnvio(Integer costoEnvio) {
+        this.costoEnvio = costoEnvio;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public OffsetDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(OffsetDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public List<DetallePedido> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<DetallePedido> detalles) {
+        this.detalles = detalles;
+    }
 }
